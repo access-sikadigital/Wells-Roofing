@@ -7,7 +7,7 @@ import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
 
 const page = getPage("blog");
-
+ 
 /**
  * "Blog (built-for-it)" — P2 / Low in the sitemap workbook.
  *
