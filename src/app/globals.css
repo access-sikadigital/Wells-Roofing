@@ -1,0 +1,402 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   WELLS ROOFING — DESIGN TOKEN SYSTEM
+   --------------------------------------------------------------------------
+   Derived from the official brand assets (logo + EDM), not invented:
+     Brand Navy   #0A2354   — wordmark, dark surfaces
+     Brand Red    #E51A1D   — chevron mark, strapline, CTAs
+     Cool neutrals            — EDM greys / near-whites
+   Type: Montserrat (display, matches the logo lockup) + Plus Jakarta Sans (UI).
+
+   Architecture: primitives → semantic aliases → utilities.
+   Never use raw hex in components. Use semantic tokens first
+   (bg-background, text-foreground, text-muted, bg-brand, bg-accent…)
+   and primitives (navy-*, red-*, stone-*) for specific steps of a scale.
+   ========================================================================== */
+
+@theme {
+  /* ------------------------------------------------------------------
+     FONTS — wired to next/font variables (see src/lib/fonts.ts)
+     ------------------------------------------------------------------ */
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: var(--font-montserrat), var(--font-jakarta), ui-sans-serif,
+    system-ui, sans-serif;
+
+  /* ------------------------------------------------------------------
+     PRIMITIVE PALETTE
+     ------------------------------------------------------------------ */
+
+  /* Navy — brand core. 900 is the exact logo navy. */
+  --color-navy-50: #f1f4fa;
+  --color-navy-100: #e2e8f5;
+  --color-navy-200: #c3d0ea;
+  --color-navy-300: #94aad8;
+  --color-navy-400: #5e7dc0;
+  --color-navy-500: #3a5ba6;
+  --color-navy-600: #2a4586;
+  --color-navy-700: #1b346d;
+  --color-navy-800: #0f2a5f;
+  --color-navy-900: #0a2354; /* ← BRAND NAVY */
+  --color-navy-950: #061532;
+
+  /* Red — brand accent. 500 is the exact logo red. Use with intent. */
+  --color-red-50: #fef3f3;
+  --color-red-100: #fde4e4;
+  --color-red-200: #fccdce;
+  --color-red-300: #f8a3a4;
+  --color-red-400: #f26e70;
+  --color-red-500: #e51a1d; /* ← BRAND RED */
+  --color-red-600: #c81417;
+  --color-red-700: #a51114;
+  --color-red-800: #871114;
+  --color-red-900: #711416;
+  --color-red-950: #3d0708;
+
+  /* Stone — cool neutrals for surfaces, body copy and hairlines. */
+  --color-stone-50: #f8fafc;
+  --color-stone-100: #f1f4f8;
+  --color-stone-200: #e4e9f0;
+  --color-stone-300: #cfd7e3;
+  --color-stone-400: #a3aec0;
+  --color-stone-500: #7b8798;
+  --color-stone-600: #5c6779;
+  --color-stone-700: #495363;
+  --color-stone-800: #3a4251;
+  --color-stone-900: #2b3140;
+  --color-stone-950: #171b25;
+
+  /* Material cues — sampled from the product tiles in the EDM. */
+  --color-slate-material: #3a3d40;
+  --color-terracotta-material: #c1642a;
+  --color-concrete-material: #8b929a;
+
+  /* ------------------------------------------------------------------
+     FLUID TYPE SCALE — clamp()-based, tuned for Montserrat display
+     Usage: text-display, text-h1, text-h2, text-h3, text-lead,
+            text-body, text-small, text-eyebrow
+     ------------------------------------------------------------------ */
+  /**
+   * Display and H1 are set UPPERCASE, which is roughly 25% wider per character
+   * than the mixed-case scales below. At a 320px viewport the content box is
+   * only 280px, and the longest words that have to survive there are
+   * "MELBOURNE'S" (homepage hero) and "SPECIFICATION" (slate supply H1).
+   * The lower bounds here are sized so those fit on one line rather than
+   * breaking mid-word — raise them and long headings start splitting.
+   */
+  --text-display: clamp(2.25rem, 1.04rem + 6.07vw, 6.5rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-h1: clamp(2.125rem, 1.52rem + 3.04vw, 4.25rem);
+  --text-h1--line-height: 1.04;
+  --text-h1--letter-spacing: -0.03em;
+
+  --text-h2: clamp(1.9rem, 1.55rem + 1.75vw, 3rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.025em;
+
+  --text-h3: clamp(1.4rem, 1.28rem + 0.6vw, 1.85rem);
+  --text-h3--line-height: 1.22;
+  --text-h3--letter-spacing: -0.02em;
+
+  --text-h4: 1.1875rem;
+  --text-h4--line-height: 1.35;
+  --text-h4--letter-spacing: -0.015em;
+
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+  --text-lead--line-height: 1.6;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.7;
+
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.6;
+
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  /* ------------------------------------------------------------------
+     SPACING / LAYOUT
+     ------------------------------------------------------------------ */
+  --spacing-section: 5.625rem; /* py-section — 90px top and bottom */
+  /**
+   * Inner-page hero band. Fixed so every route opens at the same height
+   * regardless of how long its H1 is — content is centred inside it.
+   * Sized off the worst case: the four-line H1 on /natural-slate-roofing.
+   * If a longer H1 is ever added to pages.ts, raise this rather than letting
+   * that one page grow taller than the rest.
+   */
+  --spacing-page-hero: 32rem;
+  --spacing-page-hero-lg: 46rem;
+  --spacing-section-sm: clamp(3.5rem, 2.75rem + 3vw, 6rem);
+  --container-content: 71.25rem; /* max-w-content (1140px) */
+  --container-wide: 87.5rem; /* max-w-wide (1400px) */
+
+  /* ------------------------------------------------------------------
+     RADII — the brand is squared-off and structural. Keep radii tight.
+     ------------------------------------------------------------------ */
+  --radius-card: 0.375rem;
+  --radius-button: 0.25rem;
+  --radius-pill: 999px;
+
+  /* ------------------------------------------------------------------
+     SHADOWS — cool navy-tinted, never muddy
+     ------------------------------------------------------------------ */
+  --shadow-soft: 0 1px 2px rgb(10 35 84 / 0.05),
+    0 8px 24px -8px rgb(10 35 84 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(10 35 84 / 0.07),
+    0 24px 48px -16px rgb(10 35 84 / 0.2);
+  --shadow-accent: 0 8px 28px -8px rgb(229 26 29 / 0.45);
+
+  /* ------------------------------------------------------------------
+     MOTION TOKENS — shared with GSAP/Motion via src/lib
+     Usage: ease-out-expo, ease-out-quart, duration-slow …
+     ------------------------------------------------------------------ */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+  --duration-slower: 1100ms;
+}
+
+/* ==========================================================================
+   SEMANTIC TOKENS — light (default) and dark surface themes.
+   Wrap any section in .theme-dark to invert it (hero, footer, CTA bands).
+   ========================================================================== */
+
+:root {
+  --background: #ffffff;
+  --surface: var(--color-stone-50);
+  --surface-sunken: var(--color-stone-100);
+  /* Every other section is banded in this, so section boundaries read. */
+  --section-band: var(--color-stone-100);
+  --foreground: var(--color-navy-900);
+  --muted: var(--color-stone-600);
+  --faint: var(--color-stone-500);
+  --line: var(--color-stone-200);
+  --line-strong: var(--color-stone-300);
+  --brand: var(--color-navy-900);
+  --brand-hover: var(--color-navy-800);
+  --on-brand: #ffffff;
+  --accent: var(--color-red-500);
+  --accent-hover: var(--color-red-600);
+  --on-accent: #ffffff;
+}
+
+.theme-dark {
+  --background: var(--color-navy-950);
+  --surface: var(--color-navy-900);
+  --surface-sunken: #04102a;
+  --section-band: var(--color-navy-900);
+  --foreground: #ffffff;
+  --muted: #b3c0d6;
+  --faint: #7c8bab;
+  --line: rgb(255 255 255 / 0.12);
+  --line-strong: rgb(255 255 255 / 0.24);
+  --brand: #ffffff;
+  --brand-hover: var(--color-stone-100);
+  --on-brand: var(--color-navy-900);
+  --accent: var(--color-red-500);
+  --accent-hover: var(--color-red-400);
+  --on-accent: #ffffff;
+}
+
+/* Map semantic vars into Tailwind utilities:
+   bg-background, bg-surface, text-foreground, text-muted, border-line,
+   bg-brand, text-on-brand, bg-accent … */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-on-brand: var(--on-brand);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  * {
+    min-width: 0;
+  }
+
+  html {
+    scroll-behavior: auto; /* Lenis owns scrolling */
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-red-500);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* ------------------------------------------------------------------
+     SECTION BANDING
+     Alternate the background of every top-level section so a reader can
+     see where one ends and the next begins, without a divider line.
+
+     Driven from here rather than per-component so the rhythm can never
+     drift: sections stay tone-agnostic and the page decides. Because both
+     values are semantic tokens, a `.theme-dark` section resolves them to
+     its own dark pair automatically — the alternation survives inversion.
+
+     This lives in @layer base, so any explicit `bg-*` utility on a section
+     still wins. That is the opt-out for a section that must own its
+     background.
+     ------------------------------------------------------------------ */
+  main > section:nth-of-type(odd) {
+    background-color: var(--background);
+  }
+
+  main > section:nth-of-type(even) {
+    background-color: var(--section-band);
+  }
+
+  /* Respect reduced motion globally */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+/* Subtle film-grain overlay for large dark surfaces (hero, CTA) */
+@utility grain {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Hairline top border that fades at the edges */
+@utility hairline-t {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--line-strong) 20%,
+      var(--line-strong) 80%,
+      transparent
+    );
+  }
+}
+
+/* Eyebrow label — mirrors the logo strapline: uppercase, tracked, bold */
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* The brand's short red underline accent (used under headings in the EDM) */
+@utility rule-accent {
+  &::after {
+    content: "";
+    display: block;
+    width: 3.5rem;
+    height: 4px;
+    margin-top: 1.5rem;
+    background-color: var(--accent);
+  }
+}
+
+/* Text-reveal headings are only hidden once we know JS is running (the inline
+   script in layout.tsx adds .js). Crawlers and no-JS users get visible text. */
+html.js [data-text-reveal] {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-text-reveal] {
+    visibility: visible;
+  }
+}
+
+/* Lenis recommended styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
