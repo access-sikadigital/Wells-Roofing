@@ -14,6 +14,7 @@ import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
 import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
 import { Guarantee } from "@/components/sections/Guarantee";
+import { pageVideo } from "@/config/video";
 
 const page = getPage("concrete-tile-roofing");
 export const metadata = metadataFor("concrete-tile-roofing");
@@ -24,7 +25,8 @@ export default function Page() {
       <JsonLd data={schemaForPage(page, tileFaqs)} />
       <PageHero
         page={page}
-        image="/photography/hero-concrete.jpg"
+        image={pageVideo.concrete.poster}
+        video={pageVideo.concrete.video}
         intro="Concrete tile roofing and re-roofing to a premium standard for homeowners and builders across Melbourne and the Mornington Peninsula."
         cta={{ label: "Get a Quote", href: "/contact" }}
       />

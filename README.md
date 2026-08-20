@@ -119,6 +119,23 @@ Every page is built to its section list in the Page Blueprints sheet — 104 sec
 
 Review/AggregateRating schema is deliberately not emitted while `testimonials` is empty — marking up reviews that don't exist is a manual-action risk.
 
+### Background film — and why three pages don't have it
+
+`src/config/video.ts` holds all background clips. **Read the note at the top before adding any.**
+
+Every clip in the supplied stock library shows an **asphalt shingle** roof, which is on Wells' explicit exclusion list. Placement is therefore deliberate, not decorative:
+
+| | Pages |
+|---|---|
+| **Video** | Home (4-clip crossfade) · About · Architects hub · Restoration · Terracotta · Concrete · 3 × location hubs |
+| **Stills only** | **Natural Slate Roofing · Heritage Roofing · Natural Slate Supply** |
+
+Those three are read by homeowners spending ~$80k and by architects specifying material — the exact audience that identifies a shingle roof instantly. They stay on stills until real Wells slate footage exists, or clips are generated from `docs/HERO-VIDEO-BRIEF.md`.
+
+Where video *is* used, footage sits at 30% opacity under a 70–95% navy scrim, so it reads as "premium dark roofline" (true) rather than "asphalt shingle" (off-brand). Company and location pages make no material claim at all.
+
+Weight: homepage ~5 MB across 4 clips, every other page a single 0.7–2.9 MB clip. Nothing downloads under `prefers-reduced-motion`.
+
 ### Two gotchas worth knowing
 
 - `cn()` uses an **extended** tailwind-merge. Custom scales (`text-h1`, `shadow-lift`, `rounded-card`) must be registered there or twMerge silently drops them when a colour class is passed alongside.

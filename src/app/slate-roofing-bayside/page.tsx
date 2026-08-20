@@ -1,5 +1,6 @@
 import { metadataFor } from "@/lib/metadata";
 import { LocationPage } from "@/components/sections/LocationPage";
+import { pageVideo } from "@/config/video";
 
 export const metadata = metadataFor("loc-bayside");
 
@@ -7,7 +8,8 @@ export default function Page() {
   return (
     <LocationPage
       pageKey="loc-bayside"
-      image="/photography/hero-bayside.jpg"
+      image={pageVideo.bayside.poster}
+      video={pageVideo.bayside.video}
       localImage="/content/local-bayside.jpg"
       intro="Premium slate, heritage and tile roofing across Bayside — Brighton, Hampton, Sandringham, Black Rock and Beaumaris."
       localAngle={{

@@ -1,5 +1,6 @@
 import { metadataFor } from "@/lib/metadata";
 import { LocationPage } from "@/components/sections/LocationPage";
+import { pageVideo } from "@/config/video";
 
 export const metadata = metadataFor("loc-mornington-peninsula");
 
@@ -7,7 +8,8 @@ export default function Page() {
   return (
     <LocationPage
       pageKey="loc-mornington-peninsula"
-      image="/photography/hero-peninsula.jpg"
+      image={pageVideo.peninsula.poster}
+      video={pageVideo.peninsula.video}
       localImage="/content/local-peninsula.jpg"
       intro="Specialist slate, heritage and tile roofing across the Mornington Peninsula — and our home ground since 1982. Our yard is in Mornington."
       localAngle={{

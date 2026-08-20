@@ -8,6 +8,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { ContentBlock, CheckList } from "@/components/sections/ContentBlock";
 import { ServiceArea } from "@/components/sections/ServiceArea";
 import { CTA } from "@/components/sections/CTA";
+import { pageVideo } from "@/config/video";
 
 const page = getPage("about");
 export const metadata = metadataFor("about");
@@ -19,7 +20,8 @@ export default function Page() {
       <JsonLd data={schemaForPage(page, generalFaqs)} />
       <PageHero
         page={page}
-        image="/photography/hero-about.jpg"
+        image={pageVideo.about.poster}
+        video={pageVideo.about.video}
         intro="An established Mornington Peninsula roofing name, now Melbourne's premium natural slate and tile specialist."
       />
       <TrustBar />

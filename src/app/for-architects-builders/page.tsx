@@ -11,6 +11,7 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
+import { pageVideo } from "@/config/video";
 
 const page = getPage("for-architects-builders");
 export const metadata = metadataFor("for-architects-builders");
@@ -22,7 +23,8 @@ export default function Page() {
       <JsonLd data={schemaForPage(page, tradeFaqs)} />
       <PageHero
         page={page}
-        image="/photography/hero-trade.jpg"
+        image={pageVideo.architects.poster}
+        video={pageVideo.architects.video}
         intro="Slate and premium tile supply, specification support and expert installation for architects and builders working on prestige Melbourne and Peninsula projects."
         cta={{ label: "Talk to Our Spec Team", href: "/contact" }}
       />

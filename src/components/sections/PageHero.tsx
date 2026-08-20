@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
+import { HeroVideo } from "@/components/media/HeroVideo";
 import type { PageSpec } from "@/config/pages";
 
 type PageHeroProps = {
@@ -14,8 +15,20 @@ type PageHeroProps = {
   /**
    * Background image path. Required, not defaulted — a default is how one
    * photograph quietly ends up on several routes. Every caller passes its own.
+   *
+   * Still doubles as the poster when `video` is set, so it is required either
+   * way: the poster is what reduced-motion users and crawlers actually get.
    */
   image: string;
+  /**
+   * Optional background film. Reuses `HeroVideo`, so it inherits the same
+   * guarantees: no video is downloaded under `prefers-reduced-motion`,
+   * playback pauses off screen, and a missing file falls back to `image`.
+   *
+   * NOT set on the slate, heritage or supply pages — see the note in
+   * src/config/video.ts for why.
+   */
+  video?: string;
   /** Primary CTA override. */
   cta?: { label: string; href: string };
 };
@@ -36,20 +49,27 @@ export function PageHero({
   page,
   intro,
   image,
+  video,
   cta,
 }: PageHeroProps) {
   const primary = cta ?? { label: "Get a Quote", href: "/contact" };
 
   return (
     <section className="theme-dark grain relative flex min-h-page-hero flex-col justify-center overflow-hidden pt-28 pb-16 lg:min-h-page-hero-lg lg:pt-32 lg:pb-20">
-      <Image
-        src={image}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover opacity-30"
-      />
+      {video ? (
+        <div className="absolute inset-0 opacity-30">
+          <HeroVideo clips={[video]} poster={image} />
+        </div>
+      ) : (
+        <Image
+          src={image}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-30"
+        />
+      )}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"

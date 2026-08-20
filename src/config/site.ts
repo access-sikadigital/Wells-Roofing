@@ -83,17 +83,3 @@ export function yearsTrading(now: Date = new Date()) {
   return now.getFullYear() - FOUNDED_YEAR;
 }
 
-/**
- * Hero background clips, played in order and crossfaded forever.
- * See docs/HERO-VIDEO-BRIEF.md for the generation prompts and
- * the encoding recipe these files must be exported with.
- */
-export const heroVideo = {
-  clips: [
-    "/video/hero-01-approach.mp4",
-    "/video/hero-02-slate-texture.mp4",
-    "/video/hero-03-craft.mp4",
-    "/video/hero-04-roofline.mp4",
-  ],
-  poster: "/photography/roof-02.jpg",
-} as const;

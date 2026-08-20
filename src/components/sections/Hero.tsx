@@ -1,9 +1,9 @@
 import {
   siteConfig,
-  heroVideo,
   FOUNDED_YEAR,
   yearsTrading,
 } from "@/config/site";
+import { heroVideo } from "@/config/video";
 import { HeroVideo } from "@/components/media/HeroVideo";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
