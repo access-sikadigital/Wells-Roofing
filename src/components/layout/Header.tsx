@@ -247,20 +247,35 @@ export function Header() {
           : "border-b border-transparent"
       )}
     >
-      <div className="mx-auto flex h-[4.5rem] w-full max-w-wide items-center justify-between px-5 sm:px-8 lg:px-12">
-        <Link
-          href="/"
-          onClick={closeMenu}
-          aria-label={`${siteConfig.name} — home`}
-          className={cn(
-            "transition-colors duration-base",
-            onDark ? "text-white" : "text-foreground"
-          )}
-        >
-          <Logo withStrapline />
-        </Link>
+      {/*
+        Three-column grid rather than `justify-between`.
 
-        {/* Desktop nav */}
+        With flex, the nav is only centred by accident — it sits wherever the
+        logo and the button leave room, so it drifts the moment either changes
+        width (and it already sat noticeably right of centre). `1fr auto 1fr`
+        pins the nav to the true centre of the header and lets the logo and
+        CTA grow into the equal side columns independently.
+
+        `min-w-0` on the side columns stops a long logo forcing the centre
+        column off-axis at narrow desktop widths.
+      */}
+      <div className="mx-auto grid h-[4.5rem] w-full max-w-wide grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:px-8 lg:px-12">
+        {/* Left — logo */}
+        <div className="flex min-w-0 justify-start">
+          <Link
+            href="/"
+            onClick={closeMenu}
+            aria-label={`${siteConfig.name} — home`}
+            className={cn(
+              "transition-colors duration-base",
+              onDark ? "text-white" : "text-foreground"
+            )}
+          >
+            <Logo withStrapline />
+          </Link>
+        </div>
+
+        {/* Centre — desktop nav */}
         <nav className="hidden items-center gap-7 xl:flex">
           {primaryNav.map((item) => (
             <div
@@ -325,43 +340,49 @@ export function Header() {
             </div>
           ))}
 
-          <a
-            href={siteConfig.phoneHref}
-            className={cn(
-              "font-display text-small font-bold tracking-tight transition-colors duration-base hover:text-accent",
-              onDark ? "text-white" : "text-foreground"
-            )}
-          >
-            {siteConfig.phone}
-          </a>
-          <Button href="/contact" variant="accent" arrow>
-            Get a Quote
-          </Button>
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          className={cn(
-            "flex size-11 flex-col items-center justify-center gap-1.5 xl:hidden",
-            onDark ? "text-white" : "text-foreground"
-          )}
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
-          <span
+        {/* Right — CTA (desktop) and menu toggle (mobile) */}
+        <div className="col-start-3 flex min-w-0 items-center justify-end">
+          {/*
+            The phone number used to sit alongside this. It was removed once
+            the sitewide FloatingCall button landed — two persistent
+            click-to-call targets at once is one too many, and the header is
+            now a single, unambiguous "Get a Quote" action.
+          */}
+          <Button
+            href="/contact"
+            variant="accent"
+            arrow
+            className="hidden xl:inline-flex"
+          >
+            Get a Quote
+          </Button>
+
+          {/* Mobile toggle */}
+          <button
             className={cn(
-              "h-0.5 w-6 bg-current transition-transform duration-base ease-out-quart",
-              open && "translate-y-[4px] rotate-45"
+              "-mr-2 flex size-11 flex-col items-center justify-center gap-1.5 xl:hidden",
+              onDark ? "text-white" : "text-foreground"
             )}
-          />
-          <span
-            className={cn(
-              "h-0.5 w-6 bg-current transition-transform duration-base ease-out-quart",
-              open && "-translate-y-[4px] -rotate-45"
-            )}
-          />
-        </button>
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            <span
+              className={cn(
+                "h-0.5 w-6 bg-current transition-transform duration-base ease-out-quart",
+                open && "translate-y-[4px] rotate-45"
+              )}
+            />
+            <span
+              className={cn(
+                "h-0.5 w-6 bg-current transition-transform duration-base ease-out-quart",
+                open && "-translate-y-[4px] -rotate-45"
+              )}
+            />
+          </button>
+        </div>
       </div>
 
       {/* Mobile overlay — stays mounted so GSAP can animate it out.
@@ -400,6 +421,12 @@ export function Header() {
           >
             Get a Quote
           </Button>
+          {/*
+            Kept here, unlike the desktop bar: on a phone the FloatingCall
+            button is icon-only, so this is the one place the number is
+            actually readable — and it is inside an opened menu rather than
+            persistently on screen, so it competes with nothing.
+          */}
           <a
             href={siteConfig.phoneHref}
             className="font-display text-h3 font-bold text-foreground"

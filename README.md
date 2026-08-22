@@ -114,7 +114,7 @@ Every page is built to its section list in the Page Blueprints sheet — 104 sec
 
 **`src/config/proof.ts` is the honesty boundary.** Everything that claims "we did this" or "someone said this" comes from that one file, so it can be audited in one place before launch. Two rules hold there:
 
-- `testimonials` is **empty on purpose**. `ReviewsStrip` renders a proper empty state; a placeholder quote that survives to production reads as a fake testimonial.
+- `testimonials` is **empty on purpose** and holds real reviews only. `ReviewsStrip` falls back to `sampleTestimonials` and renders a visible **"Sample content"** badge plus a dev console warning while it does. Wiring the GBP feed into `testimonials` retires the samples automatically — there's nothing to remember to delete. **Do not launch with the badge showing:** published testimonials nobody gave are misleading conduct (ACL s18), not a placeholder.
 - Gallery projects carry **no `suburb`** until they're real jobs. Those captions are the local-SEO payload, so they have to be true.
 
 Review/AggregateRating schema is deliberately not emitted while `testimonials` is empty — marking up reviews that don't exist is a manual-action risk.

@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingCall } from "@/components/layout/FloatingCall";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -87,6 +88,8 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <Footer />
+          {/* Sitewide click-to-call. Phone is the primary conversion path. */}
+          <FloatingCall />
         </SmoothScrollProvider>
       </body>
     </html>

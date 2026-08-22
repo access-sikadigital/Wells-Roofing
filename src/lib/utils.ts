@@ -27,7 +27,7 @@ const twMerge = extendTailwindMerge({
           ],
         },
       ],
-      shadow: [{ shadow: ["soft", "lift", "accent"] }],
+      shadow: [{ shadow: ["soft", "lift", "accent", "chip"] }],
       rounded: [{ rounded: ["card", "button", "pill"] }],
     },
   },

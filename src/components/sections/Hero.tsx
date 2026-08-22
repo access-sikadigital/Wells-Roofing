@@ -58,12 +58,21 @@ export function Hero() {
 
         <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
           <Reveal delay={0.55} className="lg:col-span-6">
-            <p className="max-w-xl text-lead text-muted">
+            {/*
+              Hero subheading — one line of positioning, not a paragraph.
+              Cut from ~45 words to 16 and widened from max-w-xl to max-w-2xl,
+              so it sets as two lines rather than six. A six-line block under a
+              display H1 competes with it; two lines support it.
+
+              The "44 years / builders, architects and homeowners" detail that
+              used to live here was cut rather than moved: the stats row
+              immediately to the right already says "44+ — Years since 1982",
+              and the Dual Path section below routes the two audiences. It was
+              saying the same things twice.
+            */}
+            <p className="max-w-2xl text-lead text-muted">
               Natural slate, terracotta and concrete roofing — supplied and
-              installed across Melbourne and the Mornington Peninsula. For more
-              than {yearsTrading()} years, Wells has worked with builders,
-              architects and homeowners on prestige new homes, heritage
-              restorations and complete roof replacements.
+              installed across Melbourne and the Mornington Peninsula.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Button href={siteConfig.cta.href} variant="accent" size="lg" arrow>

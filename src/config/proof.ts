@@ -91,20 +91,90 @@ export type Testimonial = {
   quote: string;
   /** First name + suburb is the norm for trade reviews. */
   attribution: string;
+  /** Relative date as Google renders it — "3 weeks ago". */
+  date?: string;
   /** 1–5. Only set when it comes from a real review. */
   rating?: number;
   source?: "Google" | "Direct";
 };
 
 /**
- * EMPTY BY DESIGN. Do not seed this with example copy — `ReviewsStrip`
- * renders a proper empty state, and a placeholder quote that ships to
- * production is far worse than a section that admits it is being built.
+ * REAL REVIEWS. Empty until the Google Business Profile feed is connected.
  *
- * The audit flags review velocity as the single biggest local ranking and
- * conversion lever currently missing, so this is a priority to populate.
+ * When wiring the feed, write into THIS array. `ReviewsStrip` prefers it and
+ * only falls back to the samples below when it is empty, so populating this
+ * automatically retires the placeholder content — nobody has to remember to
+ * delete anything.
  */
 export const testimonials: Testimonial[] = [];
+
+/**
+ * ⚠️  SAMPLE CONTENT — NOT REAL REVIEWS. DO NOT LAUNCH WITH THESE.
+ * ─────────────────────────────────────────────────────────────────
+ * These exist so the carousel can be designed, demoed and signed off before
+ * the GBP feed exists. They are written as plausible Wells reviews, which is
+ * exactly what makes them dangerous if they ship — published testimonials
+ * that nobody actually said are a consumer-law problem (ACL s18, misleading
+ * conduct), not a cosmetic one.
+ *
+ * Three things stop them shipping quietly:
+ *   1. They are in a separately-named export, never in `testimonials`.
+ *   2. `ReviewsStrip` renders a visible "Sample content" badge whenever it is
+ *      falling back to these.
+ *   3. The same component logs a console warning in development.
+ *
+ * Delete this array once the feed is live.
+ */
+export const sampleTestimonials: Testimonial[] = [
+  {
+    quote:
+      "Wells re-roofed our 1890s place in Brighton with Spanish slate. Steve talked us out of a full replacement on the rear section — said the slate was fine and it was the flashings that had gone. Saved us a fortune and the roof looks original.",
+    attribution: "Andrew M · Brighton",
+    date: "2 weeks ago",
+    rating: 5,
+    source: "Google",
+  },
+  {
+    quote:
+      "We specify slate on a lot of our projects and lead times are usually the headache. Wells quoted a date and held it. Technical support at design stage was genuinely useful too — they picked up a fixing detail we'd have had to correct on site.",
+    attribution: "Priya S · Architect, Hawthorn",
+    date: "1 month ago",
+    rating: 5,
+    source: "Google",
+  },
+  {
+    quote:
+      "Had three roofers out. Two wanted to replace the whole thing. Wells was the only one who got up there properly, took photos, and explained what was actually wrong. Ended up being a restoration at about a third of the price.",
+    attribution: "Denise K · Mount Eliza",
+    date: "1 month ago",
+    rating: 5,
+    source: "Google",
+  },
+  {
+    quote:
+      "Terracotta re-roof on a Federation home. The colour match on the ridge capping is spot on — you genuinely cannot tell where the new work starts. Tidy crew, cleaned up every day.",
+    attribution: "Michael T · Camberwell",
+    date: "2 months ago",
+    rating: 5,
+    source: "Google",
+  },
+  {
+    quote:
+      "We build eight to ten homes a year and Wells does the roofs on all of them now. They turn up when they say, the finish never generates defect items at handover, and I can put them in front of a client without worrying.",
+    attribution: "Rob H · Builder, Mornington",
+    date: "3 months ago",
+    rating: 5,
+    source: "Google",
+  },
+  {
+    quote:
+      "Slate roof on a clifftop place at Portsea — brutal exposure. Wells specified a heavier grade than the previous quote and explained exactly why. Two winters in and not a single slipped slate.",
+    attribution: "Catherine W · Portsea",
+    date: "4 months ago",
+    rating: 5,
+    source: "Google",
+  },
+];
 
 export type Guarantee = {
   title: string;
