@@ -8,7 +8,6 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { ContentBlock, CheckList } from "@/components/sections/ContentBlock";
 import { ServiceArea } from "@/components/sections/ServiceArea";
 import { CTA } from "@/components/sections/CTA";
-import { pageVideo } from "@/config/video";
 
 const page = getPage("about");
 export const metadata = metadataFor("about");
@@ -20,8 +19,7 @@ export default function Page() {
       <JsonLd data={schemaForPage(page, generalFaqs)} />
       <PageHero
         page={page}
-        image={pageVideo.about.poster}
-        video={pageVideo.about.video}
+        image="/photography/hero-about.jpg"
         intro="An established Mornington Peninsula roofing name, now Melbourne's premium natural slate and tile specialist."
       />
       <TrustBar />
@@ -30,7 +28,22 @@ export default function Page() {
         eyebrow="Our story"
         title="Roofing for generations."
         intro="Wells has been roofing Melbourne and the Mornington Peninsula since 1982 — long enough to have re-roofed homes we first worked on decades ago."
-        image="/content/about-generations.jpg"
+        /*
+          Both of these are real Wells photographs, which is why they replaced
+          the stock tool still-life that was here. On an About page the proof
+          IS the point — a staged shot of hammers on a workbench says nothing
+          a competitor couldn't also say.
+        */
+        images={[
+          {
+            src: "/content/about-slate-home.jpg",
+            alt: "Completed natural slate roof on a stone and render home",
+          },
+          {
+            src: "/content/about-crew.jpg",
+            alt: "Wells Roofing crew laying natural slate on a re-roof",
+          },
+        ]}
       >
         <p>
           Four decades in, we have deliberately narrowed rather than widened.

@@ -6,7 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { siteConfig } from "@/config/site";
 import { primaryNav, type NavItem } from "@/config/pages";
 import { Button } from "@/components/ui/Button";
-import { Logo } from "@/components/brand/Logo";
+import { LogoSwap } from "@/components/brand/Logo";
 import { cn } from "@/lib/utils";
 import { easeOutExpo } from "@/lib/motion";
 import { gsap, useGSAP, EASE } from "@/lib/gsap";
@@ -259,19 +259,29 @@ export function Header() {
         `min-w-0` on the side columns stops a long logo forcing the centre
         column off-axis at narrow desktop widths.
       */}
-      <div className="mx-auto grid h-[4.5rem] w-full max-w-wide grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:px-8 lg:px-12">
+      {/*
+        ONE FIXED BAR HEIGHT. A previous pass had this opening at 6rem and
+        shrinking to 4.5rem on scroll to buy the logo more room; it read as a
+        banner rather than a header and the reflow on first scroll was
+        distracting. 5rem is the compromise — 8px taller than the original,
+        which is enough for the frameless lockup to sit comfortably.
+      */}
+      <div className="mx-auto grid h-20 w-full max-w-wide grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:px-8 lg:px-12">
         {/* Left — logo */}
         <div className="flex min-w-0 justify-start">
           <Link
             href="/"
             onClick={closeMenu}
             aria-label={`${siteConfig.name} — home`}
-            className={cn(
-              "transition-colors duration-base",
-              onDark ? "text-white" : "text-foreground"
-            )}
+            className="block"
           >
-            <Logo withStrapline />
+            {/*
+              Sized to the 5rem bar with ~12px of clear space above and below.
+              Looks modest as a number, but this is the FRAMELESS lockup — at
+              56px the mark reads about the same as the framed master would at
+              70px, because the old keyline was eating a fifth of the height.
+            */}
+            <LogoSwap reversed={onDark} className="h-11 lg:h-14" />
           </Link>
         </div>
 

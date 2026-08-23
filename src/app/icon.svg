@@ -1,4 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="14" fill="#0a2354"/>
-  <path d="M50 14 12 47v15l14-12.2V88h16V62l8-7 8 7v26h16V49.8L88 62V47L50 14Zm0 21.3 21 18.2v20.8l-7-6.1V54l-14-12-14 12v12.2l-7 6.1V53.5l21-18.2Z" fill="#e51a1d"/>
+  <!--
+    Favicon, matched to the circular brand badge.
+
+    Only the chevron and the ring survive — at 16–32px the wordmark and
+    strapline from the full badge are an unreadable smudge, so the mark is
+    reduced to the elements that still read. icon.png (the full badge) is
+    emitted alongside as the raster fallback for contexts that render larger.
+  -->
+  <rect width="100" height="100" rx="16" fill="#0a2354"/>
+  <circle cx="50" cy="50" r="43" fill="none" stroke="#e51a1d" stroke-width="2"/>
+  <g transform="translate(24 24) scale(0.52)">
+    <path
+      d="M50 4 4 44v18l17-14.7V96h20V64l9-8 9 8v32h20V47.3L96 62V44L50 4Zm0 25.5 25 21.6V76l-9-7.8V56L50 42 34 56v12.2L25 76V51.1l25-21.6Z"
+      fill="#e51a1d"/>
+  </g>
 </svg>

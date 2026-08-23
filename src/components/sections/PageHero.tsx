@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
@@ -5,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
-import { HeroVideo } from "@/components/media/HeroVideo";
+import { cn } from "@/lib/utils";
 import type { PageSpec } from "@/config/pages";
 
 type PageHeroProps = {
@@ -16,21 +17,20 @@ type PageHeroProps = {
    * Background image path. Required, not defaulted — a default is how one
    * photograph quietly ends up on several routes. Every caller passes its own.
    *
-   * Still doubles as the poster when `video` is set, so it is required either
-   * way: the poster is what reduced-motion users and crawlers actually get.
    */
   image: string;
-  /**
-   * Optional background film. Reuses `HeroVideo`, so it inherits the same
-   * guarantees: no video is downloaded under `prefers-reduced-motion`,
-   * playback pauses off screen, and a missing file falls back to `image`.
-   *
-   * NOT set on the slate, heritage or supply pages — see the note in
-   * src/config/video.ts for why.
-   */
-  video?: string;
   /** Primary CTA override. */
   cta?: { label: string; href: string };
+  /**
+   * Optional panel beside the hero copy — used by /contact to put the quote
+   * form above the fold instead of making people scroll to it.
+   *
+   * When present the hero becomes a two-column layout and the CTA buttons are
+   * dropped: a "Get a Quote" button sitting next to the actual quote form is
+   * a second door to the room you are already standing in. The phone number
+   * stays, as the alternative to filling anything in.
+   */
+  aside?: ReactNode;
 };
 
 /**
@@ -49,27 +49,21 @@ export function PageHero({
   page,
   intro,
   image,
-  video,
   cta,
+  aside,
 }: PageHeroProps) {
   const primary = cta ?? { label: "Get a Quote", href: "/contact" };
 
   return (
     <section className="theme-dark grain relative flex min-h-page-hero flex-col justify-center overflow-hidden pt-28 pb-16 lg:min-h-page-hero-lg lg:pt-32 lg:pb-20">
-      {video ? (
-        <div className="absolute inset-0 opacity-30">
-          <HeroVideo clips={[video]} poster={image} />
-        </div>
-      ) : (
-        <Image
-          src={image}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-30"
-        />
-      )}
+      <Image
+        src={image}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover opacity-30"
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -80,41 +74,82 @@ export function PageHero({
       />
 
       <Container className="relative">
-        {/* Breadcrumb */}
-        <Reveal y={10} duration={0.6}>
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex flex-wrap items-center gap-2 text-small text-faint">
-              <li>
-                <Link href="/" className="transition-colors hover:text-accent">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden>/</li>
-              <li className="text-muted">{page.label}</li>
-            </ol>
-          </nav>
-        </Reveal>
-
-        <TextReveal
-          as="h1"
-          immediate
-          delay={0.1}
-          className="max-w-4xl font-display text-h1 uppercase text-white"
+        <div
+          className={cn(
+            aside && "grid items-center gap-12 lg:grid-cols-12 lg:gap-16",
+          )}
         >
-          {page.h1}
-        </TextReveal>
+          <div className={cn(aside && "lg:col-span-6")}>
+            {/* Breadcrumb */}
+            <Reveal y={10} duration={0.6}>
+              <nav aria-label="Breadcrumb" className="mb-6">
+                <ol className="flex flex-wrap items-center gap-2 text-small text-faint">
+                  <li>
+                    <Link
+                      href="/"
+                      className="transition-colors hover:text-accent"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li aria-hidden>/</li>
+                  <li className="text-muted">{page.label}</li>
+                </ol>
+              </nav>
+            </Reveal>
 
-        <Reveal delay={0.35}>
-          <p className="mt-6 max-w-2xl text-lead text-muted">{intro}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button href={primary.href} variant="accent" size="lg" arrow>
-              {primary.label}
-            </Button>
-            <Button href={siteConfig.phoneHref} variant="outline" size="lg">
-              Call {siteConfig.phone}
-            </Button>
+            <TextReveal
+              as="h1"
+              immediate
+              delay={0.1}
+              className="max-w-4xl font-display text-h1 uppercase text-white"
+            >
+              {page.h1}
+            </TextReveal>
+
+            <Reveal delay={0.35}>
+              <p
+                className={cn(
+                  "mt-6 text-lead text-muted",
+                  aside ? "max-w-xl" : "max-w-2xl",
+                )}
+              >
+                {intro}
+              </p>
+
+              {aside ? (
+                <div className="mt-8">
+                  <Button
+                    href={siteConfig.phoneHref}
+                    variant="outline"
+                    size="lg"
+                  >
+                    Call {siteConfig.phone}
+                  </Button>
+                </div>
+              ) : (
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <Button href={primary.href} variant="accent" size="lg" arrow>
+                    {primary.label}
+                  </Button>
+                  <Button
+                    href={siteConfig.phoneHref}
+                    variant="outline"
+                    size="lg"
+                  >
+                    Call {siteConfig.phone}
+                  </Button>
+                </div>
+              )}
+            </Reveal>
           </div>
-        </Reveal>
+
+          {aside && (
+            <Reveal delay={0.2} y={20} className="lg:col-span-6">
+              {aside}
+            </Reveal>
+          )}
+        </div>
       </Container>
     </section>
   );

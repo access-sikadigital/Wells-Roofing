@@ -19,9 +19,25 @@ import { siteConfig } from "@/config/site";
  * is what the strategy doc's NAP requirement actually means, and it is why
  * this reads from config rather than being typed out per region.
  */
-export function LocationMap({ region }: Readonly<{ region: string }>) {
+export function LocationMap({
+  /** Omit on /contact, where there is no region to relate the yard to. */
+  region,
+}: Readonly<{ region?: string }>) {
+  /*
+   * Query by FULL POSTAL ADDRESS, not by business name.
+   *
+   * `"Wells Roofing, 2/4 Frank St, Mornington VIC"` relies on Google matching
+   * the business listing — which drops the pin in the wrong place, or on a
+   * different Wells, whenever the GBP isn't linked or is mid-verification.
+   * A complete address with postcode and country geocodes deterministically,
+   * so the pin is correct regardless of listing state.
+   *
+   * The postcode and country are appended here rather than being baked into
+   * `siteConfig.address`, because that string is the NAP shown on the page and
+   * in the LocalBusiness schema, and it has to match the GBP listing verbatim.
+   */
   const query = encodeURIComponent(
-    `${siteConfig.name}, ${siteConfig.address}`
+    `${siteConfig.address} 3931, Australia`
   );
 
   return (
@@ -30,7 +46,11 @@ export function LocationMap({ region }: Readonly<{ region: string }>) {
         <SectionHeading
           eyebrow="Find us"
           title="Local, and easy to reach."
-          intro={`Our yard is in Mornington — a short run to anywhere in ${region}.`}
+          intro={
+            region
+              ? `Our yard is in Mornington — a short run to anywhere in ${region}.`
+              : "Our yard is in Mornington. Drop in, or we'll come to you — most of our work happens on your roof, not in an office."
+          }
         />
 
         <div className="mt-14 grid gap-8 lg:mt-16 lg:grid-cols-12 lg:gap-12">

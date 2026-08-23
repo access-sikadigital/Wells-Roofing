@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/ui/Icons";
+
 /**
  * PROOF — projects, testimonials and guarantees.
  * =============================================
@@ -47,6 +49,15 @@ export type Project = {
  * PLACEHOLDER SET — real imagery only, no fabricated provenance.
  * Note the absence of `suburb` on every entry: that is intentional, not an
  * oversight. Add it when the project is real.
+ */
+/*
+ * NOTE: the client's own photographs are deliberately NOT in this array.
+ *
+ * The two real Wells photos supplied so far are used only where they were
+ * given for — the About page pair and process step 02. They were briefly
+ * pulled into the gallery and the homepage hero as well; the client asked for
+ * them to stay where they were specified, so they were reverted. Ask before
+ * reusing a supplied photo somewhere it wasn't intended.
  */
 export const projects: Project[] = [
   {
@@ -179,6 +190,13 @@ export const sampleTestimonials: Testimonial[] = [
 export type Guarantee = {
   title: string;
   copy: string;
+  /**
+   * Icon key from components/ui/Icons.tsx. Stored as a NAME, not a component —
+   * this file is plain data imported by server components, and putting JSX in
+   * it would drag the icon module into every consumer whether it draws one or
+   * not.
+   */
+  icon: IconName;
 };
 
 /**
@@ -188,18 +206,22 @@ export type Guarantee = {
  */
 export const guarantees: Guarantee[] = [
   {
+    icon: "layers",
     title: "Material warranty",
     copy: "Premium natural Spanish slate carries a manufacturer's warranty measured in decades, not years. We supply the documentation with the roof, so the provenance and the cover are yours on paper.",
   },
   {
+    icon: "shieldCheck",
     title: "Workmanship guarantee",
     copy: "Our installation is guaranteed in writing. If something we fitted fails because of how we fitted it, we come back and put it right — that is the whole of the promise, with no small print about access or weather.",
   },
   {
+    icon: "seal",
     title: "Licensed and insured",
     copy: "Fully licensed and insured for domestic and commercial roofing work in Victoria. Certificates are provided with every quote, before you commit to anything.",
   },
   {
+    icon: "camera",
     title: "Documented handover",
     copy: "Every project finishes with photographs of the completed roof and the warranty paperwork in your hands — so if you sell the home, the roof is an asset you can evidence.",
   },

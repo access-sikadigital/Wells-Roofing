@@ -1,25 +1,46 @@
-import {
-  siteConfig,
-  FOUNDED_YEAR,
-  yearsTrading,
-} from "@/config/site";
-import { heroVideo } from "@/config/video";
-import { HeroVideo } from "@/components/media/HeroVideo";
+import Image from "next/image";
+import { siteConfig, FOUNDED_YEAR, yearsTrading } from "@/config/site";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { Counter } from "@/components/motion/Counter";
 
+/*
+ * Hero content is CENTRED, not bottom-aligned.
+ *
+ * `justify-end` pinned the whole block to the floor of a 100svh section, which
+ * left a large dead area under the header and made the hero read bottom-heavy.
+ * Centring balances it.
+ *
+ * `pb` is deliberately larger than `pt`: with `justify-center` the padding
+ * shifts the centre point, so heavier bottom padding lifts the block slightly
+ * above true centre — which is where it belongs optically, since the fixed
+ * header already occupies the top of the viewport.
+ */
 export function Hero() {
   return (
-    <section className="theme-dark grain relative flex min-h-svh flex-col justify-end overflow-hidden pt-32">
-      {/* Never-ending crossfaded background film */}
-      <div className="absolute inset-0 opacity-45">
-        <HeroVideo clips={heroVideo.clips} poster={heroVideo.poster} />
-      </div>
+    <section className="theme-dark grain relative flex min-h-svh flex-col justify-center overflow-hidden pt-24 pb-20 lg:pb-28">
+      {/*
+        Still, not film — background video was removed at the client's request.
 
-      {/* Navy scrim so the copy always holds contrast over any frame */}
+        This is STOCK, not one of the client's supplied photographs. It briefly
+        used their slate-home photo; they asked for supplied photos to stay on
+        the pages they were given for (About, process step 02), so this was
+        reverted. Don't reuse a client photo here without asking.
+
+        `priority` because this is the LCP element on the homepage.
+      */}
+      <Image
+        src="/photography/hero-home.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover opacity-45"
+      />
+
+      {/* Navy scrim so the copy always holds contrast over the photograph */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -39,7 +60,9 @@ export function Hero() {
         }}
       />
 
-      <Container className="relative pb-16 lg:pb-24">
+      {/* Spacing now lives on the section so it participates in the centring;
+          a second pb here would push the block back down. */}
+      <Container className="relative">
         <Reveal y={14} duration={0.8}>
           <p className="eyebrow mb-6 flex items-center gap-3 text-accent">
             <span className="h-0.5 w-10 bg-accent" aria-hidden />

@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { guarantees, type Guarantee as GuaranteeItem } from "@/config/proof";
+import { icons } from "@/components/ui/Icons";
 
 /**
  * Blueprint section — "Guarantee / warranty".
@@ -35,18 +36,43 @@ export function Guarantee({
         <SectionHeading eyebrow={eyebrow} title={title} intro={intro} />
 
         <dl className="mt-14 grid gap-x-10 gap-y-10 lg:mt-16 lg:grid-cols-2">
-          {items.map((item, i) => (
-            <Reveal key={item.title} delay={(i % 2) * 0.1}>
-              <div className="border-t border-line pt-6">
-                <dt className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
-                  {item.title}
-                </dt>
-                <dd className="mt-3 max-w-lg text-small text-muted">
-                  {item.copy}
-                </dd>
-              </div>
-            </Reveal>
-          ))}
+          {items.map((item, i) => {
+            /*
+              Looked up by name rather than stored as a component, so proof.ts
+              stays plain data. Unknown keys can't reach here — `IconName` is
+              derived from this same map — but the guard keeps a bad merge from
+              taking the page down.
+            */
+            const Icon = icons[item.icon];
+
+            return (
+              <Reveal key={item.title} delay={(i % 2) * 0.1}>
+                <div className="border-t border-line pt-6">
+                  {/*
+                    Icon lives INSIDE the <dt>, not beside it: a <dl> only
+                    permits <dt>/<dd> children, so a third sibling would be
+                    invalid markup. It is decorative — the heading text already
+                    carries the meaning — hence aria-hidden on the svg itself.
+                  */}
+                  <dt className="flex items-center gap-4">
+                    <span className="grid size-10 shrink-0 place-items-center rounded-card bg-accent/15 text-accent ring-1 ring-accent/25">
+                      {Icon ? <Icon /> : null}
+                    </span>
+                    <span className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+                      {item.title}
+                    </span>
+                  </dt>
+                  {/*
+                    pl-14 = the 2.5rem tile + the 1rem gap, so the copy hangs
+                    under the title rather than under the icon.
+                  */}
+                  <dd className="mt-3 max-w-lg pl-14 text-small text-muted">
+                    {item.copy}
+                  </dd>
+                </div>
+              </Reveal>
+            );
+          })}
         </dl>
       </Container>
     </section>

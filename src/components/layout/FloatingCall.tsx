@@ -130,9 +130,20 @@ export function FloatingCall() {
       const tl = gsap.timeline({ repeat: -1, repeatDelay: 7 });
 
       tl.to(handset, {
+        /*
+         * `transformOrigin` must sit OUT here, not inside `keyframes`.
+         *
+         * GSAP treats every key inside `keyframes` as an ARRAY of per-frame
+         * values. A string is array-like, so it iterated "50% 60%" character
+         * by character and tried `style[0] = "5"` — which throws
+         * "Failed to set an indexed property [0] on 'CSSStyleDeclaration'".
+         *
+         * Only animated properties belong in `keyframes`. Static ones like
+         * transformOrigin go in the tween vars.
+         */
+        transformOrigin: "50% 60%",
         keyframes: {
           rotate: [0, -16, 12, -10, 7, -4, 0],
-          transformOrigin: "50% 60%",
         },
         duration: 0.75,
         ease: "none",

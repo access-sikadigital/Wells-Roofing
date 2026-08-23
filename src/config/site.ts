@@ -25,7 +25,7 @@ export const siteConfig = {
   phoneHref: "tel:1800066052",
   mobile: "0408 860 711",
   mobileHref: "tel:+61408860711",
-  email: "steve@wellsroofing.com.au",
+  email: "wellsroofing@wellsfooring.com.au",
   contactName: "Steve Wells",
   address: "2/4 Frank St, Mornington VIC",
 

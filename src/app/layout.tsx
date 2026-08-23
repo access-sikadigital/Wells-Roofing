@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.strapline}`,
     description: siteConfig.tagline,
-    images: ["/brand/wells-roofing-social.png"],
+    images: ["/brand/og.png"],
   },
   robots: { index: true, follow: true },
 };

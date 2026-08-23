@@ -38,7 +38,8 @@ const defaultSteps: Step[] = [
     title: "Roof survey",
     copy: "A proper inspection of the roof, structure and existing material — so the quote reflects the actual job, not a guess.",
     image: "/process/02-survey.jpg",
-    alt: "Tape measure extended across weathered slate courses during a roof inspection",
+    // Real Wells crew, branded workwear, on an actual slate job — not stock.
+    alt: "Wells Roofing crew working on a slate roof, harnessed and in branded workwear",
   },
   {
     title: "Specification & sample",

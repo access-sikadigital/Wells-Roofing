@@ -27,12 +27,15 @@ import { cn } from "@/lib/utils";
  * The heading column is sticky on desktop, so on a long block the title stays
  * with the copy it belongs to instead of scrolling away from it.
  */
+export type BlockImage = { src: string; alt?: string };
+
 export function ContentBlock({
   eyebrow,
   title,
   intro,
   children,
   image,
+  images,
   flip = false,
 }: {
   eyebrow?: string;
@@ -40,8 +43,77 @@ export function ContentBlock({
   intro?: string;
   children?: ReactNode;
   image?: string;
+  /**
+   * Two photographs instead of one, rendered as an offset overlapping pair.
+   *
+   * Stacking two portraits vertically was the obvious option and the wrong
+   * one: it doubles the media column's height, so the copy beside it ends up
+   * floating in the middle of a very tall row. The offset pair fills the same
+   * vertical space as a single portrait while showing two images — and reads
+   * as a designed composition rather than a list.
+   *
+   * Ignored when there is only one image; use `image` for that.
+   */
+  images?: BlockImage[];
   flip?: boolean;
 }) {
+  const pair = images && images.length >= 2 ? images.slice(0, 2) : null;
+
+  if (pair) {
+    return (
+      <section className="py-section">
+        <Container>
+          <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-20">
+            <div className={cn("lg:col-span-5", flip && "lg:order-2")}>
+              {/* Extra bottom padding makes room for the offset second frame,
+                  which hangs below the first by design. */}
+              <div className="relative pb-[18%]">
+                <Parallax
+                  amount={8}
+                  className="relative aspect-4/5 w-[82%] overflow-hidden rounded-card"
+                >
+                  <Image
+                    src={pair[0].src}
+                    alt={pair[0].alt ?? ""}
+                    fill
+                    sizes="(max-width: 1024px) 82vw, 33vw"
+                    className="scale-105 object-cover"
+                  />
+                </Parallax>
+
+                {/*
+                  The ring is doing real work, not decoration: the second frame
+                  overlaps the first, and without a border the two photographs
+                  bleed into each other wherever their tones happen to match.
+                */}
+                <div className="absolute right-0 bottom-0 aspect-square w-[52%] overflow-hidden rounded-card ring-4 ring-background">
+                  <Image
+                    src={pair[1].src}
+                    alt={pair[1].alt ?? ""}
+                    fill
+                    sizes="(max-width: 1024px) 52vw, 21vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <SectionHeading eyebrow={eyebrow} title={title} intro={intro} />
+              {children && (
+                <Reveal delay={0.2}>
+                  <div className="mt-8 space-y-5 text-body text-muted">
+                    {children}
+                  </div>
+                </Reveal>
+              )}
+            </div>
+          </div>
+        </Container>
+      </section>
+    );
+  }
+
   if (!image) {
     return (
       <section className="py-section">

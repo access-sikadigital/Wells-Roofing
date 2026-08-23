@@ -26,7 +26,6 @@ import { LocationMap } from "@/components/sections/LocationMap";
 export function LocationPage({
   pageKey,
   image,
-  video,
   localImage,
   intro,
   localAngle,
@@ -40,11 +39,6 @@ export function LocationPage({
    * someone choosing its photograph.
    */
   image: string;
-  /**
-   * Optional background film for the hero. Location pages make no material
-   * claim, so stock aerials are safe here — see src/config/video.ts.
-   */
-  video?: string;
   /**
    * Portrait for the "In this area" block. Required for the same reason as
    * `image` — all three regions previously shared one hard-coded file.
@@ -61,7 +55,7 @@ export function LocationPage({
     <>
       <JsonLd data={schemaForPage(page, faqs)} />
 
-      <PageHero page={page} image={image} video={video} intro={intro} />
+      <PageHero page={page} image={image} intro={intro} />
       <QuoteFormPlaceholder
         title={`Get a quote in ${page.label}`}
         intro="Local, based in Mornington, and on the road across the region most days."

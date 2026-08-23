@@ -15,7 +15,6 @@ import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
 import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
 import { Guarantee } from "@/components/sections/Guarantee";
-import { pageVideo } from "@/config/video";
 
 const page = getPage("slate-roof-restoration");
 export const metadata = metadataFor("slate-roof-restoration");
@@ -26,8 +25,7 @@ export default function Page() {
       <JsonLd data={schemaForPage(page, slateFaqs)} />
       <PageHero
         page={page}
-        image={pageVideo.restoration.poster}
-        video={pageVideo.restoration.video}
+        image="/photography/hero-restoration.jpg"
         intro="Sympathetic slate and heritage roof restoration that preserves your home&apos;s character — honest advice on whether yours needs restoring or replacing."
         cta={{ label: "Book a Consultation", href: "/contact" }}
       />

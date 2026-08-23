@@ -79,7 +79,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* ---- Brand + direct contact ---- */}
           <div className="lg:col-span-4">
-            <Logo withStrapline className="text-white" />
+            <Logo variant="reversed" className="h-12 lg:h-14" />
 
             <p className="mt-6 max-w-sm text-small text-muted">
               {siteConfig.tagline}

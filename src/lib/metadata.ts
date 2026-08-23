@@ -29,7 +29,7 @@ export function metadataFor(key: PageKey): Metadata {
       url: canonical,
       title: page.title,
       description: page.description,
-      images: ["/brand/wells-roofing-social.png"],
+      images: ["/brand/og.png"],
     },
   };
 }

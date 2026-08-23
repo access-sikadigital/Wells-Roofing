@@ -28,8 +28,8 @@ export function organisationSchema(): Json {
     email: siteConfig.email,
     foundingDate: String(FOUNDED_YEAR),
     slogan: siteConfig.motto,
-    image: abs("/brand/wells-roofing-social.png"),
-    logo: abs("/brand/wells-roofing-logo.png"),
+    image: abs("/brand/badge.png"),
+    logo: abs("/brand/logo.png"),
     priceRange: "$$$",
     address: {
       "@type": "PostalAddress",

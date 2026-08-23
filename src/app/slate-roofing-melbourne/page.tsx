@@ -1,6 +1,5 @@
 import { metadataFor } from "@/lib/metadata";
 import { LocationPage } from "@/components/sections/LocationPage";
-import { pageVideo } from "@/config/video";
 
 export const metadata = metadataFor("loc-melbourne");
 
@@ -8,8 +7,7 @@ export default function Page() {
   return (
     <LocationPage
       pageKey="loc-melbourne"
-      image={pageVideo.melbourne.poster}
-      video={pageVideo.melbourne.video}
+      image="/photography/hero-melbourne.jpg"
       localImage="/content/local-melbourne.jpg"
       intro="Premium slate and heritage roofing for Melbourne's inner-east — Toorak, Kew, Camberwell, Malvern, Hawthorn, Armadale and Elsternwick."
       localAngle={{
