@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
+import { HeroVideo } from "@/components/media/HeroVideo";
 import { cn } from "@/lib/utils";
 import type { PageSpec } from "@/config/pages";
 
@@ -19,6 +20,17 @@ type PageHeroProps = {
    *
    */
   image: string;
+  /**
+   * Optional looping background film, for the three material pages the client
+   * supplied footage for. When set it REPLACES `image` — the video's own
+   * poster frame becomes the still, so the handoff from image to film is
+   * invisible instead of a cross-dissolve between two different photographs.
+   *
+   * `image` is still required alongside it. That is deliberate: it is the
+   * fallback the page falls back *to* if the footage is ever pulled, and it
+   * keeps every route honest about owning a photograph.
+   */
+  video?: { src: string; poster: string };
   /** Primary CTA override. */
   cta?: { label: string; href: string };
   /**
@@ -49,6 +61,7 @@ export function PageHero({
   page,
   intro,
   image,
+  video,
   cta,
   aside,
 }: PageHeroProps) {
@@ -56,14 +69,18 @@ export function PageHero({
 
   return (
     <section className="theme-dark grain relative flex min-h-page-hero flex-col justify-center overflow-hidden pt-28 pb-16 lg:min-h-page-hero-lg lg:pt-32 lg:pb-20">
-      <Image
-        src={image}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover opacity-30"
-      />
+      {video ? (
+        <HeroVideo src={video.src} poster={video.poster} />
+      ) : (
+        <Image
+          src={image}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-30"
+        />
+      )}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"

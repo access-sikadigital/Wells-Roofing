@@ -9,7 +9,7 @@ export default function Page() {
       pageKey="loc-mornington-peninsula"
       image="/photography/hero-peninsula.jpg"
       localImage="/content/local-peninsula.jpg"
-      intro="Specialist slate, heritage and tile roofing across the Mornington Peninsula — and our home ground since 1982. Our yard is in Mornington."
+      intro="Specialist slate and tile roofing across the Mornington Peninsula — our home ground since 1982. Our yard is in Mornington."
       localAngle={{
         title: "Coastal exposure changes everything.",
         copy: "Peninsula roofs take salt air, wind off the bay and driving rain that inland roofs never see. Material choice and fixing detail have to answer to that.",
@@ -17,6 +17,7 @@ export default function Page() {
             "Based in Mornington — we are local, not servicing the region from town",
             "Salt-air-appropriate fixings and flashings; copper and lead over cheaper alternatives",
             "Coastal and clifftop properties where exposure ratings genuinely matter",
+            "Coastal new builds at Portsea, Sorrento and Mount Martha, specified for exposure",
             "Period homes in Sorrento, Portsea and Mount Eliza with original slate worth preserving",
             "Working knowledge of Peninsula heritage overlays and council requirements",
         ],

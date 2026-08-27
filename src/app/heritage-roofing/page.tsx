@@ -7,14 +7,11 @@ import { PageHero } from "@/components/sections/PageHero";
 import { QuoteFormPlaceholder } from "@/components/sections/QuoteFormPlaceholder";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { ContentBlock, CheckList } from "@/components/sections/ContentBlock";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { SpecAccordion } from "@/components/sections/SpecAccordion";
 import { FaqSection } from "@/components/sections/FaqSection";
-import { ServiceArea } from "@/components/sections/ServiceArea";
 import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
 import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
-import { Guarantee } from "@/components/sections/Guarantee";
 
 const page = getPage("heritage-roofing");
 export const metadata = metadataFor("heritage-roofing");
@@ -153,14 +150,10 @@ export default function Page() {
 
       {/* 4 — Project proof */}
 
-      <ProcessSteps />
-      {/* Guarantee / warranty */}
-      <Guarantee />
 
       {/* Reviews */}
       <ReviewsStrip title="What heritage clients say." />
 
-      <ServiceArea />
       <FaqSection faqs={slateFaqs} />
       <RelatedServices keys={["slate-roof-restoration", "natural-slate-roofing", "terracotta-tile-roofing"]} />
       <CTA />

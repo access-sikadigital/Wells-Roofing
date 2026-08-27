@@ -108,8 +108,17 @@ export const pages = [
     ],
     title: "Slate & Tile Roofing Melbourne & Mornington | Wells Roofing",
     description:
-      "Melbourne & Mornington Peninsula's premium natural slate & tile roofing specialists. 45 years' experience. Get a quote.",
-    h1: "Melbourne's Premium Slate & Tile Roofing Specialists",
+      "Melbourne & Mornington Peninsula's premium natural slate & tile roofing specialists. Family owned since 1982. Get a quote.",
+    /*
+     * APPROVED by the client (feedback v1, table 3): "Still setting the
+     * standard in slate & tile roofing." — use as the primary H1/hero line.
+     *
+     * It replaces both the previous spec H1 ("Melbourne's Premium Slate & Tile
+     * Roofing Specialists") and the line the Hero was actually rendering
+     * ("Roofing for generations."), which was hardcoded and never read this
+     * field at all. `Hero` now takes the H1 as a prop like every other page.
+     */
+    h1: "Still setting the standard in slate & tile roofing.",
     schema: ["RoofingContractor", "FAQPage"],
     job: "Position Wells as the premium slate & tile specialist and route the two audiences.",
   },
@@ -134,7 +143,7 @@ export const pages = [
     ],
     title: "Natural Slate Roofing Melbourne | Wells Roofing",
     description:
-      "Premium natural & Spanish slate roofs across Melbourne & the Mornington Peninsula. 45 years' specialist experience. Get a quote.",
+      "Premium natural & Spanish slate roofs across Melbourne & the Mornington Peninsula. Slate specialists since 1982. Get a quote.",
     h1: "Natural Slate Roofing, Melbourne & Mornington Peninsula",
     schema: ["RoofingContractor", "Service", "FAQPage"],
     job: "Flagship money page. Also the PPC landing page for slate search & Meta campaigns — same URL.",
@@ -183,7 +192,7 @@ export const pages = [
     ],
     title: "Heritage Roofing Melbourne | Wells Roofing",
     description:
-      "Heritage roofing specialists for Melbourne's period homes — slate, terracotta & sympathetic restoration. 45 years' experience.",
+      "Heritage roofing specialists for Melbourne's period homes — slate, terracotta & sympathetic restoration. Since 1982.",
     h1: "Heritage Roofing for Melbourne's Period Homes",
     schema: ["Service", "FAQPage"],
     job: "Anchors the heritage topic cluster; links tightly with Slate Roofing and Restoration.",
@@ -235,7 +244,7 @@ export const pages = [
     ],
     title: "Natural Slate Supply & Specification | Wells Roofing",
     description:
-      "Premium Spanish slate (CUPA PIZARRAS / Del Carmen) supplied & specified for architects and builders. Samples, spec support, reliable lead times.",
+      "Premium Spanish slate from CUPA PIZARRAS supplied & specified for architects and builders. Samples, specification support, reliable lead times.",
     h1: "Natural Slate Supply & Specification for Architects & Builders",
     schema: ["Service", "Product", "FAQPage"],
     job: "Highest-volume organic opportunity on the site. Anchors the architects & builders hub.",
@@ -357,10 +366,10 @@ export const pages = [
     audience: "both",
     phase: "P1",
     priority: "Med",
-    title: "About Wells Roofing | 45 Years of Slate Roofing",
+    title: "About Wells Roofing | Slate Roofing Since 1982",
     description:
       "An established Mornington Peninsula roofing name, now Melbourne's premium natural slate & tile specialist. Meet the team.",
-    h1: "45 Years of Specialist Roofing",
+    h1: "Specialist Roofing Since 1982",
     schema: ["AboutPage", "Organization"],
     job: "Established and expert, not a start-up. Heritage story + deliberate premium repositioning.",
   },
@@ -440,8 +449,24 @@ export const pages = [
     ],
     title: "Slate Roofing Mornington Peninsula | Wells Roofing",
     description:
-      "Specialist slate, heritage & tile roofing across the Mornington Peninsula — Mornington, Mt Eliza, Mt Martha & more. Local, 45 years.",
-    h1: "Slate & Heritage Roofing on the Mornington Peninsula",
+      "Specialist slate, heritage & tile roofing across the Mornington Peninsula — Mornington, Mt Eliza, Mt Martha & more. Local since 1982.",
+    /*
+     * Client feedback v1: heritage must not dominate the identity — the site
+     * has to read as equally credible for contemporary architect-designed
+     * homes. Three location H1s opened on "Slate & Heritage Roofing", which
+     * made heritage the first thing a local searcher saw.
+     *
+     * Checked before changing: none of these pages carries a heritage keyword,
+     * primary or supporting. The word was pure positioning, not SEO, so
+     * swapping it for "Tile" costs nothing and matches the master brand
+     * ("premium slate & tile roofing specialist"). Every primary keyword —
+     * "roofing brighton", "roofing mornington peninsula", "slate roofing
+     * melbourne" — is untouched.
+     *
+     * /slate-roof-restoration/ KEEPS "Heritage" in its H1: it genuinely targets
+     * "heritage roof restoration" as a supporting keyword.
+     */
+    h1: "Slate & Tile Roofing on the Mornington Peninsula",
     schema: ["RoofingContractor", "FAQPage"],
     suburbs: [
       "Mornington",
@@ -472,7 +497,7 @@ export const pages = [
     title: "Slate Roofing Bayside Melbourne | Wells Roofing",
     description:
       "Premium slate, heritage & tile roofing across Bayside — Brighton, Hampton, Sandringham, Black Rock & Beaumaris.",
-    h1: "Slate & Heritage Roofing in Bayside",
+    h1: "Slate & Tile Roofing in Bayside",
     schema: ["RoofingContractor", "FAQPage"],
     suburbs: [
       "Brighton",
@@ -505,7 +530,7 @@ export const pages = [
     title: "Slate Roofing Melbourne | Wells Roofing",
     description:
       "Premium slate & heritage roofing for Melbourne's inner-east — Toorak, Kew, Camberwell, Malvern, Hawthorn & Armadale.",
-    h1: "Slate & Heritage Roofing in Premium Melbourne",
+    h1: "Slate & Tile Roofing in Premium Melbourne",
     schema: ["RoofingContractor", "FAQPage"],
     suburbs: [
       "Toorak",

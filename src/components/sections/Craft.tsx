@@ -4,20 +4,32 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { Parallax } from "@/components/motion/Parallax";
 import { Button } from "@/components/ui/Button";
-import { yearsTrading } from "@/config/site";
 
+/**
+ * "Why Wells" — three proof points, which is the cap the client set.
+ *
+ * Rebalanced under client feedback v1: "Heritage remains an important
+ * capability and proof of skill, but should not dominate the visual/verbal
+ * identity. The site must feel equally credible for contemporary
+ * architect-designed homes and prestige new builds."
+ *
+ * Heritage previously had a proof point to itself — one of only three on the
+ * homepage, which made a third of the whole pitch about period buildings.
+ * It is now named inside the "new builds and period homes" point, where it
+ * reads as one of two things Wells does rather than the headline.
+ */
 const points = [
   {
     title: "Supply to install",
     copy: "We source premium natural Spanish slate ourselves — provenance, specification support and installation under one roof.",
   },
   {
-    title: "Heritage capability",
-    copy: "Period, heritage and architecturally significant homes restored correctly, preserving the character of the property.",
+    title: "New builds and period homes",
+    copy: "Contemporary architect-designed houses and prestige new builds, alongside the heritage restoration work the business was built on.",
   },
   {
     title: "Built for architects",
-    copy: "Technical documentation, scheduling certainty and first-class communication for architect-led and prestige builds.",
+    copy: "Technical documentation at design stage, lead times we hold to a date, and one point of contact through the build.",
   },
 ];
 
@@ -41,9 +53,13 @@ export function Craft() {
 
           <div className="lg:col-span-7">
             <SectionHeading
+              /* Client feedback v1, table 4: "A specialist's eye, a generation
+                 of hands." → "Specialist slate & tile roofing since 1982."
+                 The intro also dropped its running year count in favour of a
+                 fixed founding year, per the same brief. */
               eyebrow="Our Craft"
-              title="A specialist's eye, a generation of hands."
-              intro={`For more than ${yearsTrading()} years, Wells has been the name behind Melbourne's finest slate and tile roofs — not a general roofer, a specialist.`}
+              title="Specialist slate &amp; tile roofing since 1982."
+              intro="For over four decades the Wells family has worked with homeowners, builders and architects across Melbourne and the Mornington Peninsula — on natural slate, terracotta and concrete."
             />
 
             <div className="mt-10 space-y-8">

@@ -7,14 +7,11 @@ import { PageHero } from "@/components/sections/PageHero";
 import { QuoteFormPlaceholder } from "@/components/sections/QuoteFormPlaceholder";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { ContentBlock, CheckList } from "@/components/sections/ContentBlock";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { SpecAccordion } from "@/components/sections/SpecAccordion";
 import { FaqSection } from "@/components/sections/FaqSection";
-import { ServiceArea } from "@/components/sections/ServiceArea";
 import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
 import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
-import { Guarantee } from "@/components/sections/Guarantee";
 
 const page = getPage("slate-roof-repairs");
 export const metadata = metadataFor("slate-roof-repairs");
@@ -26,7 +23,9 @@ export default function Page() {
       <PageHero
         page={page}
         image="/photography/hero-repairs.jpg"
-        intro="Specialist slate roof repairs — slipped slates, leaks and failed flashings fixed and matched to your roof, not patched with whatever is on the truck."
+        /* Client feedback v1: scope stated explicitly and up front. Wells takes
+           SLATE repairs only under this brand — no tile, no general roofing. */
+        intro="Specialist slate roof repairs — slipped slates, leaks and failed flashings, fixed and matched to your existing roof. Slate only: it is the material we know best."
         cta={{ label: "Get a Quote", href: "/contact" }}
       />
       <QuoteFormPlaceholder />
@@ -42,15 +41,17 @@ export default function Page() {
             "Slipped, cracked or missing slates",
             "Leaks traced to their true source, not the nearest wet patch",
             "Failed lead flashings, valleys and chimney abutments",
-            "Deteriorated ridge bedding and pointing",
             "Damage from foot traffic, solar installs or antenna mounts",
           ]}
         />
       </ContentBlock>
       <ContentBlock
         eyebrow="The difference"
-        title="Why a specialist, not a generalist."
-        intro="A general roofer will get water to stop today. A slate roofer will stop it without costing you the roof."
+        /* Was: "A general roofer will get water to stop today. A slate roofer
+           will stop it without costing you the roof." Removed under the client's
+           voice rules — no competitor jabs. States what we do instead. */
+        title="Repaired as slate, not patched."
+        intro="A slate roof asks for particular materials and a particular way of working on it. Getting both right is the difference between a repair that lasts and one that costs you slates."
         flip
       >
         <CheckList
@@ -101,13 +102,6 @@ export default function Page() {
             ],
           },
           {
-            criterion: "Ridge or hip capping loose",
-            values: [
-              "Perished mortar bedding, common after 30–40 years",
-              "Re-bed and re-point the full run, not the loose section",
-            ],
-          },
-          {
             criterion: "Several cracked slates in one area",
             values: [
               "Foot traffic — a solar, antenna or aerial install",
@@ -115,7 +109,7 @@ export default function Page() {
             ],
           },
         ]}
-        footnote="Slate repairs only. We do not take on tile repairs — it is not what we are set up to do well, and sending someone the right way is better than taking the job."
+        footnote="Slate repairs only. We do not take on tile or general roof repairs — pointing you to the right trade is more useful than taking a job outside what we specialise in."
       />
 
       <ContentBlock
@@ -161,14 +155,10 @@ export default function Page() {
         </p>
       </ContentBlock>
 
-      <ProcessSteps />
-      {/* Guarantee / warranty */}
-      <Guarantee />
 
       {/* Reviews */}
       <ReviewsStrip title="What repair clients say." />
 
-      <ServiceArea />
       <FaqSection faqs={slateFaqs} />
       <RelatedServices keys={["slate-roof-restoration", "natural-slate-roofing", "heritage-roofing"]} />
       <CTA />

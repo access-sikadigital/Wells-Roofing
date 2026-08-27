@@ -56,7 +56,7 @@ export function ArchitectsStrip() {
               </h2>
               <p className="mt-5 max-w-xl text-lead text-muted">
                 Premium Spanish slate supplied and specified for prestige
-                projects — CUPA PIZARRAS and Del Carmen provenance, technical
+                projects — documented CUPA PIZARRAS provenance, technical
                 spec support at design stage, and lead times you can programme
                 around.
               </p>

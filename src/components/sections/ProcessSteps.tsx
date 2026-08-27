@@ -55,7 +55,13 @@ const defaultSteps: Step[] = [
   },
   {
     title: "Expert installation",
-    copy: "Installed by slate and tile specialists — not subcontracted to a general roofing crew.",
+    /*
+      CLIENT FEEDBACK v1 (compliance): previously read "not subcontracted to a
+      general roofing crew". Wells uses subcontract trades by design, so the
+      claim was false. Rewritten to describe the STANDARD the installer works
+      to, never their employment status.
+    */
+    copy: "Installed by slate and tile trades who work in these materials every day, to a set-out and detailing standard we specify.",
     image: "/process/05-installation.jpg",
     alt: "Gloved hands setting a natural slate tile onto a timber batten",
   },
@@ -67,10 +73,43 @@ const defaultSteps: Step[] = [
   },
 ];
 
+/**
+ * THREE-STEP SUMMARY — homepage only.
+ *
+ * Client feedback v1: the full six-step section was too much for a homepage —
+ * "reduce to a simple 3-step summary (Consult, Quote, Installation)". The
+ * six-step version still runs on the service pages, where someone is already
+ * deep enough in consideration to want the detail.
+ *
+ * Deliberately not a `.slice()` of `defaultSteps`: the summary collapses
+ * survey + specification + supply into one "Quote" step, so the copy has to be
+ * written for three, not trimmed from six.
+ */
+export const summarySteps: Step[] = [
+  {
+    title: "Consult",
+    copy: "We look at the property, talk through what the roof needs to do, and give you a straight answer on the options.",
+    image: "/process/01-consultation.jpg",
+    alt: "Roof plans and a slate sample laid out on a homeowner's table",
+  },
+  {
+    title: "Quote",
+    copy: "A proper roof inspection, the material specified and a sample in your hand — then a quote priced to the actual job.",
+    image: "/process/03-specification.jpg",
+    alt: "Natural slate tile samples fanned out beside a technical specification sheet",
+  },
+  {
+    title: "Installation",
+    copy: "Material supplied to a firm lead time, installed to the standard we specify, and handed over with photographs and paperwork.",
+    image: "/process/05-installation.jpg",
+    alt: "Gloved hands setting a natural slate tile onto a timber batten",
+  },
+];
+
 export function ProcessSteps({
   steps = defaultSteps,
   eyebrow = "How it works",
-  title = "Six steps, no surprises.",
+  title = "How a Wells roof comes together.",
   intro,
 }: {
   steps?: Step[];

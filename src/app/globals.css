@@ -85,7 +85,28 @@
    * The lower bounds here are sized so those fit on one line rather than
    * breaking mid-word — raise them and long headings start splitting.
    */
-  --text-display: clamp(2.25rem, 1.04rem + 6.07vw, 6.5rem);
+  /**
+   * Upper bound was 6.5rem (104px), which set the approved homepage H1 —
+   * "Still setting the standard in slate & tile roofing." — over FOUR lines.
+   *
+   * The line count is a ratio, not a font size: at a given size the browser
+   * fits as many words as the container allows. Measured in Montserrat
+   * ExtraBold caps at -0.035em, the three lines that headline wants to make
+   * are roughly 9.0em / 10.9em / 7.0em wide. The widest is 10.9em, and the
+   * next word ("TILE") would push line two to about 13.3em — so any
+   * container-to-font ratio between ~10.9 and ~13.3 produces exactly three
+   * lines.
+   *
+   * The H1 sits in `max-w-5xl` (64rem / 1024px). 5.25rem (84px) puts the
+   * ratio at 12.2 — near the middle of that window, with ~11% headroom below
+   * and ~9% above, so it does not flip to four lines on a small metric
+   * difference. Change either this value or that `max-w` and the other has to
+   * move with it.
+   *
+   * `text-display` is used by the homepage hero and nowhere else, so tuning
+   * the token here is safe.
+   */
+  --text-display: clamp(2.25rem, 1.04rem + 6.07vw, 5.25rem);
   --text-display--line-height: 1;
   --text-display--letter-spacing: -0.035em;
 

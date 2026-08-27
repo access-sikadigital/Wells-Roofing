@@ -98,6 +98,27 @@ export const projects: Project[] = [
   },
 ];
 
+/**
+ * SELECTED PROJECTS — the homepage "Selected real projects" slot.
+ *
+ * ⚠️  EMPTY ON PURPOSE. Do not point this at `projects` above.
+ *
+ * Client feedback v1 asks the homepage for "Selected real projects". The
+ * `projects` array above is stock and material photography with deliberately
+ * generic captions — honest as a texture gallery, but putting it under a
+ * heading that says these are Wells jobs makes exactly the claim the captions
+ * were written to avoid. Same category of problem as `sampleTestimonials`.
+ *
+ * `ProjectGallery` renders an honest "we're photographing recent work"
+ * state from an empty array, so the section is presentable today and turns on
+ * the moment real photographs exist.
+ *
+ * To go live: add real Wells jobs here with a real `suburb` on each — the
+ * suburb is the local-SEO payload of the section, which is the whole reason
+ * it sits on the homepage.
+ */
+export const selectedProjects: Project[] = [];
+
 export type Testimonial = {
   quote: string;
   /** First name + suburb is the norm for trade reviews. */

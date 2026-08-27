@@ -6,7 +6,6 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { ContentBlock, CheckList } from "@/components/sections/ContentBlock";
-import { ServiceArea } from "@/components/sections/ServiceArea";
 import { CTA } from "@/components/sections/CTA";
 
 const page = getPage("about");
@@ -27,7 +26,7 @@ export default function Page() {
       <ContentBlock
         eyebrow="Our story"
         title="Roofing for generations."
-        intro="Wells has been roofing Melbourne and the Mornington Peninsula since 1982 — long enough to have re-roofed homes we first worked on decades ago."
+        intro="Family owned and operated. For over four decades the Wells family has been supplying and installing roofs across Melbourne and Victoria — long enough to have re-roofed homes we first worked on decades ago."
         /*
           Both of these are real Wells photographs, which is why they replaced
           the stock tool still-life that was here. On an About page the proof
@@ -46,18 +45,27 @@ export default function Page() {
         ]}
       >
         <p>
-          Four decades in, we have deliberately narrowed rather than widened.
-          Where a lot of roofing businesses chase volume, we have moved the other
-          way — toward natural slate, heritage restoration and premium tile,
-          where the work is harder, the standard is higher and the specialist
+          That experience is what shaped the business into what it is today: a
+          specialist roofing company with a deep understanding of natural slate,
+          traditional craftsmanship and the importance of doing the job properly.
+        </p>
+        <p>
+          We work with homeowners, builders and architects on new homes,
+          extensions and roof replacements — slate, terracotta and concrete alike.
+        </p>
+        <p>
+          Over four decades in, we have deliberately narrowed rather than
+          widened — toward the materials and the detail where specialist
           knowledge actually counts.
         </p>
       </ContentBlock>
 
       <ContentBlock
-        eyebrow="What we are not"
-        title="A specialist, by choice."
-        intro="We say no to a lot of work. That is the point."
+        /* Client feedback v1, table 4: "We say no to a lot of work. That is
+           the point." → state what we DO. */
+        eyebrow="What we do"
+        title="What we do."
+        intro="We focus on natural slate, terracotta and concrete tile roofing."
         flip
       >
         <CheckList
@@ -65,7 +73,7 @@ export default function Page() {
             "No asphalt or shingle roofing",
             "No general or volume roofing work",
             "No broad commercial or industrial roofing",
-            "Slate, heritage, terracotta and concrete tile — done properly",
+            "Natural slate, terracotta and concrete tile — new builds, re-roofs and restoration",
           ]}
         />
         <p>
@@ -75,7 +83,6 @@ export default function Page() {
         </p>
       </ContentBlock>
 
-      <ServiceArea />
       <CTA />
     </>
   );

@@ -7,14 +7,11 @@ import { PageHero } from "@/components/sections/PageHero";
 import { QuoteFormPlaceholder } from "@/components/sections/QuoteFormPlaceholder";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { ContentBlock, CheckList } from "@/components/sections/ContentBlock";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { SpecAccordion } from "@/components/sections/SpecAccordion";
 import { FaqSection } from "@/components/sections/FaqSection";
-import { ServiceArea } from "@/components/sections/ServiceArea";
 import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
 import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
-import { Guarantee } from "@/components/sections/Guarantee";
 
 const page = getPage("slate-roof-restoration");
 export const metadata = metadataFor("slate-roof-restoration");
@@ -26,7 +23,11 @@ export default function Page() {
       <PageHero
         page={page}
         image="/photography/hero-restoration.jpg"
-        intro="Sympathetic slate and heritage roof restoration that preserves your home&apos;s character — honest advice on whether yours needs restoring or replacing."
+        /* Client feedback v1: restoration under Wells is scoped to SLATE. */
+        /* Client feedback v1: heritage should not dominate. A slate roof laid in
+    the 1990s on a contemporary home needs restoring on the same terms as a
+    Victorian one, so the copy no longer assumes a period property. */
+        intro="Slate roof restoration for period homes and contemporary houses alike — and a straight answer on whether yours needs restoring or replacing."
         cta={{ label: "Book a Consultation", href: "/contact" }}
       />
       <QuoteFormPlaceholder />
@@ -34,10 +35,11 @@ export default function Page() {
       <ContentBlock
         eyebrow="The honest answer"
         title="Restore, or replace?"
-        intro="The single question that decides the cost of your project — and the one most roofers answer in their own favour."
+        intro="The single question that decides the cost of your project. We assess the roof and tell you which one you actually need."
         image="/content/restore-vs-replace.jpg"
       >
-        <p>Restoration typically costs a fraction of a full re-roof and buys decades. We assess and tell you which you need — including when the answer is &quot;nothing yet&quot;.</p>
+        <p>Restoration typically costs a fraction of a full re-roof and buys decades.</p>
+        <p>Sometimes the answer is &quot;nothing yet&quot;, and we will say so.</p>
         <CheckList
           items={[
             "Restore when the slate is sound and the fixings, flashings or ridging have failed",
@@ -50,7 +52,7 @@ export default function Page() {
       <ContentBlock
         eyebrow="Method"
         title="How we restore a slate roof."
-        intro="Sympathetic, staged and reversible wherever the heritage value of the building calls for it."
+        intro="Staged, reversible where the building calls for it, and detailed to match what is already there."
         flip
       >
         <CheckList
@@ -58,7 +60,7 @@ export default function Page() {
             "Full assessment of slate condition, fixings, flashings and structure",
             "Sympathetic replacement of damaged slates, matched to the original",
             "Renewal of lead flashings, valleys and ridge bedding",
-            "Repointing and finishing to period-correct detail",
+            "Period-correct detailing and finishing throughout",
           ]}
         />
       </ContentBlock>
@@ -66,7 +68,7 @@ export default function Page() {
       <SpecAccordion
         eyebrow="Decision guide"
         title="Restore or replace, side by side."
-        intro="The two options compared on the things that actually decide it — not on which one earns a roofer more."
+        intro="The two options compared on the things that actually decide it — condition, cost, disruption and how long the result lasts."
         columns={[
           {
             name: "Restoration",
@@ -116,7 +118,7 @@ export default function Page() {
             ],
           },
         ]}
-        footnote="Figures are indicative for a typical Melbourne period home and are confirmed against your roof at survey. We have talked plenty of owners out of a re-roof they did not need."
+        footnote="Figures are indicative for a typical Melbourne home and are confirmed against your roof at survey."
       />
 
       <ContentBlock
@@ -134,7 +136,7 @@ export default function Page() {
             "Slates slipped out of course, or a dark gap where one has gone entirely",
             "Fragments of slate in the gutters or on the ground after wind",
             "Rust staining running down from the nail line — the fixings are going before the slate is",
-            "Mortar crumbling from the ridge or hip capping",
+            "Ridge or hip capping working loose",
             "Damp patches or staining on upstairs ceilings, particularly near chimneys",
             "Previous repairs in an obviously different slate, colour or size",
           ]}
@@ -165,14 +167,10 @@ export default function Page() {
 
       {/* 5 — Before/after gallery */}
 
-      <ProcessSteps />
-      {/* Guarantee / warranty */}
-      <Guarantee />
 
       {/* Reviews */}
       <ReviewsStrip title="What restoration clients say." />
 
-      <ServiceArea />
       <FaqSection faqs={slateFaqs} />
       <RelatedServices keys={["heritage-roofing", "natural-slate-roofing", "slate-roof-repairs"]} />
       <CTA />

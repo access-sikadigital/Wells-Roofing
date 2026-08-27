@@ -166,14 +166,14 @@ export function CTA() {
 
               <a
                 href={siteConfig.phoneHref}
-                className="mt-4 block font-display text-h2 font-extrabold tracking-tight text-white transition-colors duration-base ease-out-quart hover:text-accent"
+                className="mt-4 flex min-h-11 items-center font-display text-h2 font-extrabold tracking-tight text-white transition-colors duration-base ease-out-quart hover:text-accent"
               >
                 {siteConfig.phone}
               </a>
 
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="mt-3 inline-block text-small text-muted transition-colors hover:text-accent"
+                className="mt-3 inline-flex min-h-11 items-center break-all text-small text-muted transition-colors hover:text-accent"
               >
                 {siteConfig.email}
               </a>
@@ -187,8 +187,10 @@ export function CTA() {
             data-meta
             className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between"
           >
+            {/* Was `siteConfig.motto` — this band renders on every route, so
+                the slate-only legacy line does not belong here. */}
             <p className="font-display text-h4 italic text-white/75">
-              {siteConfig.motto}
+              Specialist slate &amp; tile roofing {siteConfig.since.toLowerCase()}.
             </p>
             <p className="eyebrow text-faint">
               {siteConfig.strapline} — {siteConfig.since}

@@ -34,10 +34,18 @@ export function QuoteFormPlaceholder({
                 {title}
               </h2>
               <p className="mt-3 text-small text-muted">{intro}</p>
-              <p className="mt-4 text-small text-faint">
-                Qualifies slate vs tile and homeowner vs architect/builder, so
-                every enquiry lands in the right pipeline.
-              </p>
+              {/*
+                CLIENT FEEDBACK v1 (compliance): a second paragraph used to sit
+                here reading "Qualifies slate vs tile and homeowner vs
+                architect/builder, so every enquiry lands in the right
+                pipeline." That is an internal build note about CRM routing —
+                it described the form's logic to the customer. Removed.
+
+                The segmentation itself is unchanged and still documented in the
+                comment at the top of this file, which is where notes like that
+                belong. Nothing describing internal pipelines, lead scoring or
+                CRM behaviour should ever be rendered.
+              */}
             </div>
             <div className="flex shrink-0 flex-wrap items-center gap-4">
               <Button href="/contact" variant="accent" size="lg" arrow>

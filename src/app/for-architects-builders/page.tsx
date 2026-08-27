@@ -7,7 +7,6 @@ import { PageHero } from "@/components/sections/PageHero";
 import { QuoteFormPlaceholder } from "@/components/sections/QuoteFormPlaceholder";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { ContentBlock, CheckList } from "@/components/sections/ContentBlock";
-import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
@@ -56,7 +55,7 @@ export default function Page() {
       >
         <CheckList
           items={[
-            "Specialist slate knowledge — not a general roofer taking on slate",
+            "Specialist slate knowledge — it is the material we work in every day",
             "Technical documentation for your package and for council",
             "Communication and scheduling certainty on programmed work",
             "Over four decades of Melbourne and Peninsula project experience",
@@ -64,10 +63,6 @@ export default function Page() {
         />
       </ContentBlock>
 
-      <ProcessSteps
-        eyebrow="Working together"
-        title="From specification to handover."
-      />
       <FaqSection faqs={tradeFaqs} title="Trade questions, answered." />
       <RelatedServices
         keys={["natural-slate-supply", "natural-slate-roofing", "concrete-tile-roofing"]}

@@ -74,7 +74,10 @@ export function ServiceArea({
           <div className="lg:col-span-7">
             <SectionHeading
               eyebrow="Where we work"
-              title="Local, and deliberately so."
+              /* Was "Local, and deliberately so." — a slogan where a plain
+                 statement does more work. Client voice rules: no headlines
+                 that are slogans for the sake of it. */
+              title="Where we work."
               intro={intro}
             />
           </div>

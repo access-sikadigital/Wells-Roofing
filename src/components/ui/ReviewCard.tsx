@@ -55,7 +55,17 @@ export function ReviewCard({
         </span>
 
         <div className="min-w-0 flex-1">
-          <p className="truncate font-semibold text-foreground">
+          {/*
+            Was `truncate`. It never overflowed — but at 320px the box is 186px
+            wide and "Priya S · Architect, Hawthorn" ellipsised to
+            "Priya S · Architect, Ha…", eating the suburb. On a local trade
+            review the suburb is the half that carries the proof.
+
+            `text-balance` + wrapping lets it run to a second line instead. The
+            card height is set by the 5-line clamp on the quote below, so an
+            extra line here costs nothing and the row stays even.
+          */}
+          <p className="text-pretty font-semibold text-foreground">
             {review.attribution}
           </p>
           {review.date && (

@@ -4,7 +4,6 @@ import { schemaForPage } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { ContentBlock } from "@/components/sections/ContentBlock";
-import { ServiceArea } from "@/components/sections/ServiceArea";
 import { CTA } from "@/components/sections/CTA";
 
 const page = getPage("projects");
@@ -23,14 +22,13 @@ export default function Page() {
       <PageHero
         page={page}
         image="/photography/hero-projects.jpg"
-        intro="Real slate, heritage and tile roofing projects across the Mornington Peninsula, Bayside and premium Melbourne."
+        intro="Slate, terracotta and concrete roofing projects across the Mornington Peninsula, Bayside and premium Melbourne — new builds, re-roofs and restorations."
       />
       <ContentBlock
         eyebrow="Coming soon"
         title="Project gallery in production."
-        intro="We are photographing recent slate, heritage and tile work for this page. In the meantime, ask us for project references in your suburb."
+        intro="We are photographing recent work for this page. In the meantime, ask us for project references in your suburb."
       />
-      <ServiceArea />
       <CTA />
     </>
   );

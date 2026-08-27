@@ -26,7 +26,7 @@ const paths = [
   {
     eyebrow: "Homeowners",
     title: "Restoring or replacing a premium roof",
-    copy: "Period, heritage and architecturally significant homes across the Peninsula, Bayside and inner Melbourne. Honest advice on whether to restore or re-roof.",
+    copy: "New builds, re-roofing and restoration across the Peninsula, Bayside and inner Melbourne. Straight advice on what your roof actually needs.",
     href: getPage("natural-slate-roofing").url,
     cta: "Explore slate roofing",
     image: "/photography/roof-03.jpg",
@@ -94,9 +94,12 @@ export function DualPath() {
     <section ref={root} className="py-section">
       <Container>
         <SectionHeading
+          /* Client feedback v1, table 4: "Two audiences. Two journeys." was
+             agency voice. Replaced with plain entry points in the customer's
+             own words. */
           eyebrow="Where to start"
-          title="Two audiences. Two journeys."
-          intro="Whether you own the home or specify the build, the path from here is different — pick yours."
+          title="Planning a roof, or working on a project?"
+          intro="The path from here is different depending on which you are. Pick yours."
         />
 
         <div className="mt-14 grid gap-6 lg:mt-16 lg:grid-cols-2">

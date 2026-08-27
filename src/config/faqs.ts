@@ -31,7 +31,7 @@ export const slateFaqs: Faq[] = [
   },
   {
     q: "How much are slate roof tiles?",
-    a: "Slate tile pricing depends on grade, thickness, size and origin. Premium Spanish slate such as CUPA PIZARRAS or Del Carmen sits at the higher end and is what we specify for prestige and heritage work. We supply slate to architects, builders and trade — contact us for current pricing and lead times.",
+    a: "Slate tile pricing depends on grade, thickness, size and origin. Premium Spanish slate such as CUPA PIZARRAS sits at the higher end and is what we specify for prestige and heritage work. We supply slate to architects, builders and trade — contact us for current pricing and lead times.",
   },
   {
     q: "How do you clean a slate roof?",
@@ -47,7 +47,7 @@ export const slateFaqs: Faq[] = [
 export const tileFaqs: Faq[] = [
   {
     q: "Where can I buy roof tiles in Melbourne?",
-    a: "We supply premium natural Spanish slate directly to homeowners, architects, builders and trade across Melbourne and Victoria, including CUPA PIZARRAS and Del Carmen. For terracotta and concrete we work with premium ranges including Bristile. Contact us for samples, specification support and current lead times.",
+    a: "We supply premium natural Spanish slate directly to homeowners, architects, builders and trade across Melbourne and Victoria, including CUPA PIZARRAS. For terracotta and concrete we supply the Bristile range, including La Escandella terracotta. Contact us for samples, specification support and current lead times.",
   },
   {
     q: "Can you paint terracotta roof tiles?",
@@ -99,7 +99,7 @@ export const tradeFaqs: Faq[] = [
   },
   {
     q: "What slate do you carry?",
-    a: "Premium natural Spanish slate, including CUPA PIZARRAS and Del Carmen provenance. We can advise on the appropriate grade for the exposure, pitch and architectural intent of the project.",
+    a: "Premium natural Spanish slate from the CUPA PIZARRAS quarries in Galicia. We can advise on the appropriate grade for the exposure, pitch and architectural intent of the project.",
   },
   {
     q: "What are your lead times?",

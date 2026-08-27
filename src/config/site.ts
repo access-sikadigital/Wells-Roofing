@@ -12,12 +12,33 @@ export const siteConfig = {
   strapline: "Prestige Slate & Tile Roofing Specialists",
   straplineShort: "Slate & Tile Roofing Specialists",
   since: `Since ${FOUNDED_YEAR}`,
-  /** Brand line from the EDM sign-off. */
-  motto: "Roofing for generations.",
+  /**
+   * APPROVED HOMEPAGE H1 — client feedback v1, table 3.
+   * "Still setting the standard in slate & tile roofing."
+   */
+  headline: "Still setting the standard in slate & tile roofing.",
+  /**
+   * Legacy brand line from the EDM sign-off.
+   *
+   * ⚠️  DELIBERATELY NAMED `slateMotto`, NOT `motto`.
+   *
+   * Client feedback v1: "Reserve for natural slate-specific pages and
+   * campaigns only — do not use on terracotta or concrete pages."
+   *
+   * When it was called `motto` it read as a general-purpose brand line and
+   * duly leaked into three sitewide surfaces — the homepage H1, the footer,
+   * the final CTA band and the LocalBusiness `slogan` in the JSON-LD, which
+   * put it on all 19 pages including terracotta and concrete. The name now
+   * carries the constraint, so anyone reaching for it on a tile page has to
+   * type the word "slate" to do it.
+   *
+   * Sitewide surfaces should use `straplineShort` + `since` instead.
+   */
+  slateMotto: "Roofing for generations.",
   tagline:
     "Natural slate, terracotta and concrete roofing — supplied and installed across Melbourne and the Mornington Peninsula.",
   description:
-    "Wells Roofing is a prestige slate and tile roofing specialist providing natural slate supply and installation, heritage restoration, re-roofing, repairs and premium tile roofing across Melbourne and the Mornington Peninsula. Since 1982.",
+    "Wells Roofing is a prestige slate and tile roofing specialist providing natural slate supply and installation, re-roofing, slate repairs, restoration and premium terracotta and concrete tile roofing across Melbourne and the Mornington Peninsula. Since 1982.",
   url: "https://www.wellsroofing.com.au",
 
   /* Contact — freecall number and direct line from the EDM/onboarding */
@@ -25,9 +46,15 @@ export const siteConfig = {
   phoneHref: "tel:1800066052",
   mobile: "0408 860 711",
   mobileHref: "tel:+61408860711",
-  email: "wellsroofing@wellsfooring.com.au",
+  /* Client feedback v1: was "wellsroofing@wellsfooring.com.au" — the domain
+     was misspelled. Confirmed correct address below. */
+  email: "wellsroofing@wellsroofing.com.au",
   contactName: "Steve Wells",
   address: "2/4 Frank St, Mornington VIC",
+  /* Confirmed in the client feedback brief letterhead. Legally required on
+     commercial correspondence and used in the LocalBusiness schema. */
+  abn: "28 700 020 499",
+  legalName: "Wells Roofing Pty Ltd",
 
   serviceAreas: [
     "Mornington Peninsula",
@@ -50,7 +77,7 @@ export const siteConfig = {
       title: "Natural Slate",
       headline: "Timeless beauty. Built to last.",
       description:
-        "New slate roofs, re-roofing and heritage restoration in premium natural Spanish slate — from sourcing and specification support through to expert installation.",
+        "Premium natural Spanish slate for architect-designed new builds, re-roofing and heritage restoration — sourced, specified and installed by us.",
       image: "/materials/natural-slate.jpg",
       href: "/natural-slate-roofing/",
       flagship: true,
@@ -58,9 +85,11 @@ export const siteConfig = {
     {
       number: "02",
       title: "Terracotta",
-      headline: "Classic style. Enduring performance.",
+      /* Client feedback v1: terracotta owns warmth, colour, character and
+         timeless design — its own territory, not a step below slate. */
+      headline: "Timeless for a reason.",
       description:
-        "Premium terracotta roofing and re-roofing for period homes and architect-led builds, installed to a standard that suits the architecture and lasts.",
+        "Bristile La Escandella terracotta from Spain — colour that comes from the clay itself, in profiles and finishes that suit anything from a coastal home to a modern architectural build.",
       image: "/materials/terracotta-tile.jpg",
       href: "/terracotta-tile-roofing/",
       flagship: false,
@@ -68,9 +97,11 @@ export const siteConfig = {
     {
       number: "03",
       title: "Concrete",
-      headline: "Versatile design. Proven strength.",
+      /* Client feedback v1: concrete is about versatility and design choice.
+         Do NOT frame it as the cheap option underneath slate and terracotta. */
+      headline: "Versatile by design.",
       description:
-        "Dependable concrete tile roofing and re-roofing for premium builders and owners — engineered detail, clean lines, decades of service life.",
+        "Bristile concrete tiles in a wide range of profiles, colours and finishes — the most design-flexible of the three, and a Wells distribution range for over 25 years.",
       image: "/materials/concrete-tile.jpg",
       href: "/concrete-tile-roofing/",
       flagship: false,

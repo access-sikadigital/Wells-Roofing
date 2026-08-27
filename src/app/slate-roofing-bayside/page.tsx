@@ -9,12 +9,13 @@ export default function Page() {
       pageKey="loc-bayside"
       image="/photography/hero-bayside.jpg"
       localImage="/content/local-bayside.jpg"
-      intro="Premium slate, heritage and tile roofing across Bayside — Brighton, Hampton, Sandringham, Black Rock and Beaumaris."
+      intro="Premium slate and tile roofing across Bayside — Brighton, Hampton, Sandringham, Black Rock and Beaumaris. New builds, re-roofing and restoration."
       localAngle={{
         title: "Bayside's period stock, kept period-correct.",
-        copy: "Brighton and Hampton hold some of Melbourne's best surviving Victorian and Edwardian roofs. Most of them want restoring, not replacing.",
+        copy: "Brighton and Hampton hold some of Melbourne's best surviving period roofs, and some of its most ambitious new architecture. We work on both.",
         items: [
-            "Victorian, Edwardian and Federation slate roofs restored sympathetically",
+            "Slate on architect-designed new builds and knock-down rebuilds",
+            "Victorian, Edwardian and Federation roofs restored sympathetically",
             "Matching original slate on homes where a mismatch would be obvious from the street",
             "Bay-facing exposure handled with appropriate fixings and detailing",
             "Architect-led contemporary builds specifying natural slate",

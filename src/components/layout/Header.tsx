@@ -243,7 +243,11 @@ export function Header() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-base ease-out-quart",
         scrolled && !open
-          ? "border-b border-line bg-background/90 backdrop-blur-md"
+          /* Was /90 + blur-md. At 320px the hero paragraph was still legible
+             through the bar — the line under the logo read as a rendering
+             fault rather than as glass. /95 with a heavier blur keeps the
+             translucency without letting text read through it. */
+          ? "border-b border-line bg-background/95 backdrop-blur-xl"
           : "border-b border-transparent"
       )}
     >

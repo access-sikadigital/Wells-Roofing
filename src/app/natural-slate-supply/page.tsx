@@ -37,7 +37,7 @@ export default function Page() {
       />
       <TrustBar
         items={[
-          { stat: "CUPA", label: "PIZARRAS & Del Carmen slate" },
+          { stat: "CUPA", label: "PIZARRAS Spanish slate" },
           { stat: "Spec", label: "Technical support at design stage" },
           { stat: "Firm", label: "Documented lead times" },
         ]}
@@ -51,7 +51,7 @@ export default function Page() {
       >
         <CheckList
           items={[
-            "CUPA PIZARRAS and Del Carmen provenance",
+            "CUPA PIZARRAS provenance, documented",
             "Full range of grades, thicknesses, sizes and colour",
             "Technical data, tolerances and durability classification supplied",
             "Advice on the correct grade for pitch, exposure and architectural intent",
@@ -112,7 +112,7 @@ export default function Page() {
             criterion: "First-grade, 5–6mm",
             values: [
               "Prestige new build and heritage replacement on sheltered pitches",
-              "100 years plus; the benchmark specification",
+              "100 years plus; the usual specification for prestige work",
             ],
           },
           {
@@ -123,9 +123,12 @@ export default function Page() {
             ],
           },
           {
-            criterion: "Del Carmen",
+            /* Client feedback v1: "Del Carmen" removed — not a confirmed
+               supplier relationship. CUPA PIZARRAS only. Replaced with a
+               genuine specification criterion rather than a brand. */
+            criterion: "Consistent blue-black",
             values: [
-              "Where a consistent blue-black with minimal variation is specified",
+              "Where minimal colour variation is specified across the roof",
               "Premium tier; the usual choice on architect-led work",
             ],
           },

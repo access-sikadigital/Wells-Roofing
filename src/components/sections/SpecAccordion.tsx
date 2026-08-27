@@ -92,10 +92,12 @@ function AccordionRow({
   };
 
   return (
-    <details ref={details} className="group py-6">
+    <details ref={details} className="group">
       <summary
         onClick={onToggle}
-        className="flex cursor-pointer list-none items-start justify-between gap-6 [&::-webkit-details-marker]:hidden"
+        /* py-6 moved here off <details>: the row looked 74px tall but
+           only the 26px of text was tappable. Same fix as FaqSection. */
+        className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 [&::-webkit-details-marker]:hidden"
       >
         <h3 className="font-display text-h4 font-bold text-foreground transition-colors group-hover:text-accent">
           {row.criterion}

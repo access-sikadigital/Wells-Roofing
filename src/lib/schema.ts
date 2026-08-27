@@ -22,12 +22,25 @@ export function organisationSchema(): Json {
     "@type": ["RoofingContractor", "LocalBusiness"],
     "@id": ORGANISATION_ID,
     name: siteConfig.name,
+    /* Registered entity differs from the trading name; both are useful to
+       Google for entity resolution. `vatID` is the closest schema.org property
+       to an Australian ABN — there is no dedicated one. */
+    legalName: siteConfig.legalName,
+    vatID: siteConfig.abn,
     description: siteConfig.description,
     url: siteConfig.url,
     telephone: siteConfig.phone,
     email: siteConfig.email,
     foundingDate: String(FOUNDED_YEAR),
-    slogan: siteConfig.motto,
+    /*
+      Was `siteConfig.motto` — "Roofing for generations."
+      This schema block renders in the <head> of EVERY route from the root
+      layout, so the slogan was being asserted sitewide, including on the
+      terracotta and concrete pages. Client feedback v1 reserves that line for
+      natural-slate pages and campaigns only. The positioning line is true
+      everywhere, so it is the one that belongs in a sitewide entity.
+    */
+    slogan: `${siteConfig.straplineShort} — ${siteConfig.since}`,
     image: abs("/brand/badge.png"),
     logo: abs("/brand/logo.png"),
     priceRange: "$$$",
@@ -91,8 +104,8 @@ export function productSchema(): Json {
     "@type": "Product",
     name: "Premium Natural Spanish Slate",
     description:
-      "Premium natural Spanish roofing slate, including CUPA PIZARRAS and Del Carmen provenance, supplied and specified for architects and builders.",
-    brand: { "@type": "Brand", name: "CUPA PIZARRAS / Del Carmen" },
+      "Premium natural Spanish roofing slate from the CUPA PIZARRAS quarries, supplied and specified for architects and builders.",
+    brand: { "@type": "Brand", name: "CUPA PIZARRAS" },
     category: "Roofing slate",
     seller: { "@id": ORGANISATION_ID },
   };

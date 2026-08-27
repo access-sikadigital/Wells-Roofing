@@ -85,8 +85,15 @@ export function Footer() {
               {siteConfig.tagline}
             </p>
 
+            {/*
+              Was `siteConfig.motto` ("Roofing for generations."). Client
+              feedback v1 reserves that line for natural-slate pages and
+              campaigns only — and the footer renders on every route, including
+              terracotta and concrete. Swapped for the positioning line, which
+              is true everywhere.
+            */}
             <p className="mt-6 font-display text-h4 italic text-white">
-              {siteConfig.motto}
+              Specialist slate &amp; tile roofing {siteConfig.since.toLowerCase()}.
             </p>
 
             <div className="mt-8 max-w-sm border-t border-line pt-8">
@@ -94,14 +101,14 @@ export function Footer() {
 
               <a
                 href={siteConfig.phoneHref}
-                className="mt-3 block font-display text-h3 font-extrabold tracking-tight text-white transition-colors duration-base ease-out-quart hover:text-accent"
+                className="mt-3 flex min-h-11 items-center font-display text-h3 font-extrabold tracking-tight text-white transition-colors duration-base ease-out-quart hover:text-accent"
               >
                 {siteConfig.phone}
               </a>
 
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="mt-3 block text-small text-muted transition-colors hover:text-accent"
+                className="mt-1 flex min-h-11 items-center break-all text-small text-muted transition-colors hover:text-accent"
               >
                 {siteConfig.email}
               </a>
@@ -136,9 +143,11 @@ export function Footer() {
 
         {/* ---- Bottom bar ---- */}
         <div className="mt-14 flex flex-col gap-3 border-t border-line pt-8 text-small text-faint sm:flex-row sm:items-center sm:justify-between lg:mt-16">
+          {/* Legal entity and ABN, confirmed in the client feedback brief.
+              Trading name above, registered name here — they differ. */}
           <p>
-            © {new Date().getFullYear()} {siteConfig.name} — {siteConfig.since}.
-            All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.legalName} · ABN{" "}
+            {siteConfig.abn} — {siteConfig.since}. All rights reserved.
           </p>
           <p>
             Site by{" "}

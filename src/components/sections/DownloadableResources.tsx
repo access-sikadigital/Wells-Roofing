@@ -31,7 +31,7 @@ const resources: Resource[] = [
   {
     title: "Slate selection guide",
     description:
-      "Grades, thicknesses, sizes and colour across the CUPA PIZARRAS and Del Carmen ranges, with guidance on matching slate to pitch and exposure.",
+      "Grades, thicknesses, sizes and colour across the CUPA PIZARRAS range, with guidance on matching slate to pitch and exposure.",
     meta: "PDF · Specification",
     href: "/resources/slate-selection-guide.pdf",
     available: false,

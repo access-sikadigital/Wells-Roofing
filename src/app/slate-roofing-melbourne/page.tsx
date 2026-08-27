@@ -9,11 +9,12 @@ export default function Page() {
       pageKey="loc-melbourne"
       image="/photography/hero-melbourne.jpg"
       localImage="/content/local-melbourne.jpg"
-      intro="Premium slate and heritage roofing for Melbourne's inner-east — Toorak, Kew, Camberwell, Malvern, Hawthorn, Armadale and Elsternwick."
+      intro="Premium slate and tile roofing for Melbourne's inner-east — Toorak, Kew, Camberwell, Malvern, Hawthorn, Armadale and Elsternwick."
       localAngle={{
         title: "Melbourne's most significant roofs.",
         copy: "The inner-east carries the highest concentration of architecturally significant slate roofs in the state. They are also the least forgiving of a bad repair.",
         items: [
+            "Slate on architect-led new builds through the inner-east",
             "Heritage slate on Toorak, Kew and Camberwell period homes",
             "Architect-specified slate on prestige new builds and major renovations",
             "Restoration that preserves the character and the value of the property",

@@ -78,8 +78,17 @@ export function Services() {
       <Container>
         <SectionHeading
           eyebrow="What We Roof"
-          title="A specialist roofing partner for your next project."
-          intro="Three materials, one standard. Every roof we build is specified, sourced and installed by specialists — never subcontracted guesswork."
+          title="Natural slate, terracotta and concrete."
+          /*
+            CLIENT FEEDBACK v1 (compliance): the previous line claimed roofs are
+            "never subcontracted". Wells operates on a subcontractor model by
+            design, so that was factually false as written and a
+            misleading-advertising risk under ACL s18.
+            Reframed around quality control — the standard the installer works
+            to — rather than their employment status. Do not reintroduce any
+            claim about who employs the trades.
+          */
+          intro="Three materials, one standard. Every roof is specified, sourced and installed by specialist slate and tile trades working to the Wells standard."
         />
 
         <div className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-3">
@@ -123,7 +132,7 @@ export function Services() {
               </span>
 
               {service.flagship && (
-                <span className="absolute left-8 top-8 rounded-pill bg-accent px-3 py-1.5 font-display text-[0.625rem] font-bold uppercase tracking-[0.14em] text-on-accent lg:left-9">
+                <span className="absolute left-8 top-8 rounded-pill bg-accent px-3 py-1.5 font-display text-[0.75rem] font-bold uppercase tracking-[0.14em] text-on-accent lg:left-9">
                   Flagship
                 </span>
               )}
