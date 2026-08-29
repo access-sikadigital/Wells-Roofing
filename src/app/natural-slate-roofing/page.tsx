@@ -156,7 +156,7 @@ export default function NaturalSlateRoofingPage() {
           items={[
             "Roof size and complexity — hips, valleys, dormers and penetrations all add labour",
             "Access — height, scaffold requirements and site constraints",
-            "Slate grade and origin — premium Spanish slate sits above budget alternatives",
+            "Slate grade and origin — premium Spanish slate costs more than lower grades",
             "Structural work — whether the existing frame can carry the load",
             "Ancillary detail — flashings, ridging, guttering and leadwork",
           ]}
