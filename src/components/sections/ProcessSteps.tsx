@@ -5,17 +5,25 @@ import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * Blueprint section — "Process".
- * Default is the slate journey from the doc:
- * consultation → survey → specification & sample → supply → installation → handover.
  *
- * Each step can carry a photograph. The step number sits *on* the image rather
- * than above the heading, so the imagery costs no extra vertical space in the
- * row. Steps without an `image` render as text-only cards exactly as before —
- * so the section keeps working while photography is in production, and shorter
- * pages can opt out of imagery entirely.
+ * THREE STEPS, EVERYWHERE. Consult → Quote → Installation.
  *
- * Photography: the six files in public/process/ are delivered and unique to
- * this section. See docs/IMAGE-PROMPTS.md for the site-wide image plan.
+ * This used to run a six-step journey (consultation, survey, specification,
+ * supply, installation, handover) on the service pages, with a three-step
+ * summary reserved for the homepage. The client has asked for the three-step
+ * version across the whole site, so there is now ONE set of steps and every
+ * page renders it identically.
+ *
+ * Note that the three are NOT a `.slice()` of the old six: "Quote" folds
+ * survey, specification and supply into a single step, so the copy is written
+ * for three rather than trimmed from six. Do not reintroduce the long version
+ * for "detail" on service pages — the whole point of the change is that a
+ * visitor sees the same simple promise wherever they land.
+ *
+ * Each step carries a photograph with the step number sitting *on* the image
+ * rather than above the heading, so the imagery costs no extra vertical space.
+ * A step without an `image` renders as a text-only card, so the section keeps
+ * working if photography is ever swapped out.
  */
 
 export type Step = {
@@ -27,65 +35,11 @@ export type Step = {
   alt?: string;
 };
 
-const defaultSteps: Step[] = [
-  {
-    title: "Consultation",
-    copy: "We talk through the property, the problem and what you want the roof to do. No pressure, no obligation.",
-    image: "/process/01-consultation.jpg",
-    alt: "Roof plans and a slate sample laid out on a homeowner's table",
-  },
-  {
-    title: "Roof survey",
-    copy: "A proper inspection of the roof, structure and existing material — so the quote reflects the actual job, not a guess.",
-    image: "/process/02-survey.jpg",
-    // Real Wells crew, branded workwear, on an actual slate job — not stock.
-    alt: "Wells Roofing crew working on a slate roof, harnessed and in branded workwear",
-  },
-  {
-    title: "Specification & sample",
-    copy: "We specify the slate or tile, grade and detail, and put a physical sample in your hand before anything is ordered.",
-    image: "/process/03-specification.jpg",
-    alt: "Natural slate tile samples fanned out beside a technical specification sheet",
-  },
-  {
-    title: "Supply",
-    copy: "Material sourced directly through our own supply chain, with a firm lead time we hold you to a date on.",
-    image: "/process/04-supply.jpg",
-    alt: "Banded pallets of natural slate roofing tiles stacked in a yard",
-  },
-  {
-    title: "Expert installation",
-    /*
-      CLIENT FEEDBACK v1 (compliance): previously read "not subcontracted to a
-      general roofing crew". Wells uses subcontract trades by design, so the
-      claim was false. Rewritten to describe the STANDARD the installer works
-      to, never their employment status.
-    */
-    copy: "Installed by slate and tile trades who work in these materials every day, to a set-out and detailing standard we specify.",
-    image: "/process/05-installation.jpg",
-    alt: "Gloved hands setting a natural slate tile onto a timber batten",
-  },
-  {
-    title: "Photographed handover",
-    copy: "Documented completion, warranty paperwork, and photographs of the finished roof for your records.",
-    image: "/process/06-handover.jpg",
-    alt: "Completed natural slate roof with copper ridge capping in afternoon light",
-  },
-];
-
 /**
- * THREE-STEP SUMMARY — homepage only.
- *
- * Client feedback v1: the full six-step section was too much for a homepage —
- * "reduce to a simple 3-step summary (Consult, Quote, Installation)". The
- * six-step version still runs on the service pages, where someone is already
- * deep enough in consideration to want the detail.
- *
- * Deliberately not a `.slice()` of `defaultSteps`: the summary collapses
- * survey + specification + supply into one "Quote" step, so the copy has to be
- * written for three, not trimmed from six.
+ * The site's process. Exported as `summarySteps` too, because pages imported
+ * it under that name back when there was also a longer version to summarise.
  */
-export const summarySteps: Step[] = [
+const defaultSteps: Step[] = [
   {
     title: "Consult",
     copy: "We look at the property, talk through what the roof needs to do, and give you a straight answer on the options.",
@@ -105,6 +59,9 @@ export const summarySteps: Step[] = [
     alt: "Gloved hands setting a natural slate tile onto a timber batten",
   },
 ];
+
+/** @deprecated The long version is gone; this is simply the process. */
+export const summarySteps = defaultSteps;
 
 export function ProcessSteps({
   steps = defaultSteps,

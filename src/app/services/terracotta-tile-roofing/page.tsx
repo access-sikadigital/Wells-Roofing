@@ -17,23 +17,25 @@ const page = getPage("terracotta-tile-roofing");
 export const metadata = metadataFor("terracotta-tile-roofing");
 
 /**
- * TERRACOTTA — rewritten against client feedback v1.
+ * TERRACOTTA — the client's approved copy, VERBATIM.
  *
- * Three rules govern this page, all from the feedback brief:
+ * ⚠️  DO NOT PARAPHRASE THE BODY COPY ON THIS PAGE.
  *
- *  1. Terracotta owns its OWN territory — warmth, colour, character, timeless
- *     design. "Timeless for a reason." is the approved tonal direction. It is
- *     not "the one below slate". The previous copy ranked it explicitly
- *     ("sits below natural slate on cost and above concrete on longevity"),
- *     which is exactly the ladder the client asked us to stop building.
- *  2. No "Roofing for generations" / legacy language — that is reserved for
- *     natural slate pages only.
- *  3. The trust bar and guarantee had been inheriting SLATE statistics. The
- *     confirmed terracotta figures are a 100-year product warranty and a
- *     lifetime colour warranty, so both are overridden below rather than left
- *     on their defaults.
+ * An earlier pass adapted the client's content bank into the house voice. The
+ * client then asked for their exact wording, so every paragraph below is now
+ * reproduced word for word from the supplied text, including the three section
+ * headings ("A Timeless Roofing Material", "Spanish-Made La Escandella
+ * Terracotta", "Supply & Installation by Wells Roofing").
  *
- * Body copy is adapted from the client's own approved content bank.
+ * The only editorial changes are casing and terminal full stops on the
+ * headings, so they match every other section heading on the site. The words
+ * themselves are untouched.
+ *
+ * Two things carried over from client feedback v1, which this does not undo:
+ *  · Terracotta owns warmth, colour, character and timeless design. It is
+ *    never ranked against slate or concrete.
+ *  · The trust bar and guarantee carry TERRACOTTA figures — a 100-year product
+ *    warranty and a lifetime colour warranty — not the slate defaults.
  */
 
 /* Confirmed terracotta figures — NOT the slate defaults. */
@@ -70,6 +72,7 @@ export default function Page() {
   return (
     <>
       <JsonLd data={schemaForPage(page, tileFaqs)} />
+
       <PageHero
         page={page}
         image="/photography/hero-terracotta.jpg"
@@ -79,9 +82,19 @@ export default function Page() {
           src: "/video/terracotta.mp4",
           poster: "/video/terracotta-poster.jpg",
         }}
-        intro="Bristile La Escandella terracotta, supplied and installed across Melbourne and the Mornington Peninsula. Crafted in Spain from natural clay — warmth, colour and character that last."
+        /*
+          The client's opening paragraph, COMPLETE and unbroken.
+
+          It was previously split — sentences 1–2 here and sentence 3 stranded
+          as the lead of the section below — so the paragraph never appeared
+          intact anywhere on the page. In the client's document this paragraph
+          IS the page introduction, which is exactly what the hero intro slot
+          is, so all three sentences belong here together. Do not break it up.
+        */
+        intro="Wells Slate Roofing supplies and installs the Bristile range of La Escandella terracotta roof tiles across Melbourne and the Mornington Peninsula. Crafted in Spain from high-quality natural clay, terracotta has been used to protect homes for centuries. From the sun-washed roofs of Mediterranean villages to contemporary Australian architecture, its enduring appeal comes from the warmth, character and permanence of a natural material."
         cta={{ label: "Get a Quote", href: "/contact" }}
       />
+
       <QuoteFormPlaceholder
         title="Get a terracotta roofing quote"
         intro="Tell us about the home and the look you're after, and we'll come back with profile and colour options plus a price."
@@ -89,6 +102,7 @@ export default function Page() {
 
       <TrustBar items={terracottaStats} />
 
+      {/* Section 1 — "A Timeless Roofing Material", verbatim. */}
       <ContentBlock
         eyebrow="The material"
         title="A timeless roofing material."
@@ -96,15 +110,15 @@ export default function Page() {
         image="/content/terracotta-reroof.jpg"
       >
         <p>
-          La Escandella tiles come in a range of profiles, colours and finishes.
-          Traditional unglazed tiles give you the warmth and variation
-          associated with classic Mediterranean architecture; glazed finishes
-          create a cleaner, more contemporary look.
+          La Escandella tiles are available in a range of profiles, colours and
+          finishes. Traditional unglazed tiles provide the warmth and variation
+          associated with classic Mediterranean architecture, while glazed
+          finishes can create a cleaner, more contemporary look.
         </p>
         <p>
-          That range is why terracotta
-          is equally at home on a coastal residence, a Mediterranean-inspired
-          build, a traditional home or a modern architectural project.
+          This versatility makes terracotta equally at home on a coastal
+          residence, Mediterranean-inspired build, traditional home or modern
+          architectural project.
         </p>
         <CheckList
           items={[
@@ -116,43 +130,50 @@ export default function Page() {
         />
       </ContentBlock>
 
+      {/* Section 2 — "Spanish-Made La Escandella Terracotta", verbatim. */}
       <ContentBlock
         eyebrow="Provenance"
         title="Spanish-made La Escandella terracotta."
-        intro="La Escandella has been manufacturing terracotta roof tiles in Spain for generations. In Australia the range is supplied by Bristile, in profiles and finishes selected for Australian building conditions."
+        intro="La Escandella has been manufacturing terracotta roof tiles in Spain for generations."
         flip
       >
         <p>
-          Unlike surface-coloured roofing materials, the colour of natural
-          terracotta comes from the clay itself and from the firing process.
-          That is what gives the material its depth, and what lets a quality
-          terracotta roof hold its appearance as it ages.
+          In Australia, the range is supplied by our supplier, Bristile Roofing
+          and includes profiles and finishes selected for Australian building
+          conditions.
         </p>
         <p>
-          It is also why the colour warranty runs for the life of the tile.
+          Unlike surface-coloured roofing materials, the colour of natural
+          terracotta comes from the clay itself and the firing process. This
+          gives the material its characteristic depth and allows a quality
+          terracotta roof to retain its appearance as it ages.
         </p>
       </ContentBlock>
 
+      {/* Section 3 — "Supply & Installation by Wells Roofing", verbatim. */}
       <ContentBlock
         eyebrow="Supply &amp; installation"
-        title="Chosen properly, then laid properly."
-        intro="We work with homeowners, builders and architects from tile selection through estimating, supply and installation."
+        title="Supply &amp; installation by Wells Roofing."
+        intro="The Wells family has been roofing homes across Melbourne and Victoria for more than 40 years."
       >
         <p>
-          The finished result depends on more than choosing a good tile. Set-out,
-          detailing and the quality of the installation all matter — they are what
-          separates a terracotta roof that looks considered from one that looks
-          merely new.
+          We work with homeowners, builders and architects from initial roof and
+          tile selection through to estimating, supply and installation.
         </p>
         <p>
-          We can help select the right La Escandella profile
-          and finish for the home, provide a detailed quotation, and manage the
+          Our team understands that the finished result depends on more than
+          choosing a good tile — set-out, detailing and the quality of
+          installation all matter.
+        </p>
+        <p>
+          For projects across Melbourne and the Mornington Peninsula, Wells
+          Roofing can assist with selecting the right La Escandella profile and
+          finish for the home, provide a detailed quotation and manage the
           complete installation.
         </p>
       </ContentBlock>
 
       {/* 5 — Gallery */}
-
 
       <Guarantee
         title="Backed in writing."

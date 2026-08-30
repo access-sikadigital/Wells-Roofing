@@ -107,7 +107,8 @@ export const projects: Project[] = [
  * `projects` array above is stock and material photography with deliberately
  * generic captions — honest as a texture gallery, but putting it under a
  * heading that says these are Wells jobs makes exactly the claim the captions
- * were written to avoid. Same category of problem as `sampleTestimonials`.
+ * were written to avoid — the same problem the fabricated reviews had before
+ * the real Google feed replaced them.
  *
  * `ProjectGallery` renders an honest "we're photographing recent work"
  * state from an empty array, so the section is presentable today and turns on
@@ -121,88 +122,101 @@ export const selectedProjects: Project[] = [];
 
 export type Testimonial = {
   quote: string;
-  /** First name + suburb is the norm for trade reviews. */
+  /**
+   * Reviewer name exactly as it appears on Google.
+   *
+   * NO SUBURB. The fabricated set this replaced used "Andrew M · Brighton"
+   * because it read well; not one of the real reviews states a location, and
+   * inferring one would be inventing detail about a named person.
+   */
   attribution: string;
   /** Relative date as Google renders it — "3 weeks ago". */
   date?: string;
-  /** 1–5. Only set when it comes from a real review. */
+  /** 1–5, exactly as given. */
   rating?: number;
   source?: "Google" | "Direct";
 };
 
 /**
- * REAL REVIEWS. Empty until the Google Business Profile feed is connected.
+ * THE REAL GOOGLE AGGREGATE — transcribed from the Google Business Profile
+ * panel, not computed from the reviews below.
  *
- * When wiring the feed, write into THIS array. `ReviewsStrip` prefers it and
- * only falls back to the samples below when it is empty, so populating this
- * automatically retires the placeholder content — nobody has to remember to
- * delete anything.
+ * This distinction matters. Nine reviews exist; two carry a rating with no
+ * written text and cannot be displayed, and the two 1-star reviews are not
+ * shown on Wells' own site. Averaging whatever the carousel happens to render
+ * would therefore print "5.0", which is false. Google says 4.1 from 9, so the
+ * badge says 4.1 from 9 — while the carousel shows the reviews that have
+ * something to read.
+ *
+ * Update both numbers whenever the reviews below are refreshed.
  */
-export const testimonials: Testimonial[] = [];
+export const googleRating = { average: 4.1, count: 9 } as const;
 
 /**
- * ⚠️  SAMPLE CONTENT — NOT REAL REVIEWS. DO NOT LAUNCH WITH THESE.
- * ─────────────────────────────────────────────────────────────────
- * These exist so the carousel can be designed, demoed and signed off before
- * the GBP feed exists. They are written as plausible Wells reviews, which is
- * exactly what makes them dangerous if they ship — published testimonials
- * that nobody actually said are a consumer-law problem (ACL s18, misleading
- * conduct), not a cosmetic one.
+ * REAL GOOGLE REVIEWS for Wells Roofing (Mornington), transcribed verbatim.
  *
- * Three things stop them shipping quietly:
- *   1. They are in a separately-named export, never in `testimonials`.
- *   2. `ReviewsStrip` renders a visible "Sample content" badge whenever it is
- *      falling back to these.
- *   3. The same component logs a console warning in development.
+ * ───────────────────────────────────────────────────────────────────────────
+ * Do not edit the wording. These are other people's words.
+ * ───────────────────────────────────────────────────────────────────────────
  *
- * Delete this array once the feed is live.
+ * Sorted newest first. Two reviews from the profile are omitted here and both
+ * omissions are deliberate:
+ *
+ *  · Azza (5★) and Kroon K (1★) left a rating with no text — nothing to show.
+ *  · Timothy Harty (1★) and Kroon K (1★) are negative. A business does not
+ *    republish its own criticism, and Wells answered Timothy publicly on
+ *    Google. They are still counted in `googleRating` above, which is what
+ *    keeps the 4.1 honest.
+ *
+ * Kat W's review is truncated by Google's own "More" link; only the portion
+ * that was fully visible is reproduced, ending on a complete sentence. Do not
+ * guess the rest.
  */
-export const sampleTestimonials: Testimonial[] = [
+export const testimonials: Testimonial[] = [
   {
     quote:
-      "Wells re-roofed our 1890s place in Brighton with Spanish slate. Steve talked us out of a full replacement on the rear section — said the slate was fine and it was the flashings that had gone. Saved us a fortune and the roof looks original.",
-    attribution: "Andrew M · Brighton",
-    date: "2 weeks ago",
+      "Wells Roofing completed the roof on our home and we're extremely happy with the result. Steve and the team were professional, reliable and easy to deal with throughout the project.",
+    attribution: "S B Peagram",
+    date: "2 days ago",
     rating: 5,
     source: "Google",
   },
   {
     quote:
-      "We specify slate on a lot of our projects and lead times are usually the headache. Wells quoted a date and held it. Technical support at design stage was genuinely useful too — they picked up a fixing detail we'd have had to correct on site.",
-    attribution: "Priya S · Architect, Hawthorn",
-    date: "1 month ago",
+      "Wonderfully helpful staff and willing to help out no matter how small or large your project or expected spend is.",
+    attribution: "Kat W",
+    date: "a year ago",
     rating: 5,
     source: "Google",
   },
   {
     quote:
-      "Had three roofers out. Two wanted to replace the whole thing. Wells was the only one who got up there properly, took photos, and explained what was actually wrong. Ended up being a restoration at about a third of the price.",
-    attribution: "Denise K · Mount Eliza",
-    date: "1 month ago",
+      "absolute superstar, no problems supplying a few tiles whilst on a job, quick efficient and cheap, thanks heaps again",
+    attribution: "Calem",
+    date: "2 years ago",
     rating: 5,
     source: "Google",
   },
   {
     quote:
-      "Terracotta re-roof on a Federation home. The colour match on the ridge capping is spot on — you genuinely cannot tell where the new work starts. Tidy crew, cleaned up every day.",
-    attribution: "Michael T · Camberwell",
-    date: "2 months ago",
+      "Needed a couple of spare roof tiles, I emailed, and they had what I needed within a couple of days. Super helpful, great service and great price. Would highly recommend",
+    attribution: "Kate Adriaans",
+    date: "3 years ago",
+    rating: 5,
+    source: "Google",
+  },
+  {
+    quote: "Excellent products at best prices",
+    attribution: "mark andreasen",
+    date: "4 years ago",
     rating: 5,
     source: "Google",
   },
   {
     quote:
-      "We build eight to ten homes a year and Wells does the roofs on all of them now. They turn up when they say, the finish never generates defect items at handover, and I can put them in front of a client without worrying.",
-    attribution: "Rob H · Builder, Mornington",
-    date: "3 months ago",
-    rating: 5,
-    source: "Google",
-  },
-  {
-    quote:
-      "Slate roof on a clifftop place at Portsea — brutal exposure. Wells specified a heavier grade than the previous quote and explained exactly why. Two winters in and not a single slipped slate.",
-    attribution: "Catherine W · Portsea",
-    date: "4 months ago",
+      "Excellent service, Joe's a real gentleman, a pleasure to do business with.",
+    attribution: "Kane McCartin",
+    date: "5 years ago",
     rating: 5,
     source: "Google",
   },

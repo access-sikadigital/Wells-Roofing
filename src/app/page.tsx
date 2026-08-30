@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 import { Craft } from "@/components/sections/Craft";
-import { ProcessSteps, summarySteps } from "@/components/sections/ProcessSteps";
+import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { ProjectGallery } from "@/components/sections/ProjectGallery";
 import { ArchitectsStrip } from "@/components/sections/ArchitectsStrip";
 import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
@@ -39,8 +39,9 @@ export const metadata = metadataFor("home");
  *    page addresses homeowners. Two routers on one page is a fork the visitor
  *    has to resolve twice.
  *
- *  · Six-step process → the three-step summary, per table 4. The full version
- *    still runs on the flagship slate page.
+ *  · Six-step process → three steps, per table 4. The long version has since
+ *    been retired sitewide, so this is simply the process now, not a summary
+ *    of a longer one shown elsewhere.
  *
  *  · FAQ → three questions and a link to /faqs. The FULL bank still goes to
  *    `schemaForPage` below, so the FAQPage rich result is unaffected — the cap
@@ -61,11 +62,12 @@ export default function HomePage() {
       {/* 3 — Why Wells: three proof points, no more */}
       <Craft />
 
-      {/* 4 — How it works, in three steps */}
+      {/* 4 — How it works, in three steps.
+             No `steps` prop: three is now the process everywhere, so the
+             component default is exactly what belongs here. */}
       <ProcessSteps
-        steps={summarySteps}
         title="Three steps, start to finish."
-        intro="The full process runs to six stages — here is the shape of it."
+        intro="Consult, quote, install — that is the whole shape of it."
       />
 
       {/*

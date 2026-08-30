@@ -27,6 +27,17 @@ import { locationPages } from "@/config/pages";
  *  · A directory of places should look like an index. Rows with a hover tint
  *    behave like one; a grid of cards does not.
  */
+/**
+ * How many suburb chips each region row shows before collapsing the rest into
+ * a "+N more" chip.
+ *
+ * Five, because the "+N more" chip is itself a sixth chip — six suburbs plus
+ * the counter wrapped Mornington Peninsula onto a second line and made the
+ * rows ragged again, which is the thing the cap exists to prevent. Count the
+ * counter.
+ */
+const CHIP_LIMIT = 5;
+
 export function ServiceArea({
   intro = "Based in Mornington, working across the Peninsula, Bayside and premium inner Melbourne.",
 }: {
@@ -99,7 +110,7 @@ export function ServiceArea({
                   {locationPages.length} regions
                 </dd>
                 <dd className="mt-1 text-small text-muted tabular-nums">
-                  {totalSuburbs} suburbs served
+                  <b>{totalSuburbs}+</b> suburbs served
                 </dd>
               </div>
             </dl>
@@ -130,9 +141,24 @@ export function ServiceArea({
                   {region.label}
                 </h3>
 
-                {/* Suburbs — chips wrap cleanly at any width */}
+                {/*
+                  Suburbs — chips wrap cleanly at any width, capped at
+                  CHIP_LIMIT with a truthful "+N more" tail.
+
+                  The count is DERIVED from the data, never written by hand.
+                  Every suburb in `pages.ts` used to render, so the rows were
+                  ragged — one region ran to two lines of chips while another
+                  filled half of one — and there was nothing to signal that the
+                  region page holds more. Capping evens the rows out and turns
+                  the remainder into a reason to click through.
+
+                  ⚠️  Do not hardcode this number. If it ever reads "+10 more",
+                  ten more suburbs must genuinely be listed in `pages.ts` —
+                  overstating a service area is a claim Wells would have to
+                  honour when someone in the eleventh suburb calls.
+                */}
                 <ul className="flex flex-wrap gap-2 lg:col-span-6">
-                  {region.suburbs?.map((suburb) => (
+                  {region.suburbs?.slice(0, CHIP_LIMIT).map((suburb) => (
                     <li
                       key={suburb}
                       data-chip
@@ -141,6 +167,15 @@ export function ServiceArea({
                       {suburb}
                     </li>
                   ))}
+
+                  {(region.suburbs?.length ?? 0) > CHIP_LIMIT && (
+                    <li
+                      data-chip
+                      className="rounded-pill border border-accent/40 bg-accent/5 px-3 py-1 text-[0.8125rem] font-semibold text-accent transition-colors duration-base group-hover:border-accent"
+                    >
+                      +{(region.suburbs?.length ?? 0) - CHIP_LIMIT} more
+                    </li>
+                  )}
                 </ul>
 
                 {/* Affordance */}

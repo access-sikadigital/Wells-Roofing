@@ -41,9 +41,20 @@ export function Craft() {
           {/* Visual with parallax */}
           <div className="overflow-hidden rounded-card lg:col-span-5">
             <Parallax amount={12} className="relative aspect-4/5">
+              {/*
+                A REAL Wells project photograph, supplied by the client —
+                replacing the lead-valley detail shot that was here before.
+
+                Worth keeping real: most of the remaining imagery on the site
+                is stock or generated, and this is one of the few frames that
+                is demonstrably our own work. It is cropped to 4:5 at build
+                time from the original 4032×3024 landscape, weighted down the
+                frame so the slate fills the slot rather than the sky — see
+                public/content/wells-slate-home.jpg for the full frame.
+              */}
               <Image
                 src="/content/craft-detail.jpg"
-                alt="Detail of a Wells Roofing installation"
+                alt="Slate roof on a stone and render home by Wells Roofing, showing the entry gable, dormers and flashing detail"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="scale-110 object-cover"

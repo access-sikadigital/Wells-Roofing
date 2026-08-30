@@ -78,7 +78,10 @@ export function LocationMap({
                 <p>
                   <a
                     href={siteConfig.phoneHref}
-                    className="font-display text-h4 font-bold tracking-tight text-foreground transition-colors hover:text-accent"
+                    /* inline-flex + min-h-11 gives this the 44px tap height it
+                       needs on a phone — which is the one device where a
+                       tel: link is the primary action. */
+                    className="inline-flex min-h-11 items-center font-display text-h4 font-bold tracking-tight text-foreground transition-colors hover:text-accent"
                   >
                     {siteConfig.phone}
                   </a>
@@ -86,7 +89,7 @@ export function LocationMap({
                 <p>
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="transition-colors hover:text-accent"
+                    className="inline-flex min-h-11 items-center break-all transition-colors hover:text-accent"
                   >
                     {siteConfig.email}
                   </a>

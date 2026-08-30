@@ -60,6 +60,28 @@ export function HeroVideo({
     return () => mq.removeEventListener("change", apply);
   }, []);
 
+  /**
+   * THE HANDOFF — why this is a hard swap on frame 0, not a cross-fade.
+   *
+   * The previous version faded the video in over the poster across 1000ms.
+   * That looked correct on paper — the poster IS frame 0 of the clip — but the
+   * video autoplays the moment it can, so by the time the fade ran it was
+   * already a second or more into the shot. The result was a full second of
+   * two DIFFERENT frames blended together: a static frame 0 ghosted over a
+   * moving frame ~30. On a slow drone pan that reads as a rendering glitch for
+   * the first second or two of every fresh page load.
+   *
+   * Seeking back to 0 before revealing makes the video's first visible frame
+   * pixel-identical to the poster, so the swap has nothing to cross-fade and
+   * the transition genuinely is invisible. The poster is then hidden outright
+   * so the two are never composited.
+   */
+  const handleCanPlay = () => {
+    const el = ref.current;
+    if (el && el.currentTime > 0.05) el.currentTime = 0;
+    setReady(true);
+  };
+
   /* Pause once the hero has scrolled away; resume when it comes back. */
   useEffect(() => {
     const el = ref.current;
@@ -84,11 +106,18 @@ export function HeroVideo({
         next/image would add a wrapper that complicates stacking the video
         exactly on top of it.
       */}
+      {/*
+        The poster is HIDDEN the instant the video takes over, rather than
+        being cross-faded under it. See the note on `handleCanPlay`.
+      */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={poster}
         alt=""
-        className={cn("absolute inset-0 size-full object-cover", opacity)}
+        className={cn(
+          "absolute inset-0 size-full object-cover",
+          ready ? "opacity-0" : opacity
+        )}
       />
 
       {enabled && (
@@ -101,11 +130,9 @@ export function HeroVideo({
           loop
           playsInline
           preload="auto"
-          onCanPlay={() => setReady(true)}
+          onCanPlay={handleCanPlay}
           className={cn(
-            "absolute inset-0 size-full object-cover transition-opacity duration-1000 ease-out",
-            // Fades in over the identical poster frame, so the handoff from
-            // still to moving is invisible rather than a pop.
+            "absolute inset-0 size-full object-cover",
             ready ? opacity : "opacity-0"
           )}
         />

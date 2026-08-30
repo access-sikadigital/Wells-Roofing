@@ -7,6 +7,8 @@ import { siteConfig } from "@/config/site";
 import { primaryNav, type NavItem } from "@/config/pages";
 import { Button } from "@/components/ui/Button";
 import { LogoSwap } from "@/components/brand/Logo";
+import { ServicesMega } from "@/components/layout/ServicesMega";
+import { serviceGroups } from "@/config/pages";
 import { cn } from "@/lib/utils";
 import { easeOutExpo } from "@/lib/motion";
 import { gsap, useGSAP, EASE } from "@/lib/gsap";
@@ -52,13 +54,13 @@ function MobileNavRow({
     { dependencies: [expanded, reduce] }
   );
 
-  if (!item.children) {
+  if (!item.children && !item.mega) {
     return (
       <div data-menu-row>
         <Link
           href={item.href}
           onClick={onNavigate}
-          className="font-display text-h3 font-extrabold uppercase tracking-tight text-foreground transition-colors hover:text-accent"
+          className="flex min-h-11 items-center font-display text-h3 font-extrabold uppercase tracking-tight text-foreground transition-colors hover:text-accent"
         >
           {item.label}
         </Link>
@@ -74,7 +76,7 @@ function MobileNavRow({
         <Link
           href={item.href}
           onClick={onNavigate}
-          className="font-display text-h3 font-extrabold uppercase tracking-tight text-foreground transition-colors hover:text-accent"
+          className="flex min-h-11 items-center font-display text-h3 font-extrabold uppercase tracking-tight text-foreground transition-colors hover:text-accent"
         >
           {item.label}
         </Link>
@@ -114,19 +116,64 @@ function MobileNavRow({
         ref={panel}
         style={{ height: 0, opacity: 0, overflow: "hidden" }}
       >
-        <ul className="mt-4 space-y-3 border-l border-line pl-5">
-          {item.children.map((child) => (
-            <li key={child.href}>
-              <Link
-                href={child.href}
-                onClick={onNavigate}
-                className="block text-body text-muted transition-colors hover:text-accent"
-              >
-                {child.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {/*
+          A mega item has no flat `children` — on a phone there is no room for
+          a left rail and a right pane side by side, so the same information is
+          rendered as the groups stacked, each with its pages indented beneath.
+          Nothing from the desktop flyout is dropped; it is only re-stacked.
+        */}
+        {/*
+          TAP TARGETS — the padding is on the anchor, not the list spacing.
+
+          These were `space-y-3` lists of inline links: a ~22px line box with
+          the gap owned by the <li>, so each target measured ~34px and a tap in
+          the gap between two links hit neither. `block py-2.5` moves that space
+          inside the anchor so the full band is live and every row clears 44px.
+          The negative margin keeps the visual rhythm unchanged — a hit-area
+          fix, not a spacing change.
+        */}
+        {item.mega ? (
+          <div className="mt-4 space-y-6 border-l border-line pl-5">
+            {serviceGroups.map((group) => (
+              <div key={group.href}>
+                <Link
+                  href={group.href}
+                  onClick={onNavigate}
+                  className="flex min-h-11 items-center text-eyebrow font-semibold uppercase tracking-wider text-faint transition-colors hover:text-accent"
+                >
+                  {group.label}
+                </Link>
+                <ul className="-my-2.5">
+                  {group.children.map((child) => (
+                    <li key={child.href}>
+                      <Link
+                        href={child.href}
+                        onClick={onNavigate}
+                        className="block py-2.5 text-body text-muted transition-colors hover:text-accent"
+                      >
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <ul className="mt-2 -my-2.5 border-l border-line pl-5">
+            {item.children?.map((child) => (
+              <li key={child.href}>
+                <Link
+                  href={child.href}
+                  onClick={onNavigate}
+                  className="block py-2.5 text-body text-muted transition-colors hover:text-accent"
+                >
+                  {child.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
@@ -168,15 +215,18 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    document.documentElement.style.overflow = open ? "hidden" : "";
-  }, [open]);
-
-  /** Collapse every accordion on close, so the menu always reopens clean. */
-  const closeMenu = () => {
-    setOpen(false);
-    setMobileGroup(null);
-  };
+  /**
+   * Close is just a state flip. Everything that has to happen *after* the panel
+   * has actually left the screen — releasing the scroll lock and collapsing the
+   * accordions — is deferred to the timeline's `onReverseComplete` below.
+   *
+   * Doing either of them here is what made closing feel like it hung: the
+   * scroll lock came off and the accordion started collapsing on the same frame
+   * the button was pressed, so the page reflowed and the sub-list concertinaed
+   * *underneath a menu that was still fully painted*. It read as the menu
+   * freezing for a moment before finally going.
+   */
+  const closeMenu = () => setOpen(false);
 
   /**
    * The mobile panel timeline. Built once and left paused, then played or
@@ -229,12 +279,44 @@ export function Header() {
     { scope: panel, dependencies: [reduce] }
   );
 
+  /**
+   * OPEN SLOWLY, CLOSE FAST.
+   *
+   * The open timeline is ~0.9s end to end (0.28s scrim, then five rows at a
+   * 0.055s stagger, then the footer). Played back at 1× that is a considered
+   * entrance. Reversed at 1× it is a 0.9s wait for a menu you have already
+   * dismissed — which is the "sticks for a second" complaint.
+   *
+   * Reversing at 2.8× puts the exit at roughly a third of a second: still a
+   * real animation rather than a cut, but under the ~350ms mark where a
+   * dismissal starts to feel like lag. This is the standard asymmetry — entrances
+   * can afford to be admired, exits should get out of the way.
+   *
+   * `onReverseComplete` is the honest "the panel is gone now" signal, so the
+   * scroll lock and the accordion reset both hang off it.
+   */
   useEffect(() => {
     const tl = tlRef.current;
     if (!tl) return;
-    if (open) tl.play();
-    else tl.reverse();
+
+    if (open) {
+      document.documentElement.style.overflow = "hidden";
+      tl.timeScale(1).play();
+      return;
+    }
+
+    tl.timeScale(2.8)
+      .eventCallback("onReverseComplete", () => {
+        document.documentElement.style.overflow = "";
+        setMobileGroup(null);
+      })
+      .reverse();
   }, [open]);
+
+  /* Never leave the document scroll-locked if the header unmounts mid-close. */
+  useEffect(() => () => {
+    document.documentElement.style.overflow = "";
+  }, []);
 
   const onDark = !scrolled || open;
 
@@ -306,7 +388,7 @@ export function Header() {
                 )}
               >
                 {item.label}
-                {item.children && (
+                {(item.children || item.mega) && (
                   <svg
                     className={cn(
                       "size-3 transition-transform duration-base",
@@ -326,6 +408,10 @@ export function Header() {
                   </svg>
                 )}
               </Link>
+
+              <AnimatePresence>
+                {item.mega && openGroup === item.label && <ServicesMega />}
+              </AnimatePresence>
 
               <AnimatePresence>
                 {item.children && openGroup === item.label && (
@@ -443,7 +529,7 @@ export function Header() {
           */}
           <a
             href={siteConfig.phoneHref}
-            className="font-display text-h3 font-bold text-foreground"
+            className="flex min-h-11 items-center font-display text-h3 font-bold text-foreground"
           >
             {siteConfig.phone}
           </a>

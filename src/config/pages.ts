@@ -123,12 +123,42 @@ export const pages = [
     job: "Position Wells as the premium slate & tile specialist and route the two audiences.",
   },
 
+  /* ----------------------------------------------------------------------
+     SERVICES HUB — the parent of /services/*.
+     Added when the service pages moved from the root to /services/<name>.
+     A section of a site should have something at its own root: /services/
+     previously 404'd, which is a dead end for anyone who trims the URL and a
+     missing rung in the breadcrumb trail for all eight children.
+     ---------------------------------------------------------------------- */
+  {
+    key: "services",
+    label: "Services",
+    name: "Services (hub)",
+    url: "/services/",
+    type: "hub",
+    audience: "both",
+    phase: "P1",
+    priority: "High",
+    primaryKeyword: { term: "roofing services melbourne", vol: 90, kd: 30 },
+    supportingKeywords: [
+      "slate roofing services",
+      "tile roofing services",
+      "roof replacement melbourne",
+    ],
+    title: "Roofing Services Melbourne | Wells Roofing",
+    description:
+      "Natural slate, terracotta and concrete tile roofing across Melbourne & the Mornington Peninsula — new roofs, re-roofing, restoration, repairs and supply.",
+    h1: "Our Roofing Services",
+    schema: ["CollectionPage"],
+    job: "Hub for the eight service pages; catches broad 'roofing services' intent and passes authority down to the clusters.",
+  },
+
   /* ---------------- Slate cluster ---------------- */
   {
     key: "natural-slate-roofing",
     label: "Natural Slate Roofing",
     name: "Natural Slate Roofing (flagship)",
-    url: "/natural-slate-roofing/",
+    url: "/services/natural-slate-roofing/",
     type: "service",
     audience: "homeowner",
     phase: "P1",
@@ -152,7 +182,7 @@ export const pages = [
     key: "slate-roof-restoration",
     label: "Slate Roof Restoration",
     name: "Slate Roof Restoration",
-    url: "/slate-roof-restoration/",
+    url: "/services/slate-roof-restoration/",
     type: "service",
     audience: "homeowner",
     phase: "P1",
@@ -179,7 +209,7 @@ export const pages = [
     key: "heritage-roofing",
     label: "Heritage Roofing",
     name: "Heritage Roofing",
-    url: "/heritage-roofing/",
+    url: "/services/heritage-roofing/",
     type: "service",
     audience: "homeowner",
     phase: "P1",
@@ -201,7 +231,7 @@ export const pages = [
     key: "slate-roof-repairs",
     label: "Slate Roof Repairs",
     name: "Slate Roof Repairs",
-    url: "/slate-roof-repairs/",
+    url: "/services/slate-roof-repairs/",
     type: "service",
     audience: "homeowner",
     phase: "P2",
@@ -228,7 +258,7 @@ export const pages = [
     key: "natural-slate-supply",
     label: "Natural Slate Supply",
     name: "Natural Slate Supply & Specification",
-    url: "/natural-slate-supply/",
+    url: "/services/natural-slate-supply/",
     type: "service-b2b",
     audience: "trade",
     phase: "P1",
@@ -255,7 +285,7 @@ export const pages = [
     key: "terracotta-tile-roofing",
     label: "Terracotta Tile Roofing",
     name: "Terracotta Tile Roofing",
-    url: "/terracotta-tile-roofing/",
+    url: "/services/terracotta-tile-roofing/",
     type: "service",
     audience: "both",
     phase: "P2",
@@ -283,7 +313,7 @@ export const pages = [
     key: "concrete-tile-roofing",
     label: "Concrete Tile Roofing",
     name: "Concrete Tile Roofing",
-    url: "/concrete-tile-roofing/",
+    url: "/services/concrete-tile-roofing/",
     type: "service",
     audience: "both",
     phase: "P2",
@@ -313,7 +343,7 @@ export const pages = [
     key: "for-architects-builders",
     label: "For Architects & Builders",
     name: "For Architects & Builders",
-    url: "/for-architects-builders/",
+    url: "/services/for-architects-builders/",
     type: "hub",
     audience: "trade",
     phase: "P1",
@@ -468,6 +498,13 @@ export const pages = [
      */
     h1: "Slate & Tile Roofing on the Mornington Peninsula",
     schema: ["RoofingContractor", "FAQPage"],
+    /* ⚠️  STEVE TO CONFIRM COVERAGE.
+       Suburbs below the original list were added to flesh out the region
+       index — all are unambiguously inside the region Wells already claims
+       sitewide, but strike any the team does not actually travel to. These
+       names are indexable content on the region pages, so they earn their
+       place twice: they drive the "+N more" count on the homepage AND they
+       are what someone searching "slate roofer <suburb>" matches against. */
     suburbs: [
       "Mornington",
       "Mount Martha",
@@ -476,6 +513,10 @@ export const pages = [
       "Portsea",
       "Flinders",
       "Red Hill",
+      "Rye",
+      "Rosebud",
+      "Dromana",
+      "Safety Beach",
     ],
     job: "Home region. Must have genuinely unique local copy and proof.",
   },
@@ -499,12 +540,24 @@ export const pages = [
       "Premium slate, heritage & tile roofing across Bayside — Brighton, Hampton, Sandringham, Black Rock & Beaumaris.",
     h1: "Slate & Tile Roofing in Bayside",
     schema: ["RoofingContractor", "FAQPage"],
+    /* ⚠️  STEVE TO CONFIRM COVERAGE.
+       Suburbs below the original list were added to flesh out the region
+       index — all are unambiguously inside the region Wells already claims
+       sitewide, but strike any the team does not actually travel to. These
+       names are indexable content on the region pages, so they earn their
+       place twice: they drive the "+N more" count on the homepage AND they
+       are what someone searching "slate roofer <suburb>" matches against. */
     suburbs: [
       "Brighton",
       "Hampton",
       "Sandringham",
       "Black Rock",
       "Beaumaris",
+      "Brighton East",
+      "Elwood",
+      "Hampton East",
+      "Cheltenham",
+      "Mentone",
     ],
   },
   {
@@ -532,6 +585,13 @@ export const pages = [
       "Premium slate & heritage roofing for Melbourne's inner-east — Toorak, Kew, Camberwell, Malvern, Hawthorn & Armadale.",
     h1: "Slate & Tile Roofing in Premium Melbourne",
     schema: ["RoofingContractor", "FAQPage"],
+    /* ⚠️  STEVE TO CONFIRM COVERAGE.
+       Suburbs below the original list were added to flesh out the region
+       index — all are unambiguously inside the region Wells already claims
+       sitewide, but strike any the team does not actually travel to. These
+       names are indexable content on the region pages, so they earn their
+       place twice: they drive the "+N more" count on the homepage AND they
+       are what someone searching "slate roofer <suburb>" matches against. */
     suburbs: [
       "Toorak",
       "South Yarra",
@@ -541,6 +601,10 @@ export const pages = [
       "Kew",
       "Camberwell",
       "Elsternwick",
+      "Prahran",
+      "Balwyn",
+      "Canterbury",
+      "Glen Iris",
     ],
   },
 ] as const satisfies readonly PageSpec[];
@@ -600,12 +664,30 @@ export type NavItem = {
   label: string;
   href: string;
   children?: { label: string; href: string }[];
+  /**
+   * Render this item as the two-level Services flyout built from
+   * `serviceGroups`, rather than as a flat `children` dropdown.
+   */
+  mega?: boolean;
 };
 
-export const primaryNav: NavItem[] = [
+/**
+ * A group inside the Services mega-menu: a heading on the left, its pages on
+ * the right. Mirrors the two-level flyout pattern the client asked for.
+ */
+export type NavGroup = {
+  label: string;
+  /** The group's own landing page — the heading is clickable, not just a label. */
+  href: string;
+  blurb: string;
+  children: { label: string; href: string }[];
+};
+
+export const serviceGroups: NavGroup[] = [
   {
     label: "Slate Roofing",
     href: getPage("natural-slate-roofing").url,
+    blurb: "New slate roofs, restoration, repairs and supply.",
     children: slateCluster.map((k) => ({
       label: getPage(k).label,
       href: getPage(k).url,
@@ -614,16 +696,49 @@ export const primaryNav: NavItem[] = [
   {
     label: "Tile Roofing",
     href: getPage("terracotta-tile-roofing").url,
+    blurb: "Terracotta and concrete, supplied and installed.",
     children: tileCluster.map((k) => ({
       label: getPage(k).label,
       href: getPage(k).url,
     })),
   },
   {
-    label: "For Architects & Builders",
+    label: "Architects & Builders",
     href: getPage("for-architects-builders").url,
+    blurb: "Specification support, samples and lead times.",
+    children: [
+      {
+        label: getPage("for-architects-builders").label,
+        href: getPage("for-architects-builders").url,
+      },
+      {
+        label: getPage("natural-slate-supply").label,
+        href: getPage("natural-slate-supply").url,
+      },
+    ],
+  },
+];
+
+/**
+ * Top-level nav.
+ *
+ * The three service clusters used to sit side by side as separate top-level
+ * dropdowns ("Slate Roofing", "Tile Roofing", "For Architects & Builders"),
+ * which put three of the six nav slots on variations of the same idea. They
+ * are now one "Services" mega-menu — `mega: true` tells the header to render
+ * the two-level flyout from `serviceGroups` instead of a plain list.
+ */
+export const primaryNav: NavItem[] = [
+  {
+    /* The label links to the hub at /services/. It used to point at the
+       flagship slate page, which meant clicking the parent landed you on a
+       child — confusing, and it left the hub unreachable from the nav. */
+    label: "Services",
+    href: getPage("services").url,
+    mega: true,
   },
   { label: "Projects", href: getPage("projects").url },
+  { label: "Reviews", href: getPage("reviews").url },
   { label: "About", href: getPage("about").url },
   { label: "Contact", href: getPage("contact").url },
 ];

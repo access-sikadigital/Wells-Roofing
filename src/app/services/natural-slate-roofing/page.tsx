@@ -20,7 +20,36 @@ export const metadata = metadataFor("natural-slate-roofing");
 /**
  * FLAGSHIP MONEY PAGE — and the PPC landing page for slate search and Meta.
  * Same URL serves both, so ad spend compounds the SEO.
- * Blueprint 6.2 — 15 sections.
+ *
+ * ⚠️  DO NOT PARAPHRASE THE BODY COPY ON THIS PAGE.
+ *
+ * Same treatment as the terracotta and concrete pages. The client supplied
+ * their exact wording, so every paragraph below is reproduced word for word,
+ * including the three section headings ("Quality Natural Slate Matters",
+ * "A Roofing Legacy You Can See", "From One Generation to the Next") and the
+ * closing line.
+ *
+ * Editorial changes are limited to: casing and terminal full stops on the
+ * headings so they match the rest of the site, and one hyphen set as an em
+ * dash ("what it is today — a specialist roofing business"), which is the
+ * dash the rest of the site uses. No words are changed.
+ *
+ * Structural rule, learned from the terracotta fix: each of the client's
+ * paragraphs sits in ONE place, whole. Where a section is a single paragraph
+ * it goes in `children` as a single <p> with no `intro`, rather than having
+ * its first sentence promoted to a lead.
+ *
+ * The client's two opening paragraphs are the page introduction, so the first
+ * is the hero intro and the second is the body of the section it describes
+ * ("An investment in a home for generations").
+ *
+ * NOTE ON NAMING: the client's copy says "Wells Slate Roofing" here, while the
+ * rest of the site says "Wells Roofing". Reproduced as written rather than
+ * silently normalised — this is the third page it has come up on and it still
+ * needs a decision from Steve.
+ *
+ * The "Roofing for generations" line is allowed here and ONLY here — client
+ * feedback v1 reserves it for the natural slate pages.
  */
 export default function NaturalSlateRoofingPage() {
   return (
@@ -34,9 +63,13 @@ export default function NaturalSlateRoofingPage() {
         /* Client-supplied footage of this exact material. The poster is
            frame 0 of the clip, so the still→film handoff is invisible. */
         video={{ src: "/video/slate.mp4", poster: "/video/slate-poster.jpg" }}
-        /* Client feedback v1: dropped "not subcontracted to a general roofing
-           crew" — false as written, and a misleading-advertising risk. */
-        intro="New slate roofs, re-roofing and slate restoration in premium natural Spanish slate — sourced, specified and installed by trades who work in slate every day."
+        /*
+          The client's FIRST opening paragraph, complete and unbroken. In their
+          document this and the paragraph below it are the page introduction;
+          this one is the hero, the second is the body of the section that
+          follows. Do not split either of them.
+        */
+        intro="For more than 40 years, the Wells family has been working with natural slate, supplying and installing slate roofs across Melbourne and Victoria. That experience has shaped Wells Slate Roofing into what it is today — a specialist roofing business with a deep understanding of natural slate, traditional craftsmanship and the importance of doing the job properly."
         cta={{ label: "Book a Consultation", href: "/contact" }}
       />
 
@@ -49,20 +82,21 @@ export default function NaturalSlateRoofingPage() {
       {/* 3 — Trust / stats bar */}
       <TrustBar />
 
-      {/* 4 — What natural slate roofing involves */}
+      {/* 4 — The client's SECOND opening paragraph, verbatim and whole.
+             No `intro`: promoting its first sentence to a lead would split it,
+             which is exactly what went wrong on terracotta. */}
       <ContentBlock
-        /* Adapted from the client's approved content bank. */
         eyebrow="The material"
         title="An investment in a home for generations."
-        intro="Timeless in appearance and remarkably durable, slate has been used on significant homes and buildings for centuries. Its natural variation in colour and texture gives every roof its own character."
         image="/content/slate-anatomy.jpg"
       >
         <p>
-          Natural slate is quarried stone, split into individual tiles and hung
-          in overlapping courses. There is no coating, no substrate and nothing
-          to degrade — which, along with its ability to age well on very little
-          maintenance, is why it remains such an enduring architectural
-          material.
+          A natural slate roof is an investment in a home for generations.
+          Timeless in appearance and remarkably durable, slate has been used on
+          significant homes and buildings for centuries. Its natural variation
+          in colour and texture gives every roof its own character, while its
+          ability to age beautifully with minimal maintenance is one of the
+          reasons it remains such an enduring architectural material.
         </p>
         <CheckList
           items={[
@@ -76,66 +110,54 @@ export default function NaturalSlateRoofingPage() {
         />
       </ContentBlock>
 
-      {/* 5 — Why Wells (specialist proof) */}
+      {/* 5 — "Quality Natural Slate Matters", verbatim.
+             Two separate paragraphs in the client's document, so intro + body
+             is a legitimate split here: neither paragraph is broken. */}
       <ContentBlock
-        /* Adapted from the client's content bank, "Quality Natural Slate
-           Matters". The previous intro opened on what other roofers do; the
-           client's voice rules ask for our own proof instead of comparison. */
         eyebrow="Why Wells"
-        title="Not all slate is the same."
-        intro="The quality and origin of the stone, how it has been selected and graded, and the experience of the people installing it all decide how a slate roof looks and performs over its lifetime."
+        title="Quality natural slate matters."
+        intro="Not all slate is the same. The quality and origin of the stone, how it has been selected and graded, and the experience of the people installing it all contribute to how a slate roof will look and perform over its lifetime. Wells Slate Roofing uses carefully selected natural slate suited to Australian conditions, including premium Spanish slate from Cupa Pizarras quarries."
         image="/content/slate-supply-to-install.jpg"
         flip
       >
-        <CheckList
-          items={[
-            "Carefully selected natural slate suited to Australian conditions, including premium Spanish slate from the CUPA PIZARRAS quarries",
-            "Chosen for consistency, durability and natural character — avoiding the quality issues that lead to premature deterioration, staining or an uneven finish",
-            "Installed by roofers who understand the material and the detailing it needs",
-            "Equally at home on a contemporary architectural build and on a period restoration",
-            "Specification support for architects and builders at design stage",
-          ]}
-        />
+        <p>
+          We look for consistency, durability and natural character, while
+          avoiding the quality issues that can lead to premature deterioration,
+          staining or an uneven finish. Just as importantly, our slate is
+          installed by experienced roofers who understand the material and the
+          detailing required to get it right.
+        </p>
       </ContentBlock>
 
-      {/* 6 — Spanish slate feature */}
-      <ContentBlock
-        eyebrow="Provenance"
-        title="Premium Spanish slate, specified properly."
-        intro="Premium Spanish slate from the CUPA PIZARRAS quarries in Galicia, graded and certified for the exposure it is going onto."
-      >
+      {/* 6 — "A Roofing Legacy You Can See", verbatim. One paragraph. */}
+      <ContentBlock eyebrow="Legacy" title="A roofing legacy you can see.">
         <p>
-          Grade, thickness, size and colour all change how a slate roof performs
-          and how it looks. Specify it wrong and you get a roof that reads cheap
-          or fails early at the exposure it was never rated for. We advise on the
-          right slate for the pitch, exposure and architectural intent — then
-          supply it.
+          Some of the best evidence of our work is already sitting on rooftops
+          across Victoria. Our completed projects range from newly built
+          architectural homes and heritage restorations to slate roofs installed
+          decades ago that continue to perform and look beautiful today.
         </p>
       </ContentBlock>
 
       {/*
-        Legacy block — adapted from the client's content bank ("A Roofing
-        Legacy You Can See" / "From One Generation to the Next").
+        7 — "From One Generation to the Next", verbatim, plus the client's
+        closing line.
 
-        This is the ONE place the "Roofing for generations" line still runs.
-        Client feedback v1 reserves it for natural-slate pages and campaigns,
-        so it was pulled out of the homepage hero and the sitewide footer and
-        lives here, on the flagship slate page, where it is actually earned.
+        This is the ONE place the "Roofing for generations" line runs. Client
+        feedback v1 reserves it for natural-slate pages and campaigns, so it was
+        pulled out of the homepage hero and the sitewide footer and lives here,
+        on the flagship slate page, where it is actually earned.
       */}
       <ContentBlock
-        eyebrow="Legacy"
-        title="A roofing legacy you can see."
-        intro="Some of the best evidence of our work is already sitting on rooftops across Victoria."
+        eyebrow="Our approach"
+        title="From one generation to the next."
       >
         <p>
-          Our completed projects range from newly built architectural homes and
-          heritage restorations through to slate roofs installed decades ago
-          that continue to perform and look beautiful today.
-        </p>
-        <p>
-          From selecting the right slate and working through the technical
-          requirements to supply and specialist installation, the focus is on
-          creating roofs worthy of the buildings they protect.
+          Wells Slate Roofing combines generations of roofing knowledge with a
+          professional, considered approach to every project. From selecting the
+          right slate and working through technical requirements to supply and
+          specialist installation, our focus is on creating roofs worthy of the
+          buildings they protect.
         </p>
         <p className="font-display text-h4 italic text-foreground">
           Natural slate. Specialist craftsmanship. Roofing for generations.
@@ -171,8 +193,8 @@ export default function NaturalSlateRoofingPage() {
 
       {/* 9 — Process */}
       <ProcessSteps
-        title="From first call to photographed handover."
-        intro="Six steps, each documented, so you always know where the project stands."
+        title="From first call to finished roof."
+        intro="Three steps, each documented, so you always know where the project stands."
       />
 
       {/* 10 — Objection handling */}

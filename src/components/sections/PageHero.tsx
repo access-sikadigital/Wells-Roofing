@@ -69,8 +69,27 @@ export function PageHero({
 
   return (
     <section className="theme-dark grain relative flex min-h-page-hero flex-col justify-center overflow-hidden pt-28 pb-16 lg:min-h-page-hero-lg lg:pt-32 lg:pb-20">
+      {/*
+        MEDIA AT 95%, NOT 30%.
+
+        The footage is warm orange terracotta against a blue sky. At 30% under
+        a flat 0.9/0.95 navy scrim, the orange and the navy averaged into a
+        muddy blue-grey and the fine tile courses read as moiré banding — it
+        looked like a rendering fault rather than a roof. That is the whole of
+        the "glitchy background" problem: the scrim was not too weak, it was
+        too heavy and it was desaturating the one thing the hero exists to
+        show.
+
+        The media now runs at 95% and ALL of the text protection is carried by
+        the directional scrim below. That split is the point: at 70% the clip
+        was still blending with the near-black section behind it, so even the
+        open side came out blue-grey. Let the picture be the picture, and darken
+        only the column the words sit in.
+
+        Contrast was measured, not eyeballed — see the note on the scrim.
+      */}
       {video ? (
-        <HeroVideo src={video.src} poster={video.poster} />
+        <HeroVideo src={video.src} poster={video.poster} opacity="opacity-95" />
       ) : (
         <Image
           src={image}
@@ -78,16 +97,48 @@ export function PageHero({
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-30"
+          className="object-cover opacity-95"
         />
       )}
+
+      {/*
+        DIRECTIONAL SCRIM — dark where the words are, open where the roof is.
+
+        The old scrim was a single vertical gradient at 0.9/0.7/0.95, which
+        darkened the whole frame equally to protect copy that only occupies the
+        left half. Splitting it in two lets the right side breathe:
+
+         1. Horizontal — heavy behind the copy column, clearing toward the
+            right so the material is legible as material.
+         2. Vertical — a top band so the fixed header keeps contrast, and a
+            bottom band so the section reads as a defined edge rather than
+            fading into the next one.
+
+        Below `sm` the copy runs FULL WIDTH, so the open right-hand end of the
+        horizontal ramp ends up directly under text. The third layer is a flat
+        wash present only at small sizes. It is set at 0.66 because 0.45 was
+        measured at 3.87:1 on the concrete hero at 320px — under the 4.5:1 floor.
+        Do not lower it without re-measuring.
+      */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgb(6 21 50 / 0.9) 0%, rgb(6 21 50 / 0.7) 40%, rgb(6 21 50 / 0.95) 100%)",
+            "linear-gradient(90deg, rgb(6 21 50 / 0.96) 0%, rgb(6 21 50 / 0.93) 32%, rgb(6 21 50 / 0.62) 60%, rgb(6 21 50 / 0.10) 100%)",
         }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgb(6 21 50 / 0.66) 0%, rgb(6 21 50 / 0.00) 30%, rgb(6 21 50 / 0.08) 60%, rgb(6 21 50 / 0.72) 100%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[rgb(6_21_50/0.66)] sm:hidden"
       />
 
       <Container className="relative">
@@ -128,7 +179,10 @@ export function PageHero({
               <p
                 className={cn(
                   "mt-6 text-lead text-muted",
-                  aside ? "max-w-xl" : "max-w-2xl",
+                  /* Widened from max-w-2xl at the client's request — the
+                     terracotta opening paragraph is three sentences and was
+                     setting to seven lines. */
+                  aside ? "max-w-xl" : "max-w-3xl",
                 )}
               >
                 {intro}

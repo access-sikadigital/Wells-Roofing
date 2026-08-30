@@ -34,41 +34,72 @@ export function Services() {
       const el = root.current;
       if (!el) return;
 
-      const prefersReduced = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-      if (prefersReduced) return;
+      /*
+       * DESKTOP ONLY — both animations below are gated behind `lg`.
+       *
+       * On a phone the three panels are stacked full-width, so each one fills
+       * most of the viewport. At that size the clip-path wipe reads as the card
+       * being half-drawn rather than as a reveal, and the scrubbed parallax has
+       * to move the image while the card itself is already moving with the
+       * scroll — the two cancel and the texture looks like it is sliding
+       * independently of its own frame. Neither problem exists in the
+       * three-across desktop grid, where the panels are small relative to the
+       * viewport and the motion is peripheral.
+       *
+       * `gsap.matchMedia` is what makes this safe: it registers the tweens and
+       * their ScrollTriggers only while the query matches and REVERTS them —
+       * including the inline clip-path and transform — when it stops matching.
+       * A plain `if (window.innerWidth > 1024)` would leave a phone that was
+       * resized from desktop holding a half-clipped card forever.
+       */
+      const mm = gsap.matchMedia();
 
-      const q = gsap.utils.selector(el);
+      mm.add(
+        {
+          isDesktop: "(min-width: 1024px)",
+          reduced: "(prefers-reduced-motion: reduce)",
+        },
+        (ctx) => {
+          const { isDesktop, reduced } = ctx.conditions as {
+            isDesktop: boolean;
+            reduced: boolean;
+          };
+          if (!isDesktop || reduced) return;
 
-      // Panels wipe up into view, staggered — matching DualPath.
-      gsap.from(q("[data-panel]"), {
-        clipPath: "inset(0% 0% 100% 0%)",
-        yPercent: 6,
-        duration: 1.4,
-        ease: "expo.out",
-        stagger: 0.12,
-        scrollTrigger: { trigger: el, start: "top 75%", once: true },
-      });
+          const q = gsap.utils.selector(el);
 
-      // Slow parallax drift on each material, scrubbed to scroll, so the
-      // texture behaves like a real surface passing the window.
-      q("[data-panel-image]").forEach((image) => {
-        gsap.fromTo(
-          image,
-          { yPercent: -6 },
-          {
+          // Panels wipe up into view, staggered — matching DualPath.
+          gsap.from(q("[data-panel]"), {
+            clipPath: "inset(0% 0% 100% 0%)",
             yPercent: 6,
-            ease: "none",
-            scrollTrigger: {
-              trigger: image.closest("[data-panel]"),
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      });
+            duration: 1.4,
+            ease: "expo.out",
+            stagger: 0.12,
+            scrollTrigger: { trigger: el, start: "top 75%", once: true },
+          });
+
+          // Slow parallax drift on each material, scrubbed to scroll, so the
+          // texture behaves like a real surface passing the window.
+          q("[data-panel-image]").forEach((image) => {
+            gsap.fromTo(
+              image,
+              { yPercent: -6 },
+              {
+                yPercent: 6,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: image.closest("[data-panel]"),
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              }
+            );
+          });
+        }
+      );
+
+      return () => mm.revert();
     },
     { scope: root }
   );
