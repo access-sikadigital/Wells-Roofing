@@ -15,6 +15,12 @@ import { testimonials, googleRating, type Testimonial } from "@/config/proof";
  * fallback and its warning badge are gone — there is nothing left to fall back
  * to, which is the point.
  *
+ * ── The badge shows "4+", not "4.1" ────────────────────────────────────────
+ * `Math.floor` rather than a rounded decimal, so the figure is always at or
+ * below the true score — 4.1 shows as "4+", never as something the profile
+ * would not support. The exact number is still stated in prose on /reviews,
+ * and anyone can check it on the linked profile.
+ *
  * ── The rating badge does not average the carousel ─────────────────────────
  * It reads `googleRating`, transcribed from the Google profile: 4.1 from 9.
  * The carousel shows six, because three of the nine have no written text or
@@ -53,7 +59,7 @@ export function ReviewsStrip({
               <div>
                 <p className="flex items-center gap-2">
                   <span className="font-display text-h4 font-extrabold leading-none text-foreground">
-                    {average.toFixed(1)}
+                    {Math.floor(average)}+
                   </span>
                   <span className="flex gap-0.5" aria-hidden>
                     {Array.from({ length: 5 }, (_, i) => (
