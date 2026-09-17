@@ -1,10 +1,9 @@
 import Image from "next/image";
-import { siteConfig, FOUNDED_YEAR } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
-import { Counter } from "@/components/motion/Counter";
 
 /*
  * Hero content is CENTRED, not bottom-aligned.
@@ -62,7 +61,7 @@ export function Hero({
         }}
       />
 
-      {/* Extra bottom-left wash — protects the headline and stats */}
+      {/* Extra bottom-left wash — protects the headline and subheading */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -91,23 +90,28 @@ export function Hero({
           {h1}
         </TextReveal>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-end">
-          <Reveal delay={0.55} className="lg:col-span-6">
+        {/*
+          The three stats that sat to the right of this block ("1982 / Family
+          owned", "3 / Specialist materials", "Slate / Supply & install") were
+          removed under client feedback WRv2: "They feel disconnected and don't
+          add value here." The founding year is still in the strapline above
+          the H1, so nothing is lost. With no right-hand column there is no
+          grid left to split, so the block runs as a single column.
+        */}
+        <div className="mt-10">
+          <Reveal delay={0.55}>
             {/*
-              Hero subheading — one line of positioning, not a paragraph.
-              Cut from ~45 words to 16 and widened from max-w-xl to max-w-2xl,
-              so it sets as two lines rather than six. A six-line block under a
-              display H1 competes with it; two lines support it.
+              Hero subheading — one line, not a paragraph. A six-line block
+              under a display H1 competes with it; one or two lines support it.
 
-              The "builders, architects and homeowners" detail that used to
-              live here was cut rather than moved: the stats row to the right
-              already carries the founding year, and the Dual Path section
-              below routes the two audiences. It was saying the same things
-              twice.
+              Client feedback WRv2 supplied this line. It replaces "Natural
+              slate, terracotta and concrete roofing — supplied and installed
+              across Melbourne and the Mornington Peninsula.", which the
+              materials section directly below repeated almost word for word.
             */}
             <p className="max-w-2xl text-lead text-muted">
-              Natural slate, terracotta and concrete roofing — supplied and
-              installed across Melbourne and the Mornington Peninsula.
+              Unsure what your roof needs? We&rsquo;ll assess it and recommend
+              the right approach.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               {/* Was `siteConfig.cta`, an "#contact" anchor with no matching
@@ -119,49 +123,6 @@ export function Hero({
                 Explore Our Materials
               </Button>
             </div>
-          </Reveal>
-
-          {/* Stats */}
-          <Reveal delay={0.75} className="lg:col-span-6">
-            {/*
-              The first cell used to count up `yearsTrading()` — "44+". Client
-              feedback v1 asked for "Since 1982" sitewide and "over four
-              decades" where a round figure is more natural, because the
-              computed 44 was contradicting hardcoded "45 years" claims in the
-              meta descriptions. A fixed founding year cannot drift; a running
-              total can, and did.
-            */}
-            <dl className="grid grid-cols-3 gap-4 border-t border-line pt-8 sm:gap-6 lg:justify-items-end">
-              <div>
-                <dd className="font-display text-h2 font-extrabold text-white">
-                  {FOUNDED_YEAR}
-                </dd>
-                {/*
-                  "Family owned since" — at 320px this column is 82px wide and
-                  the label broke to THREE lines ("Family / owned / since")
-                  while its two neighbours took two. Shortened so all three
-                  labels wrap to at most two lines and the row stays even. The
-                  figure above is the year, so "since" was doing no work.
-                */}
-                <dt className="mt-1 text-small text-faint">Family owned</dt>
-              </div>
-              <div>
-                <dd className="font-display text-h2 font-extrabold text-white">
-                  <Counter to={3} />
-                </dd>
-                <dt className="mt-1 text-small text-faint">
-                  Specialist materials
-                </dt>
-              </div>
-              <div>
-                <dd className="font-display text-h2 font-extrabold text-accent">
-                  Slate
-                </dd>
-                <dt className="mt-1 text-small text-faint">
-                  Supply &amp; install
-                </dt>
-              </div>
-            </dl>
           </Reveal>
         </div>
       </Container>

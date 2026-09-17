@@ -39,9 +39,9 @@ export const metadata = metadataFor("home");
  *    page addresses homeowners. Two routers on one page is a fork the visitor
  *    has to resolve twice.
  *
- *  · Six-step process → three steps, per table 4. The long version has since
- *    been retired sitewide, so this is simply the process now, not a summary
- *    of a longer one shown elsewhere.
+ *  · Six-step process → three steps, per table 4. REVERSED by client feedback
+ *    WRv2 (Sept '26), which supplied a new six-step process ("Our process").
+ *    It is still one process sitewide — see ProcessSteps.
  *
  *  · FAQ → three questions and a link to /faqs. The FULL bank still goes to
  *    `schemaForPage` below, so the FAQPage rich result is unaffected — the cap
@@ -62,13 +62,13 @@ export default function HomePage() {
       {/* 3 — Why Wells: three proof points, no more */}
       <Craft />
 
-      {/* 4 — How it works, in three steps.
-             No `steps` prop: three is now the process everywhere, so the
-             component default is exactly what belongs here. */}
-      <ProcessSteps
-        title="Three steps, start to finish."
-        intro="Consult, quote, install — that is the whole shape of it."
-      />
+      {/* 4 — Our process, in six steps (client feedback WRv2).
+             No `steps` prop: the component default IS the process sitewide.
+             The title was "Three steps, start to finish." — true of the old
+             process, false of this one. The intro ("Consult, quote, install
+             — that is the whole shape of it.") named the three old steps, so
+             it was removed rather than left listing half the process. */}
+      <ProcessSteps title="Six steps, start to finish." />
 
       {/*
         5 — Selected real projects.

@@ -56,10 +56,14 @@ export const siteConfig = {
   abn: "28 700 020 499",
   legalName: "Wells Roofing Pty Ltd",
 
+  /* Client feedback WRv2 (Sept '26): "Remove mention to inner-east. We don't
+     want to limit our reach" — Wells services all of Victoria, and supplies
+     slate interstate. Was "Premium Inner Melbourne". This list also feeds
+     `areaServed` in the LocalBusiness schema. */
   serviceAreas: [
     "Mornington Peninsula",
     "Bayside",
-    "Premium Inner Melbourne",
+    "Greater Melbourne",
   ],
 
   nav: [
@@ -70,29 +74,34 @@ export const siteConfig = {
   ],
   cta: { label: "Request a Quote", href: "#contact" },
 
-  /** Material propositions — wording taken from the brand EDM. */
+  /**
+   * Material propositions — wording taken from the brand EDM.
+   *
+   * Client feedback WRv2 (Sept '26): the "Flagship" badge on slate is gone
+   * (so is the field that drove it), slate's headline is "Timeless beauty."
+   * and terracotta's is "Natural character." — "Timeless" now belongs to
+   * slate alone rather than opening two of the three cards.
+   */
   services: [
     {
       number: "01",
       title: "Natural Slate",
-      headline: "Timeless beauty. Built to last.",
+      headline: "Timeless beauty.",
       description:
         "Premium natural Spanish slate for architect-designed new builds, re-roofing and heritage restoration — sourced, specified and installed by us.",
       image: "/materials/natural-slate.jpg",
       href: "/services/natural-slate-roofing/",
-      flagship: true,
     },
     {
       number: "02",
       title: "Terracotta",
       /* Client feedback v1: terracotta owns warmth, colour, character and
          timeless design — its own territory, not a step below slate. */
-      headline: "Timeless for a reason.",
+      headline: "Natural character.",
       description:
         "Bristile La Escandella terracotta from Spain — colour that comes from the clay itself, in profiles and finishes that suit anything from a coastal home to a modern architectural build.",
       image: "/materials/terracotta-tile.jpg",
       href: "/services/terracotta-tile-roofing/",
-      flagship: false,
     },
     {
       number: "03",
@@ -104,7 +113,6 @@ export const siteConfig = {
         "Bristile concrete tiles in a wide range of profiles, colours and finishes — the most design-flexible of the three, and a Wells distribution range for over 25 years.",
       image: "/materials/concrete-tile.jpg",
       href: "/services/concrete-tile-roofing/",
-      flagship: false,
     },
   ],
 } as const;

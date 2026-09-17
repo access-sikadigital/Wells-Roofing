@@ -26,7 +26,7 @@ const paths = [
   {
     eyebrow: "Homeowners",
     title: "Restoring or replacing a premium roof",
-    copy: "New builds, re-roofing and restoration across the Peninsula, Bayside and inner Melbourne. Straight advice on what your roof actually needs.",
+    copy: "New builds, re-roofing and restoration across the Peninsula, Bayside and greater Melbourne. Straight advice on what your roof actually needs.",
     href: getPage("natural-slate-roofing").url,
     cta: "Explore slate roofing",
     image: "/photography/roof-03.jpg",

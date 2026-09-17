@@ -562,8 +562,20 @@ export const pages = [
   },
   {
     key: "loc-melbourne",
-    label: "Melbourne (inner-east)",
-    name: "Slate Roofing Melbourne (inner-east)",
+    /*
+     * Client feedback WRv2 (Sept '26): "Remove mention to inner-east. We don't
+     * want to limit our reach and are happy to service all of Vic and even
+     * interstate for supply of slate. Happy to optimise for the suburbs shown
+     * though."
+     *
+     * So the region is "Melbourne", not "Melbourne (inner-east)". The label
+     * drives the homepage region index, footer, breadcrumb and the location
+     * page's own headings, so this one change carries through all of them.
+     * The suburb list and every keyword below are unchanged; those are the
+     * optimisation the client wants kept.
+     */
+    label: "Melbourne",
+    name: "Slate Roofing Melbourne",
     url: "/slate-roofing-melbourne/",
     type: "location",
     audience: "both",
@@ -582,7 +594,7 @@ export const pages = [
     ],
     title: "Slate Roofing Melbourne | Wells Roofing",
     description:
-      "Premium slate & heritage roofing for Melbourne's inner-east — Toorak, Kew, Camberwell, Malvern, Hawthorn & Armadale.",
+      "Premium slate & heritage roofing across Melbourne — Toorak, Kew, Camberwell, Malvern, Hawthorn, Armadale & beyond.",
     h1: "Slate & Tile Roofing in Premium Melbourne",
     schema: ["RoofingContractor", "FAQPage"],
     /* ⚠️  STEVE TO CONFIRM COVERAGE.
@@ -827,9 +839,9 @@ export const keywordMaster: MasterKeyword[] = [
   { term: "roofing mornington", cluster: "Local", vol: 320, kd: 11, cpc: 4.91, intent: "Commercial", targetPage: "Loc: Mornington Peninsula", priority: "High" },
   { term: "roofing brighton", cluster: "Local", vol: 210, kd: 17, cpc: 10.76, intent: "Commercial", targetPage: "Loc: Bayside", priority: "High" },
   { term: "roofing mornington peninsula", cluster: "Local", vol: 140, kd: 5, cpc: 4.91, intent: "Commercial", targetPage: "Loc: Mornington Peninsula", priority: "High" },
-  { term: "roofing toorak", cluster: "Local", vol: 140, kd: 6, cpc: undefined, intent: "Commercial", targetPage: "Loc: Melbourne (inner-east)", priority: "High" },
-  { term: "roofing kew", cluster: "Local", vol: 90, kd: 6, cpc: undefined, intent: "Commercial", targetPage: "Loc: Melbourne (inner-east)", priority: "Med" },
-  { term: "roofing camberwell", cluster: "Local", vol: 90, kd: 6, cpc: undefined, intent: "Commercial", targetPage: "Loc: Melbourne (inner-east)", priority: "Med" },
+  { term: "roofing toorak", cluster: "Local", vol: 140, kd: 6, cpc: undefined, intent: "Commercial", targetPage: "Loc: Melbourne", priority: "High" },
+  { term: "roofing kew", cluster: "Local", vol: 90, kd: 6, cpc: undefined, intent: "Commercial", targetPage: "Loc: Melbourne", priority: "Med" },
+  { term: "roofing camberwell", cluster: "Local", vol: 90, kd: 6, cpc: undefined, intent: "Commercial", targetPage: "Loc: Melbourne", priority: "Med" },
   { term: "roofing mount martha", cluster: "Local", vol: 70, kd: 0, cpc: undefined, intent: "Transactional", targetPage: "Loc: Mornington Peninsula", priority: "Med" },
   { term: "roofing bayside melbourne", cluster: "Local", vol: 50, kd: 0, cpc: undefined, intent: "Commercial", targetPage: "Loc: Bayside", priority: "Med" },
   { term: "roofing mount eliza", cluster: "Local", vol: 30, kd: 0, cpc: undefined, intent: "Commercial", targetPage: "Loc: Mornington Peninsula", priority: "Med" },

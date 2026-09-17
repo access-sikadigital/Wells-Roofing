@@ -11,7 +11,6 @@ import { SpecAccordion } from "@/components/sections/SpecAccordion";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
-import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
 
 const page = getPage("heritage-roofing");
 export const metadata = metadataFor("heritage-roofing");
@@ -44,9 +43,10 @@ export default function Page() {
           ]}
         />
       </ContentBlock>
+      {/* Client feedback WRv2: was "Get it wrong once and it is permanent." */}
       <ContentBlock
         eyebrow="Why it matters"
-        title="Get it wrong once and it is permanent."
+        title="A heritage roof is unforgiving of the wrong decision."
         intro="A period roof re-covered in the wrong material devalues the home and cannot be undone cheaply. The care is the point."
         flip
       >
@@ -151,8 +151,14 @@ export default function Page() {
       {/* 4 — Project proof */}
 
 
-      {/* Reviews */}
-      <ReviewsStrip title="What heritage clients say." />
+      {/*
+        Reviews — REMOVED. Client feedback WRv2: "Remove or change header
+        'What heritage clients say' since we don't have heritage specific
+        reviews." The section was taken out rather than renamed. Reinstate it
+        once heritage-specific reviews exist:
+
+          <ReviewsStrip title="What heritage clients say." />
+      */}
 
       <FaqSection faqs={slateFaqs} />
       <RelatedServices keys={["slate-roof-restoration", "natural-slate-roofing", "terracotta-tile-roofing"]} />

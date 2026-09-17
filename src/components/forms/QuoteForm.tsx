@@ -17,7 +17,7 @@ import { ServicePicker } from "@/components/forms/ServicePicker";
  *
  * The two that look optional but aren't:
  *
- *  · **Suburb** decides whether it's a Peninsula, Bayside or inner-east job.
+ *  · **Suburb** decides whether it's a Peninsula, Bayside or Melbourne job.
  *    That's the routing question, and the local-reporting dimension the CRM
  *    audit flagged as missing.
  *  · **Service** is the slate-vs-tile split. Without it every enquiry lands in

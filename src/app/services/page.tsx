@@ -112,10 +112,13 @@ export default function Page() {
 
       <section className="py-section">
         <Container>
+          {/* Client wording, feedback WRv2. Was "Every service, in one place."
+              over "Three materials and the full range of work on each — …".
+              The client's hyphen is set as an em dash, as elsewhere. */}
           <SectionHeading
             eyebrow="What we do"
-            title="Every service, in one place."
-            intro="Three materials and the full range of work on each — new roofs, re-roofing, restoration, repairs and supply."
+            title="Specialist roofing. Complete capability."
+            intro="Natural slate, terracotta and concrete roofing — from new roofs and re-roofing to restoration, repairs and material supply."
           />
 
           <div className="mt-14 space-y-14 lg:mt-20 lg:space-y-20">

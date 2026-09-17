@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { type ReactNode, useRef } from "react";
 import { useReducedMotion } from "motion/react";
 import { gsap, EASE } from "@/lib/gsap";
 import { Container } from "@/components/ui/Container";
@@ -143,13 +143,21 @@ export function SpecAccordion({
   intro,
   columns,
   rows,
+  outro,
   footnote,
 }: Readonly<{
   eyebrow?: string;
-  title: string;
+  /** A node rather than a string, so a title can keep a phrase from breaking. */
+  title: ReactNode;
   intro?: string;
   columns: SpecColumn[];
   rows: SpecRow[];
+  /**
+   * A closing paragraph under the rows, set as body copy. Use this for a
+   * statement the reader should actually read. `footnote` is small, faint
+   * type for caveats and disclaimers.
+   */
+  outro?: string;
   footnote?: string;
 }>) {
   return (
@@ -164,6 +172,10 @@ export function SpecAccordion({
             </Reveal>
           ))}
         </div>
+
+        {outro && (
+          <p className="mt-8 max-w-3xl text-body text-muted">{outro}</p>
+        )}
 
         {footnote && (
           <p className="mt-8 max-w-3xl text-small text-faint">{footnote}</p>

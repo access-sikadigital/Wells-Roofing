@@ -17,19 +17,24 @@ import { Button } from "@/components/ui/Button";
  * homepage, which made a third of the whole pitch about period buildings.
  * It is now named inside the "new builds and period homes" point, where it
  * reads as one of two things Wells does rather than the headline.
+ *
+ * All three titles and copy lines are the client's wording from feedback
+ * WRv2 (Sept '26), reproduced as supplied. The only editorial change is a
+ * terminal full stop on the third line, to match the other two. The titles
+ * render uppercase through CSS, so "On Spec" keeps the client's casing.
  */
 const points = [
   {
     title: "Supply to install",
-    copy: "We source premium natural Spanish slate ourselves — provenance, specification support and installation under one roof.",
+    copy: "We source premium natural Spanish slate — importing, specification support and installation under one roof.",
   },
   {
     title: "New builds and period homes",
-    copy: "Contemporary architect-designed houses and prestige new builds, alongside the heritage restoration work the business was built on.",
+    copy: "Roofing materials to suit architect-designed houses and prestige new builds, alongside the heritage restoration work.",
   },
   {
-    title: "Built for architects",
-    copy: "Technical documentation at design stage, lead times we hold to a date, and one point of contact through the build.",
+    title: "On Spec for architects & builders",
+    copy: "Technical documentation at design stage, transparent quoting, and one point of contact throughout.",
   },
 ];
 

@@ -109,7 +109,8 @@ export function Services() {
       <Container>
         <SectionHeading
           eyebrow="What We Roof"
-          title="Natural slate, terracotta and concrete."
+          /* Client feedback WRv2: capitalise the three material names. */
+          title="Natural Slate, Terracotta and Concrete."
           /*
             CLIENT FEEDBACK v1 (compliance): the previous line claimed roofs are
             "never subcontracted". Wells operates on a subcontractor model by
@@ -122,13 +123,31 @@ export function Services() {
           intro="Three materials, one standard. Every roof is specified, sourced and installed by specialist slate and tile trades working to the Wells standard."
         />
 
-        <div className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-3">
+        {/*
+          ROW ALIGNMENT — client feedback WRv2: "each line is not aligned".
+
+          The copy used to sit in one block pinned to the foot of each card
+          (`justify-end`). The three descriptions run to different lengths, so
+          a longer one pushed its headline and title further up its card than
+          its neighbours' — terracotta's sat visibly higher than the other two.
+
+          From `lg`, where the cards sit side by side, each card is a SUBGRID
+          spanning five shared rows: spacer, headline, title, description,
+          link. Row heights are shared across all three cards, so every
+          headline, title and "Learn more" lands on the same line whatever the
+          copy length. `lg:gap-y-0` because the rows are one card tall and the
+          spacing lives on the elements themselves.
+
+          Below `lg` the cards stack full width, nothing sits side by side, and
+          the original bottom-anchored flex layout is kept.
+        */}
+        <div className="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-3 lg:gap-y-0">
           {siteConfig.services.map((service) => (
             <Link
               key={service.number}
               href={service.href}
               data-panel
-              className="theme-dark group relative flex min-h-120 flex-col justify-end overflow-hidden rounded-card bg-background p-8 transition-shadow duration-slow ease-out-quart hover:shadow-lift lg:min-h-140 lg:p-9"
+              className="theme-dark group relative flex min-h-120 flex-col justify-end overflow-hidden rounded-card bg-background p-8 transition-shadow duration-slow ease-out-quart hover:shadow-lift lg:row-span-5 lg:grid lg:min-h-0 lg:grid-rows-subgrid lg:gap-y-0 lg:p-9"
             >
               {/* Material — oversized so the parallax never exposes an edge */}
               <div
@@ -162,31 +181,35 @@ export function Services() {
                 {service.number}
               </span>
 
-              {service.flagship && (
-                <span className="absolute left-8 top-8 rounded-pill bg-accent px-3 py-1.5 font-display text-[0.75rem] font-bold uppercase tracking-[0.14em] text-on-accent lg:left-9">
-                  Flagship
-                </span>
-              )}
+              {/* Row 1 (lg) — the empty space above the copy. Sets the card
+                  height the old `lg:min-h-140` used to. */}
+              <span aria-hidden className="hidden lg:block lg:min-h-56" />
 
-              <div className="relative">
-                <p className="eyebrow flex items-center gap-3 text-accent">
-                  <span className="h-0.5 w-8 bg-accent" aria-hidden />
-                  {service.headline}
-                </p>
+              {/* Rows 2–5. Each is `relative` so it paints above the absolutely
+                  positioned image and scrim.
 
-                <h3 className="mt-5 font-display text-h3 font-extrabold uppercase tracking-tight text-foreground">
-                  {service.title}
-                </h3>
+                  The headline sits at the FOOT of its row (`lg:self-end`). If
+                  one headline wraps to two lines at a narrow desktop width
+                  ("Versatile by design." does at ~1100px), the one-line
+                  headlines beside it still sit the same distance above their
+                  titles instead of floating at the top of a taller row. */}
+              <p className="eyebrow relative flex items-center gap-3 text-accent lg:self-end">
+                <span className="h-0.5 w-8 shrink-0 bg-accent" aria-hidden />
+                {service.headline}
+              </p>
 
-                <p className="mt-4 text-small text-muted">
-                  {service.description}
-                </p>
+              <h3 className="relative mt-5 font-display text-h3 font-extrabold uppercase tracking-tight text-foreground">
+                {service.title}
+              </h3>
 
-                <p className="mt-8 inline-flex items-center gap-3 font-display text-small font-bold uppercase tracking-wide text-foreground transition-colors group-hover:text-accent">
-                  Learn more
-                  <span className="inline-block h-0.5 w-6 bg-accent transition-all duration-base ease-out-quart group-hover:w-12" />
-                </p>
-              </div>
+              <p className="relative mt-4 text-small text-muted">
+                {service.description}
+              </p>
+
+              <p className="relative mt-8 inline-flex items-center gap-3 self-start justify-self-start font-display text-small font-bold uppercase tracking-wide text-foreground transition-colors group-hover:text-accent">
+                Learn more
+                <span className="inline-block h-0.5 w-6 bg-accent transition-all duration-base ease-out-quart group-hover:w-12" />
+              </p>
             </Link>
           ))}
         </div>

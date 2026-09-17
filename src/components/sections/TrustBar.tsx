@@ -20,10 +20,23 @@ import { cn } from "@/lib/utils";
 
 export type TrustItem = { stat: string; label: string };
 
+/**
+ * Client wording, feedback WRv2 (Sept '26). Was "Spanish / Slate provenance —
+ * CUPA PIZARRAS", "100yr+ / Slate roof service life" and "Warranty / Material
+ * & workmanship backed".
+ *
+ * "Guaranteed" is a contractual claim. It is backed by the 7-year workmanship
+ * warranty and the manufacturer warranties in config/proof.ts; keep the two
+ * in step.
+ *
+ * Casing follows the client's text, since the same revision asks for the
+ * material names to be capitalised ("Natural Slate"). The only edits are a
+ * capital F on "From" and the spelling of "Guaranteed".
+ */
 const defaultItems: TrustItem[] = [
-  { stat: "Spanish", label: "Slate provenance — CUPA PIZARRAS" },
-  { stat: "100yr+", label: "Slate roof service life" },
-  { stat: "Warranty", label: "Material & workmanship backed" },
+  { stat: "Natural Slate", label: "From Cupa Pizarras" },
+  { stat: "100+yr", label: "Natural Slate lifespan" },
+  { stat: "Warranty", label: "Workmanship & Products Guaranteed" },
 ];
 
 /**
@@ -124,6 +137,13 @@ export function TrustBar({
       />
 
       <Container className="py-12 lg:py-16">
+        {/*
+          From `sm` each item is a two-row SUBGRID (figure, label), so the rows
+          are shared across the whole bar. A figure long enough to wrap, like
+          "Natural Slate" in a narrow column, can't push its own label out of
+          line with its neighbours. The figures sit at the foot of their row
+          (`self-end`), so every label is the same distance below its figure.
+        */}
         <dl className="grid grid-cols-1 gap-y-10 sm:grid-cols-3">
           {items.map((item, i) => {
             const numeric = parseStat(item.stat);
@@ -133,7 +153,10 @@ export function TrustBar({
             return (
               <div
                 key={item.label}
-                className={cn("relative", rule === "row" && "sm:pl-8")}
+                className={cn(
+                  "relative sm:row-span-2 sm:grid sm:grid-rows-subgrid sm:gap-y-0",
+                  rule === "row" && "sm:pl-8"
+                )}
               >
                 {rule !== "none" && (
                   <span
@@ -144,7 +167,7 @@ export function TrustBar({
                 )}
 
                 {/* Figure, rising out of an overflow mask */}
-                <dd className="overflow-hidden">
+                <dd className="overflow-hidden sm:self-end">
                   <span
                     data-figure
                     className="block font-display text-h2 font-extrabold leading-none tracking-tight text-foreground tabular-nums"

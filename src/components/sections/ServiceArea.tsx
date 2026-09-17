@@ -39,7 +39,11 @@ import { locationPages } from "@/config/pages";
 const CHIP_LIMIT = 5;
 
 export function ServiceArea({
-  intro = "Based in Mornington, working across the Peninsula, Bayside and premium inner Melbourne.",
+  /* Client feedback WRv2: was "...and premium inner Melbourne." — "We don't
+     want to limit our reach", and slate supply goes Victoria-wide and
+     interstate. The three regions below are where the pages are optimised,
+     not the edge of where Wells works. */
+  intro = "Based in Mornington, working across the Peninsula, Bayside and greater Melbourne — with natural slate supplied throughout Victoria and interstate.",
 }: {
   intro?: string;
 }) {

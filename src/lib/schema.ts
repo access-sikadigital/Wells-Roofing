@@ -1,5 +1,5 @@
 import { siteConfig, FOUNDED_YEAR } from "@/config/site";
-import type { Faq } from "@/config/faqs";
+import { faqParagraphs, type Faq } from "@/config/faqs";
 import type { PageSpec } from "@/config/pages";
 
 /**
@@ -92,7 +92,9 @@ export function faqSchema(faqs: Faq[]): Json {
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
+      // Multi-paragraph answers are joined into one plain-text answer — the
+      // same words the visitor reads, without markup.
+      acceptedAnswer: { "@type": "Answer", text: faqParagraphs(f).join(" ") },
     })),
   };
 }

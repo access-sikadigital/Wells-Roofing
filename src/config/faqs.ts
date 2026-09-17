@@ -6,10 +6,26 @@
  * what wins the featured snippet and the FAQPage rich result.
  *
  * Answers below are drafts written from the discovery questionnaire; they must
- * be signed off by the client before launch.
+ * be signed off by the client before launch. Answers marked "client wording,
+ * WRv2" were supplied by the client in the Sept '26 revision and ARE signed
+ * off — reproduce them exactly.
  */
 
-export type Faq = { q: string; a: string };
+export type Faq = {
+  q: string;
+  /**
+   * One string for a single-paragraph answer, or an array with one string per
+   * paragraph. Use the array rather than line breaks inside a string: the
+   * client's longer answers are written as separate paragraphs, and each one
+   * should render as its own <p>.
+   */
+  a: string | string[];
+};
+
+/** An answer as paragraphs, whichever shape it was written in. */
+export function faqParagraphs(faq: Faq): string[] {
+  return typeof faq.a === "string" ? [faq.a] : faq.a;
+}
 
 /** Slate — used on slate roofing, restoration and repairs pages. */
 export const slateFaqs: Faq[] = [
@@ -31,7 +47,11 @@ export const slateFaqs: Faq[] = [
   },
   {
     q: "How much are slate roof tiles?",
-    a: "Slate tile pricing depends on grade, thickness, size and origin. Premium Spanish slate such as CUPA PIZARRAS sits at the higher end and is what we specify for prestige and heritage work. We supply slate to architects, builders and trade — contact us for current pricing and lead times.",
+    /* Client wording, WRv2. */
+    a: [
+      "Natural slate pricing varies according to origin, size, thickness and specification. We supply Spanish slate from CUPA PIZARRAS, selected for its provenance, consistency and proven performance across architectural and heritage roofing projects.",
+      "Trade supply is available to architects, builders and roofing professionals. Contact us for current pricing, availability and lead times.",
+    ],
   },
   {
     q: "How do you clean a slate roof?",
@@ -67,19 +87,47 @@ export const tileFaqs: Faq[] = [
   },
 ];
 
-/** Homepage / general — the top-of-funnel questions. */
+/**
+ * Homepage / general — the top-of-funnel questions.
+ *
+ * The first three are the ones the homepage shows, and all three answers are
+ * client wording from WRv2.
+ */
 export const generalFaqs: Faq[] = [
   {
     q: "Should I restore or replace my slate roof?",
-    a: "If the slates themselves are sound and it is the fixings, flashings or ridging that have failed, restoration is almost always the right call and costs a fraction of a re-roof. Full replacement is warranted when the slate is delaminating widely or the roof has been repeatedly patched with mismatched material. We give an honest assessment either way.",
+    /* Client wording, WRv2. */
+    a: [
+      "Where the existing slate remains sound, restoration is often the most appropriate approach. Many ageing slate roofs experience deterioration in the fixings, flashings, ridging or other roof components long before the slate itself reaches the end of its service life.",
+      "A full replacement may be recommended where the slate is poor quality and has deteriorated extensively, is delaminating, or where previous repairs and incompatible materials have compromised the integrity of the roof.",
+      "Wells Roofing will assess the condition of your roof and provide a clear, practical recommendation based on what is required — whether that is targeted repairs, restoration or replacement.",
+    ],
   },
   {
     q: "What areas do you service?",
-    a: "We are based in Mornington and work across the Mornington Peninsula, Bayside and premium inner Melbourne — including Brighton, Toorak, Kew, Camberwell, Mount Eliza and Sorrento. We also take on slate projects further afield where the job is a strong fit.",
+    /*
+     * Client wording, WRv2, with the client's note on the suburb list: "Only
+     * add suburbs if helpful for SEO". They are: Brighton, Toorak, Kew,
+     * Camberwell and Mount Eliza are all validated local keywords in
+     * pages.ts, and named places are what a "roofer <suburb>" search matches
+     * against. The list is kept as supplied.
+     *
+     * One editorial change: "Greater Melbourne" is lowercased to match the
+     * second paragraph ("throughout greater Melbourne") and the rest of the
+     * site.
+     */
+    a: [
+      "Wells Roofing is based in Mornington and services the Mornington Peninsula and greater Melbourne, including areas such as Brighton, Toorak, Kew, Camberwell, Eltham, Mount Eliza and Sorrento.",
+      "We also undertake selected slate roofing projects throughout greater Melbourne and regional Victoria where the project is well suited to our specialist expertise.",
+    ],
   },
   {
     q: "Do you work with architects and builders?",
-    a: "Yes. Alongside installation we supply and specify natural slate for architect-led and prestige builds, with samples, technical specification support and reliable lead times. There is a dedicated path for trade enquiries.",
+    /* Client wording, WRv2. */
+    a: [
+      "Yes. Wells Roofing works closely with architects, builders and construction professionals on new builds, renovations and heritage projects requiring natural slate roofing.",
+      "We can assist with slate selection, samples, technical information and specification support, as well as supply and specialist installation. Our direct relationships with natural slate suppliers also allow us to provide clear advice around product availability and project lead times. A dedicated trade enquiry service is available for architects and builders.",
+    ],
   },
   {
     q: "How long has Wells Roofing been operating?",

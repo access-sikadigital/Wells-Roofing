@@ -49,16 +49,21 @@ export default function Page() {
         eyebrow="The difference"
         /* Was: "A general roofer will get water to stop today. A slate roofer
            will stop it without costing you the roof." Removed under the client's
-           voice rules — no competitor jabs. States what we do instead. */
-        title="Repaired as slate, not patched."
+           voice rules — no competitor jabs. States what we do instead.
+
+           Client feedback WRv2: title, intro and points are the client's
+           wording. Title was "Repaired as slate, not patched."; the third
+           point drops "that outlast the repair"; the first uses the client's
+           comma in place of the dash. */
+        title="Repaired, not patched."
         intro="A slate roof asks for particular materials and a particular way of working on it. Getting both right is the difference between a repair that lasts and one that costs you slates."
         flip
       >
         <CheckList
           items={[
-            "Matched replacement slates — repairs that disappear rather than stand out",
+            "Matched replacement slates, repairs that disappear rather than stand out",
             "Correct access technique, so we do not crack ten slates fixing one",
-            "Copper and lead fixings that outlast the repair",
+            "Copper and lead fixings",
             "Honest assessment of whether repair or restoration is the right spend",
           ]}
         />
@@ -109,7 +114,8 @@ export default function Page() {
             ],
           },
         ]}
-        footnote="Slate repairs only. We do not take on tile or general roof repairs — pointing you to the right trade is more useful than taking a job outside what we specialise in."
+        /* The "Slate repairs only. We do not take on tile or general roof
+           repairs…" footnote was removed under client feedback WRv2. */
       />
 
       <ContentBlock

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
-import type { Faq } from "@/config/faqs";
+import { faqParagraphs, type Faq } from "@/config/faqs";
 
 /**
  * Blueprint section — "FAQ".
@@ -13,7 +13,8 @@ import type { Faq } from "@/config/faqs";
 export function FaqSection({
   faqs,
   eyebrow = "Common questions",
-  title = "The questions people actually ask.",
+  /* Client feedback WRv2: was "The questions people actually ask." */
+  title = "Questions we’re often asked.",
   intro,
   /**
    * Cap the number shown. Client feedback v1: "long homepage FAQ content
@@ -63,7 +64,13 @@ export function FaqSection({
                     <span className="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-current transition-transform duration-base ease-out-quart group-open:rotate-90 group-open:opacity-0" />
                   </span>
                 </summary>
-                <p className="-mt-1 max-w-3xl pb-6 text-body text-muted">{faq.a}</p>
+                {/* One <p> per paragraph — the client's longer answers are
+                    written as separate paragraphs and read as such. */}
+                <div className="-mt-1 max-w-3xl space-y-4 pb-6 text-body text-muted">
+                  {faqParagraphs(faq).map((para) => (
+                    <p key={para}>{para}</p>
+                  ))}
+                </div>
               </details>
             </Reveal>
           ))}

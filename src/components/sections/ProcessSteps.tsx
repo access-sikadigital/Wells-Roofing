@@ -4,26 +4,28 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
- * Blueprint section — "Process".
+ * Blueprint section — "Our process".
  *
- * THREE STEPS, EVERYWHERE. Consult → Quote → Installation.
+ * SIX STEPS, EVERYWHERE. Consult → Site inspection → Quote → Scheduling →
+ * Installation → Warranty.
  *
- * This used to run a six-step journey (consultation, survey, specification,
- * supply, installation, handover) on the service pages, with a three-step
- * summary reserved for the homepage. The client has asked for the three-step
- * version across the whole site, so there is now ONE set of steps and every
- * page renders it identically.
+ * History: v1 feedback cut an earlier six-step journey to three (Consult,
+ * Quote, Installation). Client feedback WRv2 (Sept '26) replaced that with
+ * the six steps below, which are the client's own wording, and renamed the
+ * eyebrow from "How it works" to "Our process".
  *
- * Note that the three are NOT a `.slice()` of the old six: "Quote" folds
- * survey, specification and supply into a single step, so the copy is written
- * for three rather than trimmed from six. Do not reintroduce the long version
- * for "detail" on service pages — the whole point of the change is that a
- * visitor sees the same simple promise wherever they land.
+ * There is still ONE set of steps and every page renders it identically.
+ * Don't add a shorter version for any one page: a visitor should see the same
+ * process wherever they land.
  *
  * Each step carries a photograph with the step number sitting *on* the image
  * rather than above the heading, so the imagery costs no extra vertical space.
  * A step without an `image` renders as a text-only card, so the section keeps
  * working if photography is ever swapped out.
+ *
+ * Photography: 02-survey.jpg is a REAL Wells photograph (crew on a re-roof),
+ * supplied for the survey/inspection step, which is where it sits. The rest
+ * are editorial stills matched to the step.
  */
 
 export type Step = {
@@ -36,27 +38,50 @@ export type Step = {
 };
 
 /**
- * The site's process. Exported as `summarySteps` too, because pages imported
- * it under that name back when there was also a longer version to summarise.
+ * The site's process — client wording, WRv2. Exported as `summarySteps` too,
+ * because pages imported it under that name back when there was also a
+ * longer version to summarise.
+ *
+ * The warranty step is a contractual claim (7-year workmanship warranty). It
+ * matches the "Workmanship warranty" entry in config/proof.ts; if either
+ * changes, change both.
  */
 const defaultSteps: Step[] = [
   {
     title: "Consult",
-    copy: "We look at the property, talk through what the roof needs to do, and give you a straight answer on the options.",
+    copy: "We discuss your project, roofing requirements, preferred materials and any plans or specifications.",
     image: "/process/01-consultation.jpg",
     alt: "Roof plans and a slate sample laid out on a homeowner's table",
   },
   {
+    title: "Site inspection",
+    copy: "We assess the roof or project onsite and bring relevant slate and tile samples so you can see the options in person.",
+    image: "/process/02-survey.jpg",
+    alt: "Wells Roofing crew in safety harnesses working on a slate re-roof",
+  },
+  {
     title: "Quote",
-    copy: "A proper roof inspection, the material specified and a sample in your hand — then a quote priced to the actual job.",
+    copy: "We provide a clear, itemised quotation based on the agreed scope, materials and project requirements.",
     image: "/process/03-specification.jpg",
     alt: "Natural slate tile samples fanned out beside a technical specification sheet",
   },
   {
+    title: "Scheduling",
+    copy: "Once approved, we confirm your material selection, final details and installation timing.",
+    image: "/process/04-supply.jpg",
+    alt: "Pallets of natural slate stacked in a supply yard beside a delivery truck",
+  },
+  {
     title: "Installation",
-    copy: "Material supplied to a firm lead time, installed to the standard we specify, and handed over with photographs and paperwork.",
+    copy: "Our experienced roofing teams complete the works with careful attention to safety and workmanship.",
     image: "/process/05-installation.jpg",
     alt: "Gloved hands setting a natural slate tile onto a timber batten",
+  },
+  {
+    title: "Warranty",
+    copy: "All installations are backed by a 7-year workmanship warranty, with applicable manufacturer warranties also provided for the roofing products used.",
+    image: "/process/06-handover.jpg",
+    alt: "Completed natural slate roof with copper flashings on a stone home",
   },
 ];
 
@@ -65,7 +90,8 @@ export const summarySteps = defaultSteps;
 
 export function ProcessSteps({
   steps = defaultSteps,
-  eyebrow = "How it works",
+  /* Client feedback WRv2: was "How it works". */
+  eyebrow = "Our process",
   title = "How a Wells roof comes together.",
   intro,
 }: {
@@ -79,7 +105,10 @@ export function ProcessSteps({
       <Container>
         <SectionHeading eyebrow={eyebrow} title={title} intro={intro} />
 
-        <ol className="mt-14 grid gap-px overflow-hidden rounded-card border border-line bg-line lg:mt-16 lg:grid-cols-3">
+        {/* Six steps: 1 column on phones, 2×3 on tablets, 3×2 on desktop.
+            Six divides evenly by both, so the hairline grid never ends on a
+            ragged row. */}
+        <ol className="mt-14 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
           {steps.map((step, i) => (
             <Reveal key={step.title} delay={(i % 3) * 0.1} className="h-full">
               <li className="group flex h-full flex-col bg-background">

@@ -11,11 +11,30 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { RelatedServices } from "@/components/sections/RelatedServices";
 import { CTA } from "@/components/sections/CTA";
-import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
 import { Guarantee } from "@/components/sections/Guarantee";
 
 const page = getPage("natural-slate-roofing");
 export const metadata = metadataFor("natural-slate-roofing");
+
+/**
+ * Section 10, "Three common questions about slate roofing" — client wording
+ * from feedback WRv2, verbatim. Not in config/faqs.ts on purpose: these are
+ * page copy, not part of the FAQ bank or the FAQPage schema.
+ */
+const slateObjections = [
+  {
+    q: "Repair, restore or replace?",
+    a: "Where the slate itself remains sound, restoration can often extend the life of the roof without the need for complete replacement. We assess the slate, fixings, flashings and detailing, then recommend the work the roof genuinely requires.",
+  },
+  {
+    q: "How does slate compare with other roofing materials?",
+    a: "Natural slate typically requires a greater upfront investment, but its exceptional durability and long service life can provide excellent whole-of-life value. It is also chosen for its natural character, architectural quality and ability to age beautifully.",
+  },
+  {
+    q: "Why choose Wells Roofing for slate?",
+    a: "Wells Roofing has specialised in slate roofing since 1982. We both source and install natural slate, giving us detailed knowledge of the material, its provenance, specification and the workmanship required for long-term performance.",
+  },
+];
 
 /**
  * FLAGSHIP MONEY PAGE — and the PPC landing page for slate search and Meta.
@@ -82,30 +101,37 @@ export default function NaturalSlateRoofingPage() {
       {/* 3 — Trust / stats bar */}
       <TrustBar />
 
-      {/* 4 — The client's SECOND opening paragraph, verbatim and whole.
-             No `intro`: promoting its first sentence to a lead would split it,
-             which is exactly what went wrong on terracotta. */}
+      {/* 4 — "An investment in a home for generations".
+             Body and list replaced with the client's WRv2 (Sept '26) wording,
+             verbatim: two whole paragraphs, then the six points. Both
+             paragraphs go in `children`, not `intro`, so neither has its
+             first sentence promoted to a lead. */}
       <ContentBlock
         eyebrow="The material"
         title="An investment in a home for generations."
         image="/content/slate-anatomy.jpg"
       >
         <p>
-          A natural slate roof is an investment in a home for generations.
-          Timeless in appearance and remarkably durable, slate has been used on
-          significant homes and buildings for centuries. Its natural variation
-          in colour and texture gives every roof its own character, while its
-          ability to age beautifully with minimal maintenance is one of the
-          reasons it remains such an enduring architectural material.
+          Natural slate has protected significant homes and buildings for
+          centuries. Timeless in appearance and exceptionally durable, it brings
+          a depth and character that manufactured roofing materials cannot
+          replicate.
+        </p>
+        <p>
+          Each slate carries natural variation in colour, texture and surface,
+          creating a roof that is unique to the home. Properly specified and
+          installed, natural slate ages beautifully and offers an exceptionally
+          long service life with relatively low maintenance — making it as
+          practical as it is architecturally enduring.
         </p>
         <CheckList
           items={[
-            "New slate roofs on architect-led and prestige new builds",
-            "Full re-roofing where an existing roof has reached its end",
-            "Contemporary architectural work — large formats, clean verges, concealed detailing",
-            "Heritage restoration that preserves the character of a period home",
-            "Structural assessment — slate is heavier than tile and the frame must carry it",
-            "Correct flashing, valley and ridge detailing, where most roofs actually fail",
+            "New slate roofing for architect-designed homes and quality new builds",
+            "Complete re-roofing where an existing roof has reached the end of its serviceable life",
+            "Contemporary slate roofing including larger formats, clean verges and refined detailing",
+            "Heritage restoration undertaken with respect for the original character and detailing of the building",
+            "Roof structure assessment to ensure the supporting structure is suitable for the selected slate roofing system",
+            "Specialist detailing of flashings, valleys, ridges and junctions to support long-term roof performance",
           ]}
         />
       </ContentBlock>
@@ -191,35 +217,50 @@ export default function NaturalSlateRoofingPage() {
         </p>
       </ContentBlock>
 
-      {/* 9 — Process */}
+      {/* 9 — Process. The intro said "Three steps"; the process is six now
+             (client feedback WRv2), so the count is updated to match. */}
       <ProcessSteps
         title="From first call to finished roof."
-        intro="Three steps, each documented, so you always know where the project stands."
+        intro="Six steps, each documented, so you always know where the project stands."
       />
 
-      {/* 10 — Objection handling */}
+      {/* 10 — Objection handling.
+             Client feedback WRv2: heading was "The three things everyone
+             asks." and the answers ran as run-on "Question? Answer" bullets.
+             Questions and answers are the client's wording, verbatim. Each is
+             now a question heading over its answer, so the question reads as
+             a question rather than the first clause of a bullet. */}
       <ContentBlock
         eyebrow="Straight answers"
-        title="The three things everyone asks."
+        title="Three common questions about slate roofing."
       >
-        <CheckList
-          items={[
-            "Repair or full replacement? If the slate is sound and the fixings have failed, restoration is the right call — and far cheaper. We tell you which you need, not which pays us more.",
-            "Slate versus alternatives? Slate costs more upfront and less per year of service. If you plan to keep the home, the maths favours slate.",
-            "Are you really slate specialists? Since 1982, and we supply the material as well as install it — so we can document the provenance and specification of the natural slate we supply.",
-          ]}
-        />
+        <div className="space-y-8">
+          {slateObjections.map((item) => (
+            <div key={item.q}>
+              <h3 className="font-display text-h4 font-bold text-foreground">
+                {item.q}
+              </h3>
+              <p className="mt-2">{item.a}</p>
+            </div>
+          ))}
+        </div>
       </ContentBlock>
 
       {/* 11 — Guarantee / warranty */}
       <Guarantee />
 
-      {/* 12 — Reviews */}
-      <ReviewsStrip
-        title="What slate clients say."
-        intro="Slate-specific feedback from homeowners, architects and builders."
-      />
+      {/*
+        12 — Reviews: REMOVED under client feedback WRv2 — "We can't use this
+        right now. To be added back in at a later date."
 
+        It was headed "What slate clients say." over reviews that are not
+        slate-specific. To reinstate once there are real slate reviews:
+
+          <ReviewsStrip
+            title="What slate clients say."
+            intro="Slate-specific feedback from homeowners, architects and builders."
+          />
+      */}
 
       {/* 14 — FAQ */}
       <FaqSection

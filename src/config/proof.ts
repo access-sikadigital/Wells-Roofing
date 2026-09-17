@@ -236,8 +236,18 @@ export type Guarantee = {
 
 /**
  * Blueprint section — "Guarantee / warranty".
- * Drafted from the discovery questionnaire. MUST be confirmed by the client
- * before launch: warranty periods and insurance figures are contractual.
+ * Warranty periods and insurance claims are CONTRACTUAL.
+ *
+ * Client feedback WRv2 (Sept '26) supplied the wording for three of the four:
+ * workmanship, licensed & insured, and documented handover. Material warranty
+ * was marked "no change". So these are now the client's own words, not
+ * drafts. The earlier drafts promised more than Wells has put in writing: "no
+ * small print", "certificates with every quote", photographs on "every
+ * project". The client replaced them with language that matches the actual
+ * warranty terms. Do not re-embellish.
+ *
+ * The 7-year workmanship term also appears in the Warranty step of
+ * ProcessSteps. If one changes, change both.
  */
 export const guarantees: Guarantee[] = [
   {
@@ -247,17 +257,17 @@ export const guarantees: Guarantee[] = [
   },
   {
     icon: "shieldCheck",
-    title: "Workmanship guarantee",
-    copy: "Our installation is guaranteed in writing. If something we fitted fails because of how we fitted it, we come back and put it right — that is the whole of the promise, with no small print about access or weather.",
+    title: "Workmanship warranty",
+    copy: "Our workmanship is covered by a written 7-year Wells Roofing warranty. If an issue is found to result from our workmanship, we will assess and rectify it in accordance with the warranty terms.",
   },
   {
     icon: "seal",
-    title: "Licensed and insured",
-    copy: "Fully licensed and insured for domestic and commercial roofing work in Victoria. Certificates are provided with every quote, before you commit to anything.",
+    title: "Licensed & insured",
+    copy: "Wells Roofing holds the relevant registrations and insurances for the roofing work we undertake. Details can be provided as part of the quoting and contracting process.",
   },
   {
     icon: "camera",
     title: "Documented handover",
-    copy: "Every project finishes with photographs of the completed roof and the warranty paperwork in your hands — so if you sell the home, the roof is an asset you can evidence.",
+    copy: "On completion, we provide the relevant project documentation, which may include completed-work photographs, product information and applicable warranty details.",
   },
 ];

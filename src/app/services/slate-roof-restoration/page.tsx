@@ -40,39 +40,69 @@ export default function Page() {
       >
         <p>Restoration typically costs a fraction of a full re-roof and buys decades.</p>
         <p>Sometimes the answer is &quot;nothing yet&quot;, and we will say so.</p>
+        {/* Client feedback WRv2: points 1 and 4 reworded (client wording);
+            points 2 and 3 "are fine" and unchanged. Point 4 no longer
+            asserts that an overlay REQUIRES retention — it now says it may be
+            a consideration, assessed against the roof's condition. */}
         <CheckList
           items={[
-            "Restore when the slate is sound and the fixings, flashings or ridging have failed",
+            "Restore when the slate is sound and the fixings, flashings or ridging have deteriorated",
             "Replace when the slate is delaminating widely across the roof",
             "Replace when years of mismatched patch repairs have compromised the courses",
-            "Restore first where a heritage overlay requires original material retained",
+            "For heritage properties, retaining original slate and detailing may be an important consideration and will be assessed alongside the condition of the roof and any applicable heritage requirements",
           ]}
         />
       </ContentBlock>
+      {/* Method — intro and all four points are client wording, WRv2. */}
       <ContentBlock
         eyebrow="Method"
         title="How we restore a slate roof."
-        intro="Staged, reversible where the building calls for it, and detailed to match what is already there."
+        intro="Carefully assessed, selectively repaired and detailed to respect the existing roof."
         flip
       >
         <CheckList
           items={[
-            "Full assessment of slate condition, fixings, flashings and structure",
-            "Sympathetic replacement of damaged slates, matched to the original",
-            "Renewal of lead flashings, valleys and ridge bedding",
-            "Period-correct detailing and finishing throughout",
+            "Full assessment of the slate, fixings, flashings, valleys and overall roof condition",
+            "Careful replacement of damaged or deteriorated slates, matched as closely as practical to the existing roof",
+            "Renewal or repair of leadwork, flashings, valleys, ridges and other detailing where required",
+            "Traditional detailing and finishing appropriate to the age, character and construction of the building",
           ]}
         />
       </ContentBlock>
 
+      {/*
+        Decision guide — revised under client feedback WRv2.
+
+        · Title: client supplied "Restoration or Re-Roofing; side by side."
+          Set in the site's sentence case, with the comma the old title used.
+        · Intro: "the things that actually decide it —" struck by the client.
+        · Restoration note: "failed detailing" → "worn detailing".
+        · Rows: client wording throughout. "When it is the wrong call" is
+          replaced by "When we recommend it". "Repairs only defer replacement
+          in short term" gains "the" so it reads correctly.
+        · The "Figures are indicative…" footnote was struck and replaced by
+          the client's paragraph on how the assessment is made. That is a
+          statement, not a caveat, so it runs as body copy (`outro`) rather
+          than in the faint footnote style.
+        · Restoration's "20–30 years" became "Many more good years depending
+          on the slate age". Don't reintroduce a fixed figure: the client
+          removed it because the honest answer depends on the roof.
+      */}
       <SpecAccordion
         eyebrow="Decision guide"
-        title="Restore or replace, side by side."
-        intro="The two options compared on the things that actually decide it — condition, cost, disruption and how long the result lasts."
+        title={
+          <>
+            {/* nowrap: at desktop width the title otherwise breaks inside
+                the hyphen as "re- / roofing". */}
+            Restoration or <span className="whitespace-nowrap">re-roofing</span>
+            , side by side.
+          </>
+        }
+        intro="The two options compared on condition, cost, disruption and how long the result lasts."
         columns={[
           {
             name: "Restoration",
-            note: "Sound slate, failed detailing",
+            note: "Sound slate, worn detailing",
             highlight: true,
           },
           { name: "Full re-roof", note: "Slate itself has failed" },
@@ -80,56 +110,56 @@ export default function Page() {
         rows={[
           {
             criterion: "Typical cost",
-            values: [
-              "Roughly a third of a re-roof",
-              "Full project cost, staged over the roof",
-            ],
+            values: ["Roughly a third of a re-roof", "Full project cost"],
           },
           {
             criterion: "Life it buys",
             values: [
-              "20–30 years before the question returns",
-              "80–100 years from a new slate roof",
+              "Many more good years depending on the slate age",
+              "80–100 years for a new slate roof",
             ],
           },
           {
             criterion: "Time on site",
-            values: ["One to two weeks on a typical home", "Three to six weeks"],
+            values: [
+              "One to two weeks on a standard home",
+              "Three to six weeks",
+            ],
           },
           {
             criterion: "Original material",
-            values: [
-              "Retained — the reason heritage overlays prefer it",
-              "Salvaged and reused where the slate is sound enough",
-            ],
+            values: ["Retained", "Salvaged and reused where possible"],
           },
           {
             criterion: "What it fixes",
             values: [
-              "Fixings, flashings, valleys, ridging, pointing",
-              "Everything, including battens, sarking and structure",
+              "Fixings, flashings, valleys, ridging, capping",
+              "Everything, including battens, sarking and slate as required",
             ],
           },
           {
-            criterion: "When it is the wrong call",
+            criterion: "When we recommend it",
             values: [
-              "Slate delaminating widely — you are paying twice",
-              "Slate still sound — you are replacing what works",
+              "When inspections confirm the existing roof is sound",
+              "When deterioration is widespread and repairs only defer replacement in the short term",
             ],
           },
         ]}
-        footnote="Figures are indicative for a typical Melbourne home and are confirmed against your roof at survey."
+        outro="Our assessment looks beyond the immediate repair. We consider the overall condition, repair history and remaining serviceability of the roof so you can make an informed decision about whether restoration is worthwhile or whether replacement represents a better investment."
       />
 
+      {/* Warning signs — both paragraphs are client wording, WRv2, each kept
+          whole: the first as the lead, the second as body. The list is
+          unchanged; the client's "the signs below" refers to it. */}
       <ContentBlock
         eyebrow="Warning signs"
         title="What tells you the roof is asking for attention."
-        intro="Slate rarely fails suddenly. It signals for years first, and the signals are visible from the ground if you know what you are looking at."
+        intro="We can tell a great deal about a slate roof without leaving the ground. It shows its age at the edges, the ridging and the flashings first, and those signals appear long before the slate itself gives way."
       >
         <p>
-          A roof that has started to move will show it at the edges and the
-          junctions long before it shows it in the field. These are the things
-          worth acting on before the next wet winter, not after it.
+          Read early, they point to a straightforward repair. Read late, they
+          point to a re-roof. The signs below are the ones worth acting on
+          before the next wet winter.
         </p>
         <CheckList
           items={[
@@ -143,25 +173,27 @@ export default function Page() {
         />
       </ContentBlock>
 
+      {/* Nail sickness — title and body are client wording, WRv2. The client
+          wrote the body as ONE paragraph, so it runs as a single <p> with no
+          `intro`; promoting its first sentence to a lead would split it. */}
       <ContentBlock
         eyebrow="Nail sickness"
-        title="Why sound slate still ends up on the ground."
-        intro="The most common reason a century-old slate roof fails has nothing to do with the slate."
+        title="Why sound slate can still end up on the ground."
         flip
       >
         <p>
-          Natural slate outlives the nails that hold it. Original iron fixings
-          corrode long before the stone does, and once enough of them have gone
-          the slates begin to slip one at a time — a condition the trade calls
-          nail sickness. The slate itself is usually still perfectly good.
-        </p>
-        <p>
-          It matters because it changes the answer. A roof shedding slates
-          through failed fixings is a restoration candidate, and re-fixing with
-          copper or silicon-bronze nails resets the clock for decades. A roof
-          shedding slates because the stone is delaminating is not. Telling
-          those two apart from the ground is guesswork, which is why we get on
-          the roof before quoting.
+          The most common reason a century-old slate roof fails often has
+          nothing to do with the slate. Natural slate outlives the iron nails
+          that hold it. The original fixings corrode long before the stone
+          does, and as they go the slates begin to release one by one, a
+          condition known in the trade as nail sickness. Where the slate is
+          good stone, it comes down with decades of service still in it. This
+          is why the distinction matters. A roof losing slates to failed
+          fixings is a candidate for restoration, and re-fixing in copper or
+          silicon-bronze returns it to reliable service for a generation. A
+          roof losing slates because the stone itself is delaminating is not.
+          The two cannot be told apart from the ground, which is why we assess
+          every roof in person before we quote.
         </p>
       </ContentBlock>
 
