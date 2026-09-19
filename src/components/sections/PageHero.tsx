@@ -43,6 +43,8 @@ type PageHeroProps = {
    * stays, as the alternative to filling anything in.
    */
   aside?: ReactNode;
+  /** Middle breadcrumb for nested pages, e.g. Home / Projects / Beaumaris Hotel. */
+  parent?: { label: string; href: string };
 };
 
 /**
@@ -64,6 +66,7 @@ export function PageHero({
   video,
   cta,
   aside,
+  parent,
 }: PageHeroProps) {
   const primary = cta ?? { label: "Get a Quote", href: "/contact" };
 
@@ -161,6 +164,19 @@ export function PageHero({
                     </Link>
                   </li>
                   <li aria-hidden>/</li>
+                  {parent && (
+                    <>
+                      <li>
+                        <Link
+                          href={parent.href}
+                          className="transition-colors hover:text-accent"
+                        >
+                          {parent.label}
+                        </Link>
+                      </li>
+                      <li aria-hidden>/</li>
+                    </>
+                  )}
                   <li className="text-muted">{page.label}</li>
                 </ol>
               </nav>

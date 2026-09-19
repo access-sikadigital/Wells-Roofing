@@ -128,6 +128,28 @@ export function breadcrumbSchema(
   };
 }
 
+/** Photo set for one project catalogue page. */
+export function imageGallerySchema(gallery: {
+  title: string;
+  summary: string;
+  url: string;
+  photos: { src: string; alt: string }[];
+}): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: gallery.title,
+    description: gallery.summary,
+    url: abs(gallery.url),
+    creator: { "@id": ORGANISATION_ID },
+    image: gallery.photos.map((p) => ({
+      "@type": "ImageObject",
+      contentUrl: abs(p.src),
+      description: p.alt,
+    })),
+  };
+}
+
 /**
  * Assemble every schema block a page declares in its spec.
  * Pass `faqs` when the page declares FAQPage.

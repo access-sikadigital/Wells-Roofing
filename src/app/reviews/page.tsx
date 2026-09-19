@@ -6,7 +6,6 @@ import { PageHero } from "@/components/sections/PageHero";
 import { ReviewsStrip } from "@/components/sections/ReviewsStrip";
 import { ContentBlock } from "@/components/sections/ContentBlock";
 import { CTA } from "@/components/sections/CTA";
-import { googleRating } from "@/config/proof";
 
 const page = getPage("reviews");
 export const metadata = metadataFor("reviews");
@@ -15,11 +14,9 @@ export const metadata = metadataFor("reviews");
  * Now showing the REAL Google reviews rather than a "feed being connected"
  * placeholder.
  *
- * The page is honest about the gap between the count and what is displayed:
- * Google holds nine reviews, six of which have text worth reading. Rather than
- * quietly showing six and letting the badge say nine, the note below says so
- * and links out to the profile, where anyone can read all of them including
- * the two that are critical.
+ * The rating figure and review count are not shown anywhere (client request).
+ * The note below still says the carousel shows only the reviews with text,
+ * and points people to the profile to read them all.
  *
  * Review / AggregateRating schema is still not emitted — see ReviewsStrip.
  */
@@ -42,7 +39,9 @@ export default function Page() {
       <ContentBlock
         eyebrow="Straight about it"
         title="Read them all on Google."
-        intro={`Our Google rating is ${googleRating.average} from ${googleRating.count} reviews. The ones above are those with something written; the rest are ratings without a comment.`}
+        /* "Our Google rating is 4.1 from 9 reviews." removed at the client's
+           request, along with the figures on the badge. */
+        intro="The ones above are those with something written; the rest are ratings without a comment."
       >
         <p>
           If we have worked on your roof, a few words on Google genuinely helps

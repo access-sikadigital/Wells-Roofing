@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * Assets in /public/brand:
  *
  *  · `logo.png`                  Supplied master. Framed lockup, NAVY ink.
- *  · `logo-reversed.png`         Framed lockup, WHITE ink. Dark backgrounds.
+ *                                (Also the `logo` in the LocalBusiness schema.)
  *  · `logo-lockup.png`           Screen lockup, NAVY ink.  ← used on the site
  *  · `logo-lockup-reversed.png`  Screen lockup, WHITE ink. ← used on the site
  *  · `badge.png`                 Square, white ink on navy. Favicon, OG, social.
@@ -31,13 +31,15 @@ import { cn } from "@/lib/utils";
  * At the same box height the mark itself renders ~1.25× larger, and with the
  * header sizing below it lands at roughly double what it was.
  *
- * The framed masters stay in /public/brand untouched for print and socials.
+ * The unused framed variants (`logo-reversed.png`, `logo-plate.png`) were
+ * removed from /public to keep it to files the site serves; both remain in git
+ * history, and the vector master is `wells-roofing-logo.eps`.
  *
- * ⚠️  `logo-reversed.png` was DERIVED, not supplied. The brand pack had only
- * the navy-ink transparent master, a white-*plate* version (opaque white
- * rectangle) and the square badge — no transparent reversed lockup. On the
- * navy hero and footer the navy wordmark simply disappeared, leaving the red
- * chevron floating on its own.
+ * ⚠️  The reversed (white-ink) artwork was DERIVED, not supplied. The brand
+ * pack had only the navy-ink transparent master, a white-*plate* version
+ * (opaque white rectangle) and the square badge — no transparent reversed
+ * lockup. On the navy hero and footer the navy wordmark simply disappeared,
+ * leaving the red chevron floating on its own.
  *
  * It was produced from the supplied master by mapping the navy ink to white
  * and leaving every red pixel untouched, preserving alpha so the edges stay

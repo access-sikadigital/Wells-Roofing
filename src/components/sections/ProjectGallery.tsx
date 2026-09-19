@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { gsap, useGSAP, EASE } from "@/lib/gsap";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -195,7 +196,7 @@ export function ProjectGallery({
                 data-tile
                 className="group w-[78vw] shrink-0 snap-start sm:w-[46vw] lg:w-[30vw] xl:w-[26vw]"
               >
-                <figure>
+                <figure className="relative">
                   {/* Fixed height is what keeps the section short and stops it
                       growing as projects are added. */}
                   <div className="relative h-64 overflow-hidden rounded-card bg-surface sm:h-72 lg:h-80">
@@ -204,6 +205,9 @@ export function ProjectGallery({
                       alt={project.alt}
                       fill
                       sizes="(max-width: 640px) 78vw, (max-width: 1024px) 46vw, 30vw"
+                      /* Real project photos under /projects/ are pre-sized
+                         thumbnails; serve them as they are. */
+                      unoptimized={project.image.startsWith("/projects/")}
                       className="object-cover transition-transform duration-slower ease-out-quart group-hover:scale-105"
                     />
                   </div>
@@ -218,8 +222,19 @@ export function ProjectGallery({
                       className="mt-2 h-px w-5 shrink-0 bg-line-strong transition-colors duration-base group-hover:bg-accent"
                     />
                     <span className="min-w-0">
-                      <span className="block truncate font-display text-small font-extrabold uppercase tracking-wide text-foreground">
-                        {project.title}
+                      <span className="block truncate font-display text-small font-extrabold uppercase tracking-wide text-foreground transition-colors group-hover:text-accent">
+                        {project.href ? (
+                          /* Stretched link: the ::after covers the whole
+                             figure, so the photo and caption are one target. */
+                          <Link
+                            href={project.href}
+                            className="after:absolute after:inset-0 after:content-['']"
+                          >
+                            {project.title}
+                          </Link>
+                        ) : (
+                          project.title
+                        )}
                       </span>
                       <span className="mt-0.5 block truncate text-small text-muted">
                         {project.suburb

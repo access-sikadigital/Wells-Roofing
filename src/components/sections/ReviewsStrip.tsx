@@ -15,18 +15,11 @@ import { testimonials, googleRating, type Testimonial } from "@/config/proof";
  * fallback and its warning badge are gone — there is nothing left to fall back
  * to, which is the point.
  *
- * ── The badge shows "4+", not "4.1" ────────────────────────────────────────
- * `Math.floor` rather than a rounded decimal, so the figure is always at or
- * below the true score — 4.1 shows as "4+", never as something the profile
- * would not support. The exact number is still stated in prose on /reviews,
- * and anyone can check it on the linked profile.
- *
- * ── The rating badge does not average the carousel ─────────────────────────
- * It reads `googleRating`, transcribed from the Google profile: 4.1 from 9.
- * The carousel shows six, because three of the nine have no written text or
- * are negative. Averaging what happens to be on screen would print 5.0 and be
- * false. Curating which reviews to feature is normal; misstating the score is
- * not, so the score comes from Google and the quotes come from the carousel.
+ * ── The badge is the Google mark and stars only ────────────────────────────
+ * The client asked for the "4+" figure and the "9 Google reviews" count to be
+ * removed. The stars still come from `googleRating` (the real profile figure,
+ * 4.1 → four filled), never from an average of the carousel. The carousel
+ * only shows reviews with text, so its average would overstate the score.
  *
  * NOTE: Review / AggregateRating schema is still deliberately NOT emitted.
  * Google treats a business marking up its own reviews as self-serving and it
@@ -44,7 +37,6 @@ export function ReviewsStrip({
   items?: Testimonial[];
 }>) {
   const shown = items ?? testimonials;
-  const { average, count } = googleRating;
 
   return (
     <section className="bg-surface py-section">
@@ -52,25 +44,21 @@ export function ReviewsStrip({
         <div className="flex flex-wrap items-end justify-between gap-8">
           <SectionHeading eyebrow={eyebrow} title={title} intro={intro} />
 
-          {/* Google summary badge — the credibility anchor for the row */}
+          {/* Google summary badge — the credibility anchor for the row.
+              Client request: Google mark and stars only. The "4+" figure and
+              the "9 Google reviews" count were removed. */}
           <Reveal delay={0.1}>
             <div className="flex items-center gap-4 rounded-card border border-line bg-background px-5 py-4">
               <GoogleGlyph className="size-7 shrink-0" />
-              <div>
-                <p className="flex items-center gap-2">
-                  <span className="font-display text-h4 font-extrabold leading-none text-foreground">
-                    {Math.floor(average)}+
-                  </span>
-                  <span className="flex gap-0.5" aria-hidden>
-                    {Array.from({ length: 5 }, (_, i) => (
-                      <Star key={i} filled={i < Math.round(average)} />
-                    ))}
-                  </span>
-                </p>
-                <p className="mt-1 text-small text-faint">
-                  {count} Google reviews
-                </p>
-              </div>
+              <span
+                className="flex gap-0.5"
+                role="img"
+                aria-label={`Rated ${googleRating.average} out of 5 on Google`}
+              >
+                {Array.from({ length: 5 }, (_, i) => (
+                  <Star key={i} filled={i < Math.round(googleRating.average)} />
+                ))}
+              </span>
             </div>
           </Reveal>
         </div>

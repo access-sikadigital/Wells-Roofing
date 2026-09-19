@@ -43,6 +43,8 @@ export type Project = {
   alt: string;
   /** Set when the pair is a genuine before/after of the same roof. */
   beforeAfter?: boolean;
+  /** Project page this tile links to, when there is one. */
+  href?: string;
 };
 
 /**
@@ -98,27 +100,135 @@ export const projects: Project[] = [
   },
 ];
 
+/* ==========================================================================
+   PROJECT CATALOGUES — one full photo set per real Wells job.
+   ========================================================================== */
+
+export type CataloguePhoto = {
+  src: string;
+  /** Describe what is in frame. Never claim work the photo doesn't show. */
+  alt: string;
+  /** Intrinsic size, so the gallery reserves space and never jumps. */
+  width: number;
+  height: number;
+};
+
+export type ProjectCatalogue = {
+  /** URL segment: /projects/<slug>/. Must match a route and a pages.ts key. */
+  slug: string;
+  title: string;
+  material: ProjectMaterial;
+  /** Specific product, shown under the title. */
+  product: string;
+  /** Real suburb of the job — this is the local-SEO payload. */
+  suburb: string;
+  /** One or two sentences. Facts only. */
+  summary: string;
+  /** Index into `photos` used for the catalogue card and page hero. */
+  cover: number;
+  photos: CataloguePhoto[];
+};
+
+/** Landscape 4:3 / 16:9 and portrait 3:4 — the three shapes the phone shot. */
+const L = { width: 2400, height: 1800 };
+const W = { width: 2400, height: 1350 };
+const P = { width: 1800, height: 2400 };
+
+/**
+ * Real Wells projects, each with its own page under /projects/ and an entry in
+ * the Projects menu (built from this array — see `primaryNav` in pages.ts).
+ *
+ * TO ADD A PROJECT:
+ *  1. Put web-sized, metadata-stripped photos in public/projects/<slug>/.
+ *     Phone originals carry GPS in their EXIF — never publish them as-is.
+ *  2. Add an entry here.
+ *  3. Add a page spec in pages.ts (key `project-<slug>`) and a route at
+ *     src/app/projects/<slug>/page.tsx — copy the Beaumaris Hotel one.
+ */
+export const projectCatalogues: ProjectCatalogue[] = [
+  {
+    slug: "beaumaris-hotel",
+    title: "Beaumaris Hotel",
+    material: "Natural slate",
+    product: "Spanish slate",
+    suburb: "Beaumaris",
+    /*
+     * ⚠️  STEVE TO CONFIRM / EXPAND. The supplied folder was titled "Beaumaris
+     * Hotel (Spanish Slate)" and nothing more, so this says only that. Scope
+     * (new roof, re-roof or restoration), year, the slate range, and whether
+     * Wells supplied, installed or both, are all worth adding — but only once
+     * someone who was on the job has confirmed them.
+     */
+    summary:
+      "Spanish slate across the mansard roofs, towers and dormers of the Beaumaris Hotel — one of Bayside's best-known buildings.",
+    cover: 25,
+    photos: [
+      { src: "/projects/beaumaris-hotel/01.jpg", alt: "Spanish slate mansard roof above the upper verandah of the Beaumaris Hotel", ...L },
+      { src: "/projects/beaumaris-hotel/02.jpg", alt: "Slate mansard roof, dormers and chimney along the hotel frontage", ...L },
+      { src: "/projects/beaumaris-hotel/03.jpg", alt: "Close view of the slate between the dormers and a rendered chimney", ...L },
+      { src: "/projects/beaumaris-hotel/04.jpg", alt: "Central tower and slate mansard roof of the Beaumaris Hotel", ...L },
+      { src: "/projects/beaumaris-hotel/05.jpg", alt: "Slate mansard roof and chimney above the cast-iron verandah", ...L },
+      { src: "/projects/beaumaris-hotel/06.jpg", alt: "Corner view of the Beaumaris Hotel with its slate roofs and verandahs", ...L },
+      { src: "/projects/beaumaris-hotel/07.jpg", alt: "Slate mansard with dormer windows beneath iron roof cresting", ...L },
+      { src: "/projects/beaumaris-hotel/08.jpg", alt: "Slate roof planes meeting between the dormers and chimneys", ...L },
+      { src: "/projects/beaumaris-hotel/09.jpg", alt: "Corner tower of the Beaumaris Hotel with slate roof and iron cresting", ...L },
+      { src: "/projects/beaumaris-hotel/10.jpg", alt: "Steep slate mansard roof beneath decorative iron cresting", ...L },
+      { src: "/projects/beaumaris-hotel/11.jpg", alt: "The Beaumaris Hotel from across the street, slate roofs along the full frontage", ...L },
+      { src: "/projects/beaumaris-hotel/12.jpg", alt: "Street view of the Beaumaris Hotel frontage and slate roofline", ...L },
+      { src: "/projects/beaumaris-hotel/13.jpg", alt: "Beaumaris Hotel front elevation with slate mansard roofs and iron cresting", ...L },
+      { src: "/projects/beaumaris-hotel/14.jpg", alt: "The Beaumaris Hotel slate roofline against the afternoon sun", ...L },
+      { src: "/projects/beaumaris-hotel/15.jpg", alt: "Pedimented dormer set into the slate roof, framed by iron cresting", ...L },
+      { src: "/projects/beaumaris-hotel/16.jpg", alt: "Slate roof behind the parapet dormers and iron cresting", ...L },
+      { src: "/projects/beaumaris-hotel/17.jpg", alt: "Slate mansard roof and dormers above the corner balcony", ...L },
+      { src: "/projects/beaumaris-hotel/18.jpg", alt: "The Beaumaris Hotel roofline silhouetted against the sky", ...W },
+      { src: "/projects/beaumaris-hotel/19.jpg", alt: "Slate tower roof with iron cresting, seen from below", ...W },
+      { src: "/projects/beaumaris-hotel/20.jpg", alt: "The Beaumaris Hotel and its slate roofs from the street", ...W },
+      { src: "/projects/beaumaris-hotel/21.jpg", alt: "The Beaumaris Hotel through the trees, slate roofline in view", ...W },
+      { src: "/projects/beaumaris-hotel/22.jpg", alt: "Slate mansard roofs and dormers along the upper storey", ...W },
+      { src: "/projects/beaumaris-hotel/23.jpg", alt: "Corner of the Beaumaris Hotel with slate roofs above two levels of verandah", ...P },
+      { src: "/projects/beaumaris-hotel/24.jpg", alt: "Spanish slate mansard roof above the lacework verandah", ...L },
+      { src: "/projects/beaumaris-hotel/25.jpg", alt: "Beaumaris Hotel frontage with its slate roof and central tower", ...L },
+      { src: "/projects/beaumaris-hotel/26.jpg", alt: "The Beaumaris Hotel, roofed in Spanish slate", ...L },
+      { src: "/projects/beaumaris-hotel/27.jpg", alt: "The Beaumaris Hotel from the roadside", ...P },
+      { src: "/projects/beaumaris-hotel/28.jpg", alt: "Beaumaris Hotel façade and slate roofs", ...P },
+      { src: "/projects/beaumaris-hotel/29.jpg", alt: "Corner of the Beaumaris Hotel and its slate tower roof", ...P },
+    ],
+  },
+];
+
 /**
  * SELECTED PROJECTS — the homepage "Selected real projects" slot.
  *
- * ⚠️  EMPTY ON PURPOSE. Do not point this at `projects` above.
+ * REAL WELLS JOBS ONLY. Do not point this at `projects` above: that is stock
+ * and material photography, and a heading that says "Recent work" over it
+ * would claim jobs Wells didn't do.
  *
- * Client feedback v1 asks the homepage for "Selected real projects". The
- * `projects` array above is stock and material photography with deliberately
- * generic captions — honest as a texture gallery, but putting it under a
- * heading that says these are Wells jobs makes exactly the claim the captions
- * were written to avoid — the same problem the fabricated reviews had before
- * the real Google feed replaced them.
- *
- * `ProjectGallery` renders an honest "we're photographing recent work"
- * state from an empty array, so the section is presentable today and turns on
- * the moment real photographs exist.
- *
- * To go live: add real Wells jobs here with a real `suburb` on each — the
- * suburb is the local-SEO payload of the section, which is the whole reason
- * it sits on the homepage.
+ * Built from `projectCatalogues`: a few of the strongest frames from each
+ * catalogue, each tile linking to that project's page. The suburb on every
+ * tile is the local-SEO payload of the section.
  */
-export const selectedProjects: Project[] = [];
+const featuredFrames: Record<string, number[]> = {
+  // Cover, front elevation, central tower, iron cresting, verandah, frontage.
+  "beaumaris-hotel": [25, 12, 3, 9, 23, 1],
+};
+
+export const selectedProjects: Project[] = projectCatalogues.flatMap((c) =>
+  (featuredFrames[c.slug] ?? [c.cover]).map((i) => ({
+    title: c.title,
+    material: c.material,
+    suburb: c.suburb,
+    // The 1200px grid thumbnail — see ProjectCatalogue.
+    image: c.photos[i].src.replace(/\/([^/]+)$/, "/thumbs/$1"),
+    alt: c.photos[i].alt,
+    href: `/projects/${c.slug}/`,
+  }))
+);
+
+export function getCatalogue(slug: string): ProjectCatalogue {
+  const found = projectCatalogues.find((c) => c.slug === slug);
+  if (!found) throw new Error(`Unknown project catalogue: ${slug}`);
+  return found;
+}
 
 export type Testimonial = {
   quote: string;

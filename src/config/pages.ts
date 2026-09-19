@@ -14,6 +14,8 @@
  * compete with each other. Supporting keywords go in H2s, body and FAQs.
  */
 
+import { projectCatalogues } from "@/config/proof";
+
 export type Phase = "P1" | "P2";
 export type Priority = "High" | "Med" | "Low";
 export type Audience = "homeowner" | "trade" | "both";
@@ -370,6 +372,30 @@ export const pages = [
     h1: "Our Roofing Projects",
     schema: ["CollectionPage", "ImageGallery"],
     job: "Filterable by material and suburb; before/after; captions with location for local SEO.",
+  },
+  /* ---------------- Project catalogues (children of /projects/) ----------------
+     One per entry in `projectCatalogues` (config/proof.ts). The label is what
+     the Projects dropdown shows. */
+  {
+    key: "project-beaumaris-hotel",
+    label: "Beaumaris Hotel",
+    name: "Project: Beaumaris Hotel (Spanish slate)",
+    url: "/projects/beaumaris-hotel/",
+    type: "trust",
+    audience: "both",
+    phase: "P1",
+    priority: "Med",
+    supportingKeywords: [
+      "spanish slate roof",
+      "slate roofing beaumaris",
+      "slate roofing bayside",
+    ],
+    title: "Beaumaris Hotel — Spanish Slate Roof | Wells Roofing",
+    description:
+      "Spanish slate across the mansard roofs, towers and dormers of the Beaumaris Hotel in Bayside. See the full project photo set.",
+    h1: "Beaumaris Hotel",
+    schema: ["ImageGallery"],
+    job: "Real project catalogue — full photo set of one Wells job, linked from the Projects menu.",
   },
   {
     key: "reviews",
@@ -749,7 +775,17 @@ export const primaryNav: NavItem[] = [
     href: getPage("services").url,
     mega: true,
   },
-  { label: "Projects", href: getPage("projects").url },
+  {
+    /* A dropdown of the project catalogues, built from `projectCatalogues`
+       so adding a project adds its menu entry. The label still links to the
+       /projects/ index. */
+    label: "Projects",
+    href: getPage("projects").url,
+    children: projectCatalogues.map((p) => ({
+      label: p.title,
+      href: `/projects/${p.slug}/`,
+    })),
+  },
   { label: "Reviews", href: getPage("reviews").url },
   { label: "About", href: getPage("about").url },
   { label: "Contact", href: getPage("contact").url },
