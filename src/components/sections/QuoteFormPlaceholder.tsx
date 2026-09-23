@@ -30,7 +30,7 @@ export function QuoteFormPlaceholder({
         <Reveal>
           <div className="flex flex-col gap-8 rounded-card border border-line bg-background p-8 lg:flex-row lg:items-center lg:justify-between lg:p-10">
             <div className="max-w-xl">
-              <h2 className="font-display text-h3 font-extrabold uppercase tracking-tight text-foreground">
+              <h2 className="font-display text-h3 font-extrabold tracking-tight text-foreground">
                 {title}
               </h2>
               <p className="mt-3 text-small text-muted">{intro}</p>

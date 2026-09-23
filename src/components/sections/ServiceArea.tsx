@@ -101,7 +101,7 @@ export function ServiceArea({
             <dl className="grid grid-cols-1 gap-8 border-t border-line pt-8 sm:grid-cols-2 lg:justify-items-end lg:text-right">
               <div>
                 <dt className="eyebrow text-faint">Based in</dt>
-                <dd className="mt-2 font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+                <dd className="mt-2 font-display text-h4 font-extrabold tracking-tight text-foreground">
                   Mornington
                 </dd>
                 <dd className="mt-1 text-small text-muted">
@@ -110,7 +110,7 @@ export function ServiceArea({
               </div>
               <div>
                 <dt className="eyebrow text-faint">Coverage</dt>
-                <dd className="mt-2 font-display text-h4 font-extrabold uppercase tracking-tight text-foreground tabular-nums">
+                <dd className="mt-2 font-display text-h4 font-extrabold tracking-tight text-foreground tabular-nums">
                   {locationPages.length} regions
                 </dd>
                 <dd className="mt-1 text-small text-muted tabular-nums">
@@ -141,7 +141,7 @@ export function ServiceArea({
                 </span>
 
                 {/* Region */}
-                <h3 className="font-display text-h3 font-extrabold uppercase leading-tight tracking-tight text-foreground transition-colors duration-base group-hover:text-accent lg:col-span-4">
+                <h3 className="font-display text-h3 font-extrabold leading-tight tracking-tight text-foreground transition-colors duration-base group-hover:text-accent lg:col-span-4">
                   {region.label}
                 </h3>
 

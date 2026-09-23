@@ -69,7 +69,7 @@ export function LocationMap({
           {/* NAP — must match GBP and LocalBusiness schema exactly */}
           <Reveal delay={0.15} className="lg:col-span-5">
             <div className="rounded-card border border-line bg-surface p-8">
-              <p className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+              <p className="font-display text-h4 font-extrabold tracking-tight text-foreground">
                 {siteConfig.name}
               </p>
 

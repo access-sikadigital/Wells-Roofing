@@ -140,7 +140,7 @@ export function DualPath() {
                   {path.eyebrow}
                 </p>
 
-                <h3 className="mt-5 max-w-md font-display text-h3 font-extrabold uppercase tracking-tight text-foreground">
+                <h3 className="mt-5 max-w-md font-display text-h3 font-extrabold tracking-tight text-foreground">
                   {path.title}
                 </h3>
 

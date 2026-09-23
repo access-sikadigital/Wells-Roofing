@@ -131,7 +131,7 @@ export function CTA() {
 
             <TextReveal
               as="h2"
-              className="max-w-2xl font-display text-h1 uppercase text-white"
+              className="max-w-2xl font-display text-h1 text-white"
             >
               Send us your plans.
             </TextReveal>

@@ -82,7 +82,7 @@ export function Craft() {
               {points.map((point, i) => (
                 <Reveal key={point.title} delay={i * 0.1}>
                   <div className="border-l-2 border-accent/30 pl-6 transition-colors hover:border-accent">
-                    <h3 className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+                    <h3 className="font-display text-h4 font-extrabold tracking-tight text-foreground">
                       {point.title}
                     </h3>
                     <p className="mt-2 max-w-lg text-small text-muted">

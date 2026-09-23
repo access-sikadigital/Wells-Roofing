@@ -32,7 +32,7 @@ export function RelatedServices({
                 href={page.url}
                 className="group flex h-full flex-col rounded-card border border-line bg-background p-7 transition-all duration-slow ease-out-quart hover:-translate-y-1.5 hover:border-accent/30 hover:shadow-lift"
               >
-                <h3 className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+                <h3 className="font-display text-h4 font-extrabold tracking-tight text-foreground">
                   {page.label}
                 </h3>
                 <p className="mt-3 flex-1 text-small text-muted">

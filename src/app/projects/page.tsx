@@ -61,7 +61,7 @@ export default function Page() {
                           {project.photos.length} photos
                         </span>
                       </div>
-                      <h2 className="mt-5 font-display text-h4 font-extrabold uppercase tracking-tight text-foreground transition-colors group-hover:text-accent">
+                      <h2 className="mt-5 font-display text-h4 font-extrabold tracking-tight text-foreground transition-colors group-hover:text-accent">
                         {project.title}
                       </h2>
                       <p className="mt-1 text-small text-muted">

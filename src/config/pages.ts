@@ -158,7 +158,7 @@ export const pages = [
   /* ---------------- Slate cluster ---------------- */
   {
     key: "natural-slate-roofing",
-    label: "Natural Slate Roofing",
+    label: "Natural slate roofing",
     name: "Natural Slate Roofing (flagship)",
     url: "/services/natural-slate-roofing/",
     type: "service",
@@ -182,7 +182,7 @@ export const pages = [
   },
   {
     key: "slate-roof-restoration",
-    label: "Slate Roof Restoration",
+    label: "Slate roof restoration",
     name: "Slate Roof Restoration",
     url: "/services/slate-roof-restoration/",
     type: "service",
@@ -209,7 +209,7 @@ export const pages = [
   },
   {
     key: "heritage-roofing",
-    label: "Heritage Roofing",
+    label: "Heritage roofing",
     name: "Heritage Roofing",
     url: "/services/heritage-roofing/",
     type: "service",
@@ -231,7 +231,7 @@ export const pages = [
   },
   {
     key: "slate-roof-repairs",
-    label: "Slate Roof Repairs",
+    label: "Slate roof repairs",
     name: "Slate Roof Repairs",
     url: "/services/slate-roof-repairs/",
     type: "service",
@@ -258,7 +258,7 @@ export const pages = [
   },
   {
     key: "natural-slate-supply",
-    label: "Natural Slate Supply",
+    label: "Natural slate supply",
     name: "Natural Slate Supply & Specification",
     url: "/services/natural-slate-supply/",
     type: "service-b2b",
@@ -285,7 +285,7 @@ export const pages = [
   /* ---------------- Tile cluster ---------------- */
   {
     key: "terracotta-tile-roofing",
-    label: "Terracotta Tile Roofing",
+    label: "Terracotta tile roofing",
     name: "Terracotta Tile Roofing",
     url: "/services/terracotta-tile-roofing/",
     type: "service",
@@ -313,7 +313,7 @@ export const pages = [
   },
   {
     key: "concrete-tile-roofing",
-    label: "Concrete Tile Roofing",
+    label: "Concrete tile roofing",
     name: "Concrete Tile Roofing",
     url: "/services/concrete-tile-roofing/",
     type: "service",
@@ -343,7 +343,7 @@ export const pages = [
   /* ---------------- Audience, trust & conversion ---------------- */
   {
     key: "for-architects-builders",
-    label: "For Architects & Builders",
+    label: "For architects & builders",
     name: "For Architects & Builders",
     url: "/services/for-architects-builders/",
     type: "hub",
@@ -723,7 +723,7 @@ export type NavGroup = {
 
 export const serviceGroups: NavGroup[] = [
   {
-    label: "Slate Roofing",
+    label: "Slate roofing",
     href: getPage("natural-slate-roofing").url,
     blurb: "New slate roofs, restoration, repairs and supply.",
     children: slateCluster.map((k) => ({
@@ -732,7 +732,7 @@ export const serviceGroups: NavGroup[] = [
     })),
   },
   {
-    label: "Tile Roofing",
+    label: "Tile roofing",
     href: getPage("terracotta-tile-roofing").url,
     blurb: "Terracotta and concrete, supplied and installed.",
     children: tileCluster.map((k) => ({
@@ -741,7 +741,7 @@ export const serviceGroups: NavGroup[] = [
     })),
   },
   {
-    label: "Architects & Builders",
+    label: "Architects & builders",
     href: getPage("for-architects-builders").url,
     blurb: "Specification support, samples and lead times.",
     children: [

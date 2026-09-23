@@ -50,27 +50,51 @@ export function Hero({
         fill
         priority
         sizes="100vw"
-        className="object-cover opacity-45"
+        className="object-cover opacity-70"
       />
 
-      {/* Navy scrim so the copy always holds contrast over the photograph */}
+      {/*
+        HORIZONTAL scrim — deep navy on the left where the copy sits, opening
+        up to the bare photograph on the right. Matches the inner-page heroes
+        in PageHero.tsx so every hero on the site reads the same way.
+
+        The many stops are not decoration: a two-stop linear ramp interpolates
+        in a straight line, which the eye reads as a hard edge in the middle
+        and a visible band at the light end. These stops follow an ease curve
+        (slow fall, then quick, then slow), which is what makes the falloff
+        read as smooth. The `grain` class on the section dithers what is left.
+      */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgb(6 21 50 / 0.85) 0%, rgb(6 21 50 / 0.55) 35%, rgb(6 21 50 / 0.95) 100%)",
+            "linear-gradient(90deg, rgb(6 21 50 / 0.94) 0%, rgb(6 21 50 / 0.92) 12%, rgb(6 21 50 / 0.86) 24%, rgb(6 21 50 / 0.74) 36%, rgb(6 21 50 / 0.58) 48%, rgb(6 21 50 / 0.40) 60%, rgb(6 21 50 / 0.24) 72%, rgb(6 21 50 / 0.12) 84%, rgb(6 21 50 / 0.04) 93%, rgb(6 21 50 / 0) 100%)",
         }}
       />
 
-      {/* Extra bottom-left wash — protects the headline and subheading */}
+      {/*
+        Vertical wash — kept light, or it would cancel the horizontal ramp and
+        flatten the whole frame back to navy. It only has to sit the headline
+        off the sky at the top and hold the buttons at the bottom.
+      */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(75% 65% at 15% 85%, rgb(6 21 50 / 0.75) 0%, transparent 70%)",
+            "linear-gradient(180deg, rgb(6 21 50 / 0.55) 0%, rgb(6 21 50 / 0.18) 22%, rgb(6 21 50 / 0.06) 50%, rgb(6 21 50 / 0.30) 82%, rgb(6 21 50 / 0.55) 100%)",
         }}
+      />
+
+      {/*
+        Below `sm` the copy runs full width, so it ends up over the open right
+        end of the horizontal ramp. Flat wash at small sizes only — same fix,
+        and same 0.66 value, as PageHero.
+      */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[rgb(6_21_50/0.66)] sm:hidden"
       />
 
       {/* Spacing now lives on the section so it participates in the centring;

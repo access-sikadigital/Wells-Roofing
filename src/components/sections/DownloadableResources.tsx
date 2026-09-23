@@ -81,7 +81,7 @@ export function DownloadableResources() {
                 >
                   <p className="eyebrow text-faint">{resource.meta}</p>
 
-                  <h3 className="mt-4 font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+                  <h3 className="mt-4 font-display text-h4 font-extrabold tracking-tight text-foreground">
                     {resource.title}
                   </h3>
 

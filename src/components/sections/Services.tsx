@@ -110,7 +110,7 @@ export function Services() {
         <SectionHeading
           eyebrow="What We Roof"
           /* Client feedback WRv2: capitalise the three material names. */
-          title="Natural Slate, Terracotta and Concrete."
+          title="Natural slate, terracotta and concrete."
           /*
             CLIENT FEEDBACK v1 (compliance): the previous line claimed roofs are
             "never subcontracted". Wells operates on a subcontractor model by
@@ -198,7 +198,7 @@ export function Services() {
                 {service.headline}
               </p>
 
-              <h3 className="relative mt-5 font-display text-h3 font-extrabold uppercase tracking-tight text-foreground">
+              <h3 className="relative mt-5 font-display text-h3 font-extrabold tracking-tight text-foreground">
                 {service.title}
               </h3>
 

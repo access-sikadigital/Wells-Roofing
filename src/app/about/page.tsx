@@ -110,7 +110,7 @@ export default function Page() {
       >
         <div className="space-y-8">
           <div>
-            <h3 className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+            <h3 className="font-display text-h4 font-extrabold tracking-tight text-foreground">
               New homes
             </h3>
             <p className="mt-2 max-w-xl text-small text-muted">
@@ -122,7 +122,7 @@ export default function Page() {
           </div>
 
           <div>
-            <h3 className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+            <h3 className="font-display text-h4 font-extrabold tracking-tight text-foreground">
               Extensions &amp; additions
             </h3>
             <p className="mt-2 max-w-xl text-small text-muted">
@@ -135,7 +135,7 @@ export default function Page() {
           </div>
 
           <div>
-            <h3 className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+            <h3 className="font-display text-h4 font-extrabold tracking-tight text-foreground">
               Roof replacements
             </h3>
             <p className="mt-2 max-w-xl text-small text-muted">

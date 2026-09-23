@@ -67,9 +67,9 @@ export const siteConfig = {
   ],
 
   nav: [
-    { label: "Natural Slate", href: "#services" },
-    { label: "Tile Roofing", href: "#services" },
-    { label: "Our Craft", href: "#craft" },
+    { label: "Natural slate", href: "#services" },
+    { label: "Tile roofing", href: "#services" },
+    { label: "Our craft", href: "#craft" },
     { label: "Contact", href: "#contact" },
   ],
   cta: { label: "Request a Quote", href: "#contact" },
@@ -85,7 +85,7 @@ export const siteConfig = {
   services: [
     {
       number: "01",
-      title: "Natural Slate",
+      title: "Natural slate",
       headline: "Timeless beauty.",
       description:
         "Premium natural Spanish slate for architect-designed new builds, re-roofing and heritage restoration — sourced, specified and installed by us.",

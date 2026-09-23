@@ -51,7 +51,7 @@ export function ArchitectsStrip() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <h2 className="mt-5 max-w-2xl font-display text-h2 font-extrabold uppercase tracking-tight text-foreground">
+              <h2 className="mt-5 max-w-2xl font-display text-h2 font-extrabold tracking-tight text-foreground">
                 Specifying slate? Start with a sample.
               </h2>
               <p className="mt-5 max-w-xl text-lead text-muted">

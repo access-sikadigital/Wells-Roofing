@@ -60,7 +60,7 @@ function MobileNavRow({
         <Link
           href={item.href}
           onClick={onNavigate}
-          className="flex min-h-11 items-center font-display text-h3 font-extrabold uppercase tracking-tight text-foreground transition-colors hover:text-accent"
+          className="flex min-h-11 items-center font-display text-h3 font-extrabold tracking-tight text-foreground transition-colors hover:text-accent"
         >
           {item.label}
         </Link>
@@ -76,7 +76,7 @@ function MobileNavRow({
         <Link
           href={item.href}
           onClick={onNavigate}
-          className="flex min-h-11 items-center font-display text-h3 font-extrabold uppercase tracking-tight text-foreground transition-colors hover:text-accent"
+          className="flex min-h-11 items-center font-display text-h3 font-extrabold tracking-tight text-foreground transition-colors hover:text-accent"
         >
           {item.label}
         </Link>

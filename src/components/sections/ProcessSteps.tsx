@@ -132,7 +132,7 @@ export function ProcessSteps({
                 )}
 
                 <div className="flex flex-1 flex-col p-8">
-                  <h3 className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+                  <h3 className="font-display text-h4 font-extrabold tracking-tight text-foreground">
                     {step.title}
                   </h3>
                   <p className="mt-2 text-small text-muted">{step.copy}</p>

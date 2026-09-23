@@ -126,7 +126,7 @@ export default function Page() {
               <Reveal key={group.href} delay={0.05 * gi}>
                 <div className="border-t border-line pt-10">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
-                    <h2 className="font-display text-h3 font-extrabold uppercase tracking-tight text-foreground">
+                    <h2 className="font-display text-h3 font-extrabold tracking-tight text-foreground">
                       {group.label}
                     </h2>
                     <Link

@@ -58,7 +58,7 @@ export function Guarantee({
                     <span className="grid size-10 shrink-0 place-items-center rounded-card bg-accent/15 text-accent ring-1 ring-accent/25">
                       {Icon ? <Icon /> : null}
                     </span>
-                    <span className="font-display text-h4 font-extrabold uppercase tracking-tight text-foreground">
+                    <span className="font-display text-h4 font-extrabold tracking-tight text-foreground">
                       {item.title}
                     </span>
                   </dt>

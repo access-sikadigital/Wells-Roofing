@@ -128,7 +128,11 @@ export function PageHero({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, rgb(6 21 50 / 0.96) 0%, rgb(6 21 50 / 0.93) 32%, rgb(6 21 50 / 0.62) 60%, rgb(6 21 50 / 0.10) 100%)",
+            /* Eased stops rather than four — see the note in Hero.tsx: a
+               sparse ramp bands at the light end and reads as an edge in the
+               middle. The dark end and the 0.62 midpoint are unchanged, so
+               the measured contrast over the copy still holds. */
+            "linear-gradient(90deg, rgb(6 21 50 / 0.96) 0%, rgb(6 21 50 / 0.95) 14%, rgb(6 21 50 / 0.93) 32%, rgb(6 21 50 / 0.85) 42%, rgb(6 21 50 / 0.72) 52%, rgb(6 21 50 / 0.56) 62%, rgb(6 21 50 / 0.38) 73%, rgb(6 21 50 / 0.22) 83%, rgb(6 21 50 / 0.10) 93%, rgb(6 21 50 / 0.04) 100%)",
         }}
       />
       <div

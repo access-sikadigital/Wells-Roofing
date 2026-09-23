@@ -426,3 +426,6 @@ html.lenis body {
 .lenis.lenis-stopped {
   overflow: hidden;
 }
+h2{
+  text-transform: capitalize;
+}

@@ -127,7 +127,7 @@ export function QuoteForm({ className }: { className?: string }) {
           className
         )}
       >
-        <p className="font-display text-h3 font-extrabold tracking-tight text-navy-900 uppercase">
+        <p className="font-display text-h3 font-extrabold tracking-tight text-navy-900">
           Thanks — we&apos;ve got it.
         </p>
         <p className="mt-4 text-small text-stone-600">
@@ -160,7 +160,7 @@ export function QuoteForm({ className }: { className?: string }) {
       onSubmit={handleSubmit}
       className={cn("rounded-card bg-white p-6 shadow-chip sm:p-8", className)}
     >
-      <p className="font-display text-h4 font-extrabold tracking-tight text-navy-900 uppercase">
+      <p className="font-display text-h4 font-extrabold tracking-tight text-navy-900">
         Request a quote
       </p>
       <p className="mt-2 text-small text-stone-600">
