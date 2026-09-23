@@ -35,15 +35,17 @@ export function Hero({
       {/*
         Still, not film — background video was removed at the client's request.
 
-        This is STOCK, not one of the client's supplied photographs. It briefly
-        used their slate-home photo; they asked for supplied photos to stay on
-        the pages they were given for (About, process step 02), so this was
-        reverted. Don't reuse a client photo here without asking.
+        A REAL Wells roof: the Beaumaris Hotel's Spanish slate, from the
+        project catalogue at /projects/beaumaris-hotel/. It replaces the stock
+        frame that was here (/photography/hero-home.jpg) at the client's
+        request. Of the 29 frames, this one keeps the building on the open
+        right-hand side with the slate mansard above the verandah, and has no
+        poles, wires or branches crossing the headline.
 
         `priority` because this is the LCP element on the homepage.
       */}
       <Image
-        src="/photography/hero-home.jpg"
+        src="/projects/beaumaris-hotel/26.jpg"
         alt=""
         fill
         priority
@@ -119,8 +121,11 @@ export function Hero({
               <Button href="/contact" variant="accent" size="lg" arrow>
                 Get a Quote
               </Button>
-              <Button href="#services" variant="outline" size="lg">
-                Explore Our Materials
+              {/* Was "Explore Our Materials", a jump link to #services.
+                  Client asked for the phone number here instead — same pairing
+                  as every inner-page hero: quote form, or call. */}
+              <Button href={siteConfig.phoneHref} variant="outline" size="lg">
+                Call {siteConfig.phone}
               </Button>
             </div>
           </Reveal>

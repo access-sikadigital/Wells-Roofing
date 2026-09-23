@@ -58,11 +58,7 @@ export default function Page() {
 
       <PageHero
         page={page}
-        /* A REAL Wells roof, not stock: the Beaumaris Hotel's Spanish slate
-           mansard (see projectCatalogues). Chosen for the hero because the
-           slate fills the frame against open sky, with no poles, wires or
-           cars crossing the headline. Full set at /projects/beaumaris-hotel/. */
-        image="/projects/beaumaris-hotel/06.jpg"
+        image="/photography/hero-slate.jpg"
         /* The client's opening paragraph, complete and unbroken. */
         intro="For more than 40 years, the Wells family has worked with homeowners, builders, architects and designers across Melbourne and the Mornington Peninsula. Wells Roofing specialises in the supply and installation of quality natural slate, concrete, terracotta and roofing systems for new homes, extensions and roof replacements."
         cta={{ label: "Get a Quote", href: "/contact" }}
