@@ -153,8 +153,23 @@
   --spacing-page-hero: 32rem;
   --spacing-page-hero-lg: 46rem;
   --spacing-section-sm: clamp(3.5rem, 2.75rem + 3vw, 6rem);
-  --container-content: 71.25rem; /* max-w-content (1140px) */
-  --container-wide: 87.5rem; /* max-w-wide (1400px) */
+  /**
+   * Layout widths.
+   *
+   * `wide` was 1400px and is now 1920px at the client's request, so sections
+   * fill a full HD screen instead of banding in at the sides. Anything that
+   * sizes itself off the container — section grids, card rows, the header —
+   * grows with it. The per-block `max-w-*` caps inside sections (headlines,
+   * lead paragraphs) are deliberately NOT scaled: they exist to hold line
+   * length, and a 1920px line of body copy is unreadable.
+   *
+   * `content` is the reading width used by the FAQ and the spec table. It
+   * moved 1140 → 1280 rather than to 1920 for the same reason: at 1920 an
+   * answer paragraph runs to roughly 230 characters a line, about triple the
+   * comfortable maximum.
+   */
+  --container-content: 80rem; /* max-w-content (1280px) */
+  --container-wide: 120rem; /* max-w-wide (1920px) */
 
   /* ------------------------------------------------------------------
      RADII — the brand is squared-off and structural. Keep radii tight.

@@ -352,7 +352,8 @@ export function Header() {
         distracting. 5rem is the compromise — 8px taller than the original,
         which is enough for the frameless lockup to sit comfortably.
       */}
-      <div className="mx-auto grid h-20 w-full max-w-wide grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:px-8 lg:px-12">
+      {/* Gutter scale must match Container.tsx — see the note there. */}
+      <div className="mx-auto grid h-20 w-full max-w-wide grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         {/* Left — logo */}
         <div className="flex min-w-0 justify-start">
           <Link

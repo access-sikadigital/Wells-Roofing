@@ -189,7 +189,10 @@ export function ProjectGallery({
           data-lenis-prevent
           className="mt-12 overflow-x-auto overscroll-x-contain pb-2 lg:mt-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          <ol className="flex snap-x snap-mandatory gap-4 px-5 sm:px-8 lg:gap-6 lg:px-12">
+          {/* Left padding repeats Container's gutter scale so the first card
+              starts on the same line as the section heading above it. Change
+              it here whenever Container.tsx changes. */}
+          <ol className="flex snap-x snap-mandatory gap-4 px-5 sm:px-8 lg:gap-6 lg:px-12 xl:px-16 2xl:px-20">
             {shown.map((project, i) => (
               <li
                 key={project.title + project.image}
