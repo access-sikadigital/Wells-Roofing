@@ -1,9 +1,19 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { ServicePicker } from "@/components/forms/ServicePicker";
+import {
+  MESSAGE_MAX,
+  formatAuPhone,
+  normalizeAuPhone,
+  validateEmail,
+  validateMessage,
+  validateName,
+  validateSuburb,
+} from "@/lib/lead-validation";
 
 /**
  * QUOTE FORM
@@ -45,11 +55,38 @@ const SERVICES = [
 ] as const;
 
 type Status = "idle" | "submitting" | "success" | "error";
-type FieldKey = "name" | "email" | "phone" | "suburb" | "services";
+type FieldKey = "name" | "email" | "phone" | "suburb" | "services" | "message";
 type Errors = Partial<Record<FieldKey, string>>;
+
+/**
+ * One rule per field, so blur-time and submit-time validation can never
+ * disagree — they call the same function. The rules themselves live in
+ * `lib/lead-validation`, which the API route imports too.
+ */
+function checkField(key: FieldKey, value: string): string | undefined {
+  switch (key) {
+    case "name": {
+      const r = validateName(value);
+      return r.ok ? undefined : r.error;
+    }
+    case "email":
+      return validateEmail(value) ?? undefined;
+    case "phone": {
+      const r = normalizeAuPhone(value);
+      return r.ok ? undefined : r.error;
+    }
+    case "suburb":
+      return validateSuburb(value) ?? undefined;
+    case "message":
+      return validateMessage(value) ?? undefined;
+    default:
+      return undefined;
+  }
+}
 
 export function QuoteForm({ className }: { className?: string }) {
   const id = useId();
+  const router = useRouter();
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
   const [services, setServices] = useState<string[]>([]);
@@ -74,20 +111,17 @@ export function QuoteForm({ className }: { className?: string }) {
     };
 
     const next: Errors = {};
-    if (!values.name) next.name = "Please tell us your name.";
-    // Deliberately loose: the only check that matters client-side is that it
-    // looks like an address. Strict regexes reject valid addresses.
-    if (!values.email) next.email = "We need an email address.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email))
-      next.email = "That doesn't look like an email address.";
-    // Same reasoning for phone: AU numbers get written +61, 04, with spaces
-    // and brackets. A strict pattern rejects real people.
-    if (!values.phone) next.phone = "We need a number to call you back on.";
-    else if (values.phone.replace(/\D/g, "").length < 8)
-      next.phone = "That number looks too short.";
-    if (!values.suburb) next.suburb = "Which suburb is the property in?";
+    next.name = checkField("name", values.name);
+    next.email = checkField("email", values.email);
+    next.phone = checkField("phone", values.phone);
+    next.suburb = checkField("suburb", values.suburb);
+    next.message = checkField("message", values.message);
     if (values.services.length === 0)
       next.services = "Pick at least one service.";
+    // Undefined entries would otherwise count as errors on the length check.
+    (Object.keys(next) as FieldKey[]).forEach((k) => {
+      if (!next[k]) delete next[k];
+    });
 
     setErrors(next);
     if (Object.keys(next).length > 0) {
@@ -98,20 +132,63 @@ export function QuoteForm({ className }: { className?: string }) {
 
     setStatus("submitting");
     try {
+      /*
+        Campaign data is read at SUBMIT time from the URL, and falls back to
+        whatever was stashed on the first page of the visit. Someone lands on
+        an ad URL, reads two service pages, then fills the form — by then the
+        UTMs are long gone from the address bar, and without the fallback
+        every one of those leads reports as direct traffic.
+      */
+      const params = new URLSearchParams(window.location.search);
+      const stashed = (k: string) => {
+        const live = params.get(k);
+        if (live) {
+          try {
+            sessionStorage.setItem(`wr_${k}`, live);
+          } catch {
+            /* private mode — the live value still works for this submit */
+          }
+          return live;
+        }
+        try {
+          return sessionStorage.getItem(`wr_${k}`) ?? "";
+        } catch {
+          return "";
+        }
+      };
+
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...values,
           elapsedMs: Date.now() - mountedAt.current,
+          pageUrl: window.location.href,
+          pagePath: window.location.pathname,
+          utm_source: stashed("utm_source"),
+          utm_medium: stashed("utm_medium"),
+          utm_campaign: stashed("utm_campaign"),
+          utm_content: stashed("utm_content"),
+          utm_term: stashed("utm_term"),
+          gclid: stashed("gclid"),
+          fbclid: stashed("fbclid"),
         }),
       });
       if (!res.ok) throw new Error(String(res.status));
       setStatus("success");
       form.reset();
       setServices([]);
-      // Success replaces the form, so focus has to be sent somewhere real.
+      /*
+        Send them to /thank-you/ rather than swapping the form for a success
+        message. A distinct URL is what Google Ads and Meta count conversions
+        on, and it gives the person somewhere to go next.
+
+        The inline success state below is still rendered: it shows for the
+        instant before navigation, and it is what they see if the route fails
+        to load. A submitted lead must never look unsubmitted.
+      */
       requestAnimationFrame(() => successRef.current?.focus());
+      router.push("/thank-you/");
     } catch {
       setStatus("error");
     }
@@ -144,6 +221,33 @@ export function QuoteForm({ className }: { className?: string }) {
       </div>
     );
   }
+
+  /*
+    Validate on BLUR, never on keystroke. Checking as someone types tells them
+    "that doesn't look like an email" while they are still on the second
+    letter of it, which reads as the form arguing with them. Blur catches the
+    mistake the moment they move on, which is early enough to fix and late
+    enough to be fair.
+
+    Errors clear on the next keystroke rather than waiting for another blur:
+    once someone starts fixing it, the red message has done its job.
+  */
+  const onBlur = (key: FieldKey) => (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const value = e.currentTarget.value;
+    const error = checkField(key, value);
+    setErrors((prev) => ({ ...prev, [key]: error }));
+
+    // Tidy the number into the format Wells reads on a call sheet, but only
+    // once it is actually valid — reformatting a half-typed number fights
+    // the person typing it.
+    if (key === "phone" && !error) {
+      const r = normalizeAuPhone(value);
+      if (r.ok) e.currentTarget.value = formatAuPhone(r.local);
+    }
+  };
+
+  const onInput = (key: FieldKey) => () =>
+    setErrors((prev) => (prev[key] ? { ...prev, [key]: undefined } : prev));
 
   const field =
     "mt-1.5 w-full rounded-button border border-stone-300 bg-white px-4 py-3 text-body text-navy-900 " +
@@ -179,7 +283,10 @@ export function QuoteForm({ className }: { className?: string }) {
             name="name"
             type="text"
             autoComplete="name"
-            placeholder="Your name"
+            placeholder="First and last name"
+            maxLength={70}
+            onBlur={onBlur("name")}
+            onInput={onInput("name")}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? `${id}-name-err` : undefined}
             className={field}
@@ -202,6 +309,9 @@ export function QuoteForm({ className }: { className?: string }) {
             inputMode="email"
             autoComplete="email"
             placeholder="you@example.com"
+            maxLength={254}
+            onBlur={onBlur("email")}
+            onInput={onInput("email")}
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? `${id}-email-err` : undefined}
             className={field}
@@ -225,7 +335,10 @@ export function QuoteForm({ className }: { className?: string }) {
             type="tel"
             inputMode="tel"
             autoComplete="tel"
-            placeholder="04__ ___ ___"
+            placeholder="0412 345 678"
+            maxLength={20}
+            onBlur={onBlur("phone")}
+            onInput={onInput("phone")}
             aria-invalid={!!errors.phone}
             aria-describedby={errors.phone ? `${id}-phone-err` : undefined}
             className={field}
@@ -247,6 +360,9 @@ export function QuoteForm({ className }: { className?: string }) {
             type="text"
             autoComplete="address-level2"
             placeholder="e.g. Brighton"
+            maxLength={60}
+            onBlur={onBlur("suburb")}
+            onInput={onInput("suburb")}
             aria-invalid={!!errors.suburb}
             aria-describedby={errors.suburb ? `${id}-suburb-err` : undefined}
             className={field}
@@ -292,9 +408,21 @@ export function QuoteForm({ className }: { className?: string }) {
           id={`${id}-message`}
           name="message"
           rows={3}
+          /* Hard cap rather than a counter: nobody writing a roofing enquiry
+             is near 2000 characters, and anything that is, is a bot. */
+          maxLength={MESSAGE_MAX}
           placeholder="Anything useful — age of the roof, what's going wrong, timing."
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? `${id}-message-err` : undefined}
+          onBlur={onBlur("message")}
+          onInput={onInput("message")}
           className={cn(field, "resize-y")}
         />
+        {errors.message && (
+          <p id={`${id}-message-err`} className={errorText}>
+            {errors.message}
+          </p>
+        )}
       </div>
 
       {/* Honeypot. Hidden from sight and from assistive tech; bots fill it. */}

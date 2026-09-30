@@ -446,6 +446,37 @@ export const pages = [
     job: "Multi-step qualifying form (slate vs tile, homeowner vs architect/builder, project stage, suburb) → GHL.",
   },
   {
+    /*
+      Post-submission destination for the quote form.
+
+      It is a real route rather than an in-place success message because the
+      client needs a thank-you URL: it is the only reliable conversion trigger
+      for Google Ads and Meta ("destination = /thank-you/"), and it gives the
+      lead somewhere to go next instead of a dead end.
+
+      `noindex` because a thank-you page has no business in search results —
+      it would rank for nothing, and any impression it did get would be
+      someone landing on a confirmation for an enquiry they never sent. It is
+      `follow` though, so the links out of it still pass equity.
+    */
+    key: "thank-you",
+    label: "Thank you",
+    name: "Thank you (post-enquiry)",
+    url: "/thank-you/",
+    type: "conversion",
+    audience: "both",
+    phase: "P1",
+    priority: "High",
+    title: "Thank you | Wells Roofing",
+    description:
+      "Thanks for your enquiry. A Wells Roofing specialist will call you back, usually the same business day.",
+    h1: "Thanks — we've got your enquiry.",
+    schema: [],
+    noindex: true,
+    job: "Conversion confirmation + ad conversion trigger + onward internal links.",
+  },
+
+  {
     key: "faqs",
     label: "FAQs",
     name: "FAQs",

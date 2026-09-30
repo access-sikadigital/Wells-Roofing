@@ -1,4 +1,12 @@
 import { NextResponse } from "next/server";
+import {
+  looksLikeSpam,
+  normalizeAuPhone,
+  validateEmail,
+  validateMessage,
+  validateName,
+  validateSuburb,
+} from "@/lib/lead-validation";
 
 /**
  * QUOTE SUBMISSION ENDPOINT
@@ -27,7 +35,21 @@ type Payload = {
   message?: string;
   company?: string;
   elapsedMs?: number;
+  /** Which page the form was on, and the campaign that brought them there. */
+  pageUrl?: string;
+  pagePath?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  utm_term?: string;
+  gclid?: string;
+  fbclid?: string;
 };
+
+/** Trim, cap, and guarantee a string — everything here arrives untrusted. */
+const str = (v: unknown, max = 200) =>
+  typeof v === "string" ? v.trim().slice(0, max) : "";
 
 /** Bots complete instantly; a human cannot fill six fields in three seconds. */
 const MIN_ELAPSED_MS = 3000;
@@ -40,11 +62,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Malformed request." }, { status: 400 });
   }
 
-  const name = body.name?.trim() ?? "";
-  const email = body.email?.trim() ?? "";
-  const phone = body.phone?.trim() ?? "";
-  const suburb = body.suburb?.trim() ?? "";
-  const message = body.message?.trim() ?? "";
+  const name = str(body.name, 70);
+  const email = str(body.email, 254);
+  const phone = str(body.phone, 20);
+  const suburb = str(body.suburb, 60);
+  const message = str(body.message, 2000);
   // Coerce defensively — this is a public endpoint, so `services` could be
   // anything regardless of what the form sends.
   const services = Array.isArray(body.services)
@@ -60,16 +82,26 @@ export async function POST(request: Request) {
   if (typeof body.elapsedMs === "number" && body.elapsedMs < MIN_ELAPSED_MS) {
     return NextResponse.json({ ok: true });
   }
+  if (looksLikeSpam(message)) return NextResponse.json({ ok: true });
 
-  // Re-validate server-side. Client validation is UX; this is the real gate.
-  const emailLooksValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if (
-    !name ||
-    !suburb ||
+  /*
+   * Re-validate with the SAME rules the form uses. Client validation is UX —
+   * this is the gate. Anything can POST here, and a form is trivially
+   * bypassed with curl, so the CRM is only as clean as this block.
+   */
+  const nameResult = validateName(name);
+  const phoneResult = normalizeAuPhone(phone);
+  const invalid =
+    !nameResult.ok ||
+    !phoneResult.ok ||
+    !!validateEmail(email) ||
+    !!validateSuburb(suburb) ||
+    !!validateMessage(message) ||
     services.length === 0 ||
-    !emailLooksValid ||
-    phone.replace(/\D/g, "").length < 8
-  ) {
+    // Junk a browser can't produce: the picker only ever sends its own values.
+    services.length > 8;
+
+  if (invalid || !nameResult.ok || !phoneResult.ok) {
     return NextResponse.json(
       { error: "Missing or invalid fields." },
       { status: 422 }
@@ -77,16 +109,32 @@ export async function POST(request: Request) {
   }
 
   const lead = {
-    name,
+    // GHL maps a contact from first/last, so the split happens here rather
+    // than in a workflow formula where it is invisible and unversioned.
+    first_name: nameResult.first,
+    last_name: nameResult.last,
+    name: nameResult.full,
     email,
-    phone,
+    // E.164 so GHL can text the number without guessing the country.
+    phone: phoneResult.e164,
+    phoneLocal: phoneResult.local,
     suburb,
     services,
     // Flattened copy — most CRM field mappings, GHL included, expect a string
     // rather than an array, and losing the structured version costs nothing.
     servicesText: services.join(", "),
     message,
-    source: "website — hero quote form",
+    source: "website - quote form",
+    formName: "Quote form",
+    pageUrl: str(body.pageUrl, 500),
+    pagePath: str(body.pagePath, 200),
+    utm_source: str(body.utm_source, 100),
+    utm_medium: str(body.utm_medium, 100),
+    utm_campaign: str(body.utm_campaign, 200),
+    utm_content: str(body.utm_content, 200),
+    utm_term: str(body.utm_term, 200),
+    gclid: str(body.gclid, 300),
+    fbclid: str(body.fbclid, 300),
     submittedAt: new Date().toISOString(),
   };
 

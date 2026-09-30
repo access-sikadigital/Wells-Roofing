@@ -22,6 +22,13 @@ export function metadataFor(key: PageKey): Metadata {
       ...(page.supportingKeywords ?? []),
     ],
     alternates: { canonical },
+    /*
+      `noindex` pages (the empty blog, the thank-you page) were excluded from
+      sitemap.xml but never carried the meta tag, so Google could still index
+      them from a link. `follow` stays on deliberately — the page shouldn't
+      rank, but the links out of it should still count.
+    */
+    ...(page.noindex ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       type: "website",
       locale: "en_AU",
