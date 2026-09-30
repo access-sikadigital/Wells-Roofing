@@ -25,7 +25,10 @@ export default function Page() {
 
       <ContentBlock
         eyebrow="Our story"
-        title="Roofing for generations."
+        /* Client brief, About updates: "Roofing for generations." removed at
+           the client's request; the section now leads on longevity of the
+           business rather than of the family. */
+        title="Four decades of specialist roofing."
         intro="Family owned and operated. For over four decades the Wells family has been supplying and installing roofs across Melbourne and Victoria — long enough to have re-roofed homes we first worked on decades ago."
         /*
           Both of these are real Wells photographs, which is why they replaced
@@ -62,24 +65,30 @@ export default function Page() {
 
       <ContentBlock
         /* Client feedback v1, table 4: "We say no to a lot of work. That is
-           the point." → state what we DO. */
+           the point." → state what we DO.
+
+           The first pass carried that as three "No …" bullets. The About
+           updates brief rejected them: a prestige page should not open its
+           capability list with what the company refuses. The same positioning
+           now runs positively — the list is the work itself, and the prose
+           underneath does the excluding. */
         eyebrow="What we do"
-        title="What we do."
-        intro="We focus on natural slate, terracotta and concrete tile roofing."
+        title="Specialists, by choice."
+        intro="We focus on what we do best: natural slate, terracotta and concrete tile roofing — for new builds, re-roofs and heritage restoration."
         flip
       >
         <CheckList
           items={[
-            "No asphalt or shingle roofing",
-            "No general or volume roofing work",
-            "No broad commercial or industrial roofing",
-            "Natural slate, terracotta and concrete tile — new builds, re-roofs and restoration",
+            "Natural slate roofing — supply, new roofs and restoration",
+            "Terracotta tile roofing",
+            "Concrete tile roofing",
+            "New builds, re-roofs and heritage restoration",
           ]}
         />
         <p>
-          Narrowing the work is what lets us hold the standard. A crew that lays
-          slate every week is a different proposition to one that lays it twice a
-          year.
+          By focusing only on slate and tile, we hold a standard general roofers
+          can&rsquo;t. A crew that lays slate every week is a different
+          proposition to one that lays it twice a year.
         </p>
       </ContentBlock>
 
@@ -139,11 +148,15 @@ export default function Page() {
               Roof replacements
             </h3>
             <p className="mt-2 max-w-xl text-small text-muted">
-              Recurring leaks, deteriorating tiles, rusted valleys or repeated
-              repairs can all mean an ageing roof has reached its end. We assess
-              what is actually there and give you a straight answer on whether
-              replacement is warranted — then manage it from selection and
-              removal through to the new roof.
+              {/* Opened on leaks, rust and deterioration in the first pass.
+                  Softened per the About updates brief — the failure imagery
+                  worked against the prestige and longevity line the rest of
+                  the page holds. */}
+              When an older roof is past its best, we assess what&rsquo;s
+              actually there and give you a straight, honest answer on whether a
+              replacement is warranted. If it is, we manage the whole project —
+              material selection, removal and installation of your new slate or
+              tile roof — for a finish built to last.
             </p>
           </div>
         </div>
