@@ -165,29 +165,38 @@ export function CTA() {
               <p className="eyebrow text-faint">Or speak to a specialist</p>
 
               {/*
-                `inline-flex`, not `flex`. As a block-level flex container this
-                link filled the column's full width, so the parent's
-                `lg:text-right` had nothing to act on and the number sat hard
-                left while the eyebrow above and the email below — both inline —
-                sat right. Shrinking the box to its content lets text-align
-                place it, and matches the email link directly beneath.
+                Each link gets its OWN block wrapper, and the link inside stays
+                `inline-flex`.
 
-                `min-h-11` stays: it is what gives the number a 44px tap height
-                on a phone, where a tel: link is the primary action.
+                Both of these were previously bare `inline-flex` links. Being
+                inline-level, they flowed onto the SAME line — the email ran on
+                straight after the phone number — and their `mt-*` margins were
+                ignored, because vertical margins do nothing on an inline box.
+                The block wrapper puts each on its own line and makes the
+                margin real, while `inline-flex` keeps the link itself shrunk
+                to its text so the parent's `lg:text-right` has something to
+                push against.
+
+                `min-h-11` stays: it is what gives each one a 44px tap target
+                on a phone, where tapping the number is the primary action.
               */}
-              <a
-                href={siteConfig.phoneHref}
-                className="mt-4 inline-flex min-h-11 items-center font-display text-h2 font-extrabold tracking-tight text-white transition-colors duration-base ease-out-quart hover:text-accent"
-              >
-                {siteConfig.phone}
-              </a>
+              <div className="mt-4">
+                <a
+                  href={siteConfig.phoneHref}
+                  className="inline-flex min-h-11 items-center font-display text-h2 font-extrabold tracking-tight text-white transition-colors duration-base ease-out-quart hover:text-accent"
+                >
+                  {siteConfig.phone}
+                </a>
+              </div>
 
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="mt-3 inline-flex min-h-11 items-center break-all text-small text-muted transition-colors hover:text-accent"
-              >
-                {siteConfig.email}
-              </a>
+              <div className="mt-1">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="inline-flex min-h-11 max-w-full items-center break-words text-small text-muted transition-colors hover:text-accent"
+                >
+                  {siteConfig.email}
+                </a>
+              </div>
             </Reveal>
           </div>
         </div>
