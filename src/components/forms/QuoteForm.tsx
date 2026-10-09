@@ -188,7 +188,7 @@ export function QuoteForm({ className }: { className?: string }) {
         to load. A submitted lead must never look unsubmitted.
       */
       requestAnimationFrame(() => successRef.current?.focus());
-      router.push("/thank-you/");
+      router.push("/thank-you");
     } catch {
       setStatus("error");
     }

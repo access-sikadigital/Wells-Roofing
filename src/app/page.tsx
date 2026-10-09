@@ -97,7 +97,7 @@ export default function HomePage() {
       <FaqSection
         faqs={generalFaqs}
         limit={3}
-        more={{ label: "Read all FAQs", href: "/faqs/" }}
+        more={{ label: "Read all FAQs", href: "/faqs" }}
       />
 
       {/* 10 — Final CTA */}

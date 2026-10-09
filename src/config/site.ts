@@ -90,7 +90,7 @@ export const siteConfig = {
       description:
         "Premium natural Spanish slate for architect-designed new builds, re-roofing and heritage restoration — sourced, specified and installed by us.",
       image: "/materials/natural-slate.jpg",
-      href: "/services/natural-slate-roofing/",
+      href: "/services/natural-slate-roofing",
     },
     {
       number: "02",
@@ -101,7 +101,7 @@ export const siteConfig = {
       description:
         "Bristile La Escandella terracotta from Spain — colour that comes from the clay itself, in profiles and finishes that suit anything from a coastal home to a modern architectural build.",
       image: "/materials/terracotta-tile.jpg",
-      href: "/services/terracotta-tile-roofing/",
+      href: "/services/terracotta-tile-roofing",
     },
     {
       number: "03",
@@ -112,7 +112,7 @@ export const siteConfig = {
       description:
         "Bristile concrete tiles in a wide range of profiles, colours and finishes — the most design-flexible of the three, and a Wells distribution range for over 25 years.",
       image: "/materials/concrete-tile.jpg",
-      href: "/services/concrete-tile-roofing/",
+      href: "/services/concrete-tile-roofing",
     },
   ],
 } as const;
