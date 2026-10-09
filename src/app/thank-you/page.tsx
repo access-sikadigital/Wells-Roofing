@@ -77,7 +77,7 @@ export default function Page() {
                 <Button href={siteConfig.phoneHref} variant="accent" size="lg">
                   Call {siteConfig.phone}
                 </Button>
-                <Button href="/projects/" variant="outline" size="lg" arrow>
+                <Button href="/projects" variant="outline" size="lg" arrow>
                   See recent work
                 </Button>
               </div>
@@ -141,32 +141,32 @@ export default function Page() {
               <ul className="mt-6 grid gap-x-10 gap-y-4 sm:grid-cols-2">
                 {[
                   {
-                    href: "/projects/",
+                    href: "/projects",
                     label: "Recent projects",
                     note: "Slate, terracotta and heritage work we've completed",
                   },
                   {
-                    href: "/reviews/",
+                    href: "/reviews",
                     label: "Reviews",
                     note: "What Melbourne and Peninsula clients say",
                   },
                   {
-                    href: "/faqs/",
+                    href: "/faqs",
                     label: "Roofing FAQs",
                     note: "Cost, lifespan, and restore versus replace",
                   },
                   {
-                    href: "/services/slate-roof-restoration/",
+                    href: "/services/slate-roof-restoration",
                     label: "Slate roof restoration",
                     note: "What's involved, and when it beats a re-roof",
                   },
                   {
-                    href: "/services/natural-slate-roofing/",
+                    href: "/services/natural-slate-roofing",
                     label: "Natural slate roofing",
                     note: "Our flagship material, supplied and installed",
                   },
                   {
-                    href: "/about/",
+                    href: "/about",
                     label: "About Wells Roofing",
                     note: "Family owned, specialist since 1982",
                   },
