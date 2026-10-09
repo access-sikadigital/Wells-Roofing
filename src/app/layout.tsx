@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     images: ["/brand/og.png"],
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "83P4SDZFD7_PDjv_0uQ0vuVUbr5jRGbDLxUeYtawZrk",
+  },
 };
 
 export const viewport: Viewport = {
